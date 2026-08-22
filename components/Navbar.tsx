@@ -14,12 +14,14 @@ const seekerLinks = [
   { href: "/learning-path", label: "خطة التعلم" },
   { href: "/coach", label: "المدربة الذكية" },
   { href: "/return-path", label: "طريق العودة" },
+  { href: "/about", label: "من نحن" },
 ];
 
 const orgLinks = [
   { href: "/", label: "الرئيسية" },
   { href: "/opportunities", label: "الفرص" },
   { href: "/org/dashboard", label: "لوحة المنظمة" },
+  { href: "/about", label: "من نحن" },
 ];
 
 function isActive(pathname: string, href: string) {
