@@ -1,0 +1,145 @@
+{
+  "skills": [
+    { "name_ar": "حل المشكلات", "name_en": "Problem Solving", "category": "soft" },
+    { "name_ar": "بايثون", "name_en": "Python", "category": "technical" },
+    { "name_ar": "قواعد البيانات SQL", "name_en": "SQL", "category": "technical" },
+    { "name_ar": "التواصل", "name_en": "Communication", "category": "soft" },
+    { "name_ar": "الإبداع", "name_en": "Creativity", "category": "soft" },
+    { "name_ar": "تحليل البيانات", "name_en": "Data Analysis", "category": "technical" },
+    { "name_ar": "HTML", "name_en": "HTML", "category": "technical" },
+    { "name_ar": "CSS", "name_en": "CSS", "category": "technical" },
+    { "name_ar": "جافاسكربت", "name_en": "JavaScript", "category": "technical" },
+    { "name_ar": "إدارة المشاريع", "name_en": "Project Management", "category": "soft" },
+    { "name_ar": "تصميم واجهات وتجربة المستخدم", "name_en": "UI/UX Design", "category": "design" },
+    { "name_ar": "التسويق الرقمي", "name_en": "Digital Marketing", "category": "marketing" },
+    { "name_ar": "أساسيات الأمن السيبراني", "name_en": "Cybersecurity Basics", "category": "technical" }
+  ],
+  "opportunities": [
+    {
+      "title_ar": "مطوّرة واجهات أمامية (Frontend Developer)",
+      "company": "شركة تك ستارت الأردنية",
+      "description": "انضمي إلى فريق تطوير مواقع في عمّان لبناء منتجات رقمية عصرية باستخدام HTML وCSS وJavaScript، مع إمكانية العمل عن بُعد جزئيًا.",
+      "location": "عمّان، الأردن — حضوري/عن بُعد",
+      "employment_type": "دوام كامل",
+      "required_skills": [
+        { "skill": "HTML", "level": 3, "is_required": true },
+        { "skill": "CSS", "level": 3, "is_required": true },
+        { "skill": "JavaScript", "level": 3, "is_required": true },
+        { "skill": "Problem Solving", "level": 2, "is_required": false }
+      ]
+    },
+    {
+      "title_ar": "محللة بيانات (Data Analyst)",
+      "company": "شركة تحليلات الأردن",
+      "description": "دور لتحليل البيانات باستخدام SQL وPython وإعداد تقارير لدعم القرار في قطاع الخدمات المالية.",
+      "location": "إربد، الأردن — حضوري",
+      "employment_type": "دوام كامل",
+      "required_skills": [
+        { "skill": "SQL", "level": 3, "is_required": true },
+        { "skill": "Data Analysis", "level": 3, "is_required": true },
+        { "skill": "Python", "level": 2, "is_required": false },
+        { "skill": "Communication", "level": 2, "is_required": false }
+      ]
+    },
+    {
+      "title_ar": "متدربة تصميم UI/UX",
+      "company": "استوديو إبداع الزرقاء",
+      "description": "تدريب عملي على تصميم تجارب مستخدم مميزة لتطبيقات الجوال، من رسم النماذج إلى التصميم النهائي.",
+      "location": "الزرقاء، الأردن — حضوري",
+      "employment_type": "تدريب",
+      "required_skills": [
+        { "skill": "UI/UX Design", "level": 3, "is_required": true },
+        { "skill": "Creativity", "level": 3, "is_required": true },
+        { "skill": "Communication", "level": 2, "is_required": false }
+      ]
+    },
+    {
+      "title_ar": "مساعدة تسويق رقمي",
+      "company": "وكالة نبض عمّان الإعلانية",
+      "description": "دعم فريق التسويق في إدارة الحملات الإعلانية على وسائل التواصل وإنشاء محتوى جذاب وتحليل الأداء.",
+      "location": "عمّان، الأردن — حضوري",
+      "employment_type": "دوام جزئي",
+      "required_skills": [
+        { "skill": "Digital Marketing", "level": 2, "is_required": true },
+        { "skill": "Communication", "level": 2, "is_required": true },
+        { "skill": "Creativity", "level": 2, "is_required": false },
+        { "skill": "Data Analysis", "level": 1, "is_required": false }
+      ]
+    },
+    {
+      "title_ar": "متدربة أمن سيبراني",
+      "company": "مركز الأمن السيبراني الأردني",
+      "description": "تدريب على مراقبة الشبكات واكتشاف الثغرات وتطبيق أساسيات الأمن السيبراني في بيئة حكومية.",
+      "location": "عمّان، الأردن — حضوري",
+      "employment_type": "تدريب",
+      "required_skills": [
+        { "skill": "Cybersecurity Basics", "level": 3, "is_required": true },
+        { "skill": "Problem Solving", "level": 3, "is_required": true },
+        { "skill": "Python", "level": 1, "is_required": false }
+      ]
+    },
+    {
+      "title_ar": "مطوّرة برمجيات عن بُعد (Remote Software Developer)",
+      "company": "شركة جيت وورلد (عالمية)",
+      "description": "فرصة عمل عن بُعد لبناء تطبيقات ويب باستخدام Python وJavaScript، مع فريق موزع حول العالم.",
+      "location": "عن بُعد (دولي)",
+      "employment_type": "دوام كامل",
+      "required_skills": [
+        { "skill": "Python", "level": 3, "is_required": true },
+        { "skill": "JavaScript", "level": 3, "is_required": true },
+        { "skill": "Problem Solving", "level": 3, "is_required": true },
+        { "skill": "Communication", "level": 2, "is_required": false }
+      ]
+    },
+    {
+      "title_ar": "محللة بيانات تسويقية (Marketing Data Analyst)",
+      "company": "شركة دبي الرقمية",
+      "description": "تحليل بيانات الحملات التسويقية وتقديم توصيات لتحسين الأداء في سوق الإمارات.",
+      "location": "دبي، الإمارات — حضوري/عن بُعد",
+      "employment_type": "دوام كامل",
+      "required_skills": [
+        { "skill": "Data Analysis", "level": 3, "is_required": true },
+        { "skill": "SQL", "level": 2, "is_required": true },
+        { "skill": "Digital Marketing", "level": 2, "is_required": false },
+        { "skill": "Communication", "level": 2, "is_required": false }
+      ]
+    },
+    {
+      "title_ar": "متدربة إدارة مشاريع تقنية",
+      "company": "شركة مشاريع مصر",
+      "description": "تدريب على تخطيط وتنفيذ مشاريع تقنية مع فرق متعددة، واكتساب مهارات إدارة المشاريع.",
+      "location": "القاهرة، مصر — حضوري",
+      "employment_type": "تدريب",
+      "required_skills": [
+        { "skill": "Project Management", "level": 2, "is_required": true },
+        { "skill": "Communication", "level": 3, "is_required": true },
+        { "skill": "Problem Solving", "level": 2, "is_required": false },
+        { "skill": "Data Analysis", "level": 1, "is_required": false }
+      ]
+    },
+    {
+      "title_ar": "مصممة جرافيك وتجربة مستخدم",
+      "company": "استوديو إبداع لندن",
+      "description": "العمل عن بُعد على تصميم هويات بصرية وتجارب استخدام لتطبيقات أوروبية ناشئة.",
+      "location": "عن بُعد (أوروبا)",
+      "employment_type": "عقد مستقل",
+      "required_skills": [
+        { "skill": "UI/UX Design", "level": 3, "is_required": true },
+        { "skill": "Creativity", "level": 3, "is_required": true },
+        { "skill": "Communication", "level": 2, "is_required": false }
+      ]
+    },
+    {
+      "title_ar": "أخصائية تواصل اجتماعي",
+      "company": "مؤسسة صوت المجتمع",
+      "description": "إدارة حسابات التواصل الاجتماعي وإنشاء محتوى تفاعلي لحملات توعوية في المنطقة العربية.",
+      "location": "عن بُعد (العالم العربي)",
+      "employment_type": "دوام جزئي",
+      "required_skills": [
+        { "skill": "Digital Marketing", "level": 2, "is_required": true },
+        { "skill": "Communication", "level": 3, "is_required": true },
+        { "skill": "Creativity", "level": 2, "is_required": true }
+      ]
+    }
+  ]
+}
