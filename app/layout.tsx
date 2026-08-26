@@ -78,10 +78,19 @@ export default function RootLayout({
                     <a href="/assessment" className="transition hover:text-lavender-400">اكتشفي مهاراتك</a>
                   </li>
                   <li>
-                    <a href="/learning-path" className="transition hover:text-lavender-400">المسارات المهنية</a>
+                    <a href="/opportunities" className="transition hover:text-lavender-400">الفرص</a>
                   </li>
                   <li>
-                    <a href="/coach" className="transition hover:text-lavender-400">كيف تعمل المنصة؟</a>
+                    <a href="/skill-passport" className="transition hover:text-lavender-400">جواز المهارات</a>
+                  </li>
+                  <li>
+                    <a href="/learning-path" className="transition hover:text-lavender-400">خطة التعلم</a>
+                  </li>
+                  <li>
+                    <a href="/coach" className="transition hover:text-lavender-400">المدربة الذكية</a>
+                  </li>
+                  <li>
+                    <a href="/return-path" className="transition hover:text-lavender-400">طريق العودة</a>
                   </li>
                   <li>
                     <a href="/about" className="transition hover:text-lavender-400">عن مِهَن</a>
