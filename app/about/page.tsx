@@ -66,7 +66,7 @@ export default function AboutPage() {
       <section className="grid gap-6 md:grid-cols-2">
         <article className="card border-t-4 border-t-royal-500">
           <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-royal-50 text-2xl">
-            🎯
+            
           </div>
           <h2 className="text-xl font-extrabold text-navy-900 md:text-2xl">
             رسالتنا
@@ -80,7 +80,7 @@ export default function AboutPage() {
 
         <article className="card border-t-4 border-t-coral-400">
           <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-coral-50 text-2xl">
-            🌟
+            
           </div>
           <h2 className="text-xl font-extrabold text-navy-900 md:text-2xl">
             رؤيتنا

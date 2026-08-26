@@ -3,53 +3,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const howItWorks = [
-  {
-    step: "01",
-    title: "أجري تقييم مهاراتك",
-    desc: "اختبار تفاعلي يكشف قوتك الحقيقية وما تحتاجين تطويره.",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M9 11l3 3L22 4" />
-        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
-      </svg>
-    ),
-  },
-  {
-    step: "02",
-    title: "اكتشفي فرصك المتوافقة",
-    desc: "نسبة توافق حقيقية مع وظائف وتدريبات تناسبك.",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="11" cy="11" r="8" />
-        <path d="M21 21l-4.35-4.35" />
-      </svg>
-    ),
-  },
-  {
-    step: "03",
-    title: "اتبعي مسار التعلم",
-    desc: "خطة مجانية خطوة بخطوة توصلك لمهاراتك التالية.",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z" />
-        <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z" />
-      </svg>
-    ),
-  },
-  {
-    step: "04",
-    title: "ابدئي مسيرتك",
-    desc: "قدمي على الفرص واثقة بمهاراتك المستجدة.",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
-        <path d="M22 4L12 14.01l-3-3" />
-      </svg>
-    ),
-  },
-];
-
 const aiTags = [
   "تحليل السيرة الذاتية",
   "اكتشاف المهارات الخفية",
@@ -217,9 +170,6 @@ export default function HomePage() {
               <Link href="/assessment" className="btn-primary min-h-[48px] px-6 py-3 text-sm sm:px-7 sm:text-base">
                 اكتشفي مهاراتك الآن
               </Link>
-              <Link href="#how" className="btn-outline min-h-[48px] px-6 py-3 text-sm sm:px-7 sm:text-base">
-                كيف تعمل مِهَن؟
-              </Link>
             </div>
           </div>
 
@@ -272,49 +222,6 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── كيف تعمل مِهَن؟ ── */}
-      <section id="how" className="scroll-mt-24">
-        <div className="mb-10 text-center md:mb-12">
-          <span className="mb-3 inline-block rounded-full bg-royal-50 px-4 py-1 text-xs font-bold text-royal-600">خطوات بسيطة</span>
-          <h2 className="section-title">كيف تعمل مِهَن؟</h2>
-          <p className="mx-auto mt-3 max-w-lg text-sm text-navy-500 sm:text-base">أربع خطوات تفصلك عن فرصة أحلامك</p>
-        </div>
-
-        <div className="relative">
-          {/* connecting line (desktop) */}
-          <div className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-0.5 -translate-x-1/2 bg-gradient-to-b from-royal-200 via-coral-200 to-lavender-200 lg:block" />
-
-          <div className="grid gap-5 sm:gap-6 md:gap-8 lg:grid-cols-2">
-            {howItWorks.map((item, i) => (
-              <div
-                key={item.step}
-                className={`card group relative flex items-start gap-4 transition-all duration-300 hover:-translate-y-1 sm:gap-5 ${
-                  i % 2 === 0 ? "lg:mr-auto lg:ml-0 lg:text-right lg:pl-16" : "lg:ml-auto lg:mr-0 lg:text-left lg:pr-16"
-                }`}
-              >
-                {/* step circle (desktop connector) */}
-                <div className="pointer-events-none absolute left-1/2 top-8 z-10 hidden h-10 w-10 -translate-x-1/2 place-items-center rounded-full border-2 border-lavender-200 bg-white text-xs font-extrabold text-royal-600 lg:grid">
-                  {item.step}
-                </div>
-
-                {/* mobile step number */}
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-royal-50 to-lavender-50 text-xs font-extrabold text-royal-600 lg:hidden">
-                  {item.step}
-                </span>
-
-                <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-lavender-50 to-coral-50 text-royal-500 transition-colors group-hover:from-royal-600 group-hover:to-coral-400 group-hover:text-white sm:h-14 sm:w-14">
-                  {item.icon}
-                </div>
-                <div className="min-w-0 space-y-1">
-                  <h3 className="text-base font-extrabold text-navy-900 sm:text-lg">{item.title}</h3>
-                  <p className="text-xs leading-relaxed text-navy-500 sm:text-sm">{item.desc}</p>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
