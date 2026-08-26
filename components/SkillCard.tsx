@@ -19,25 +19,25 @@ export default function SkillCard({
 }: SkillCardProps) {
   const border =
     status === "met"
-      ? "border-success-200 bg-success-50/50"
+      ? "border-success-300 bg-success-50/30"
       : status === "missing"
-        ? "border-coral-200 bg-coral-50/50"
-        : "border-lavender-100/60 bg-white";
+        ? "border-warning-300 bg-warning-50/30"
+        : "border border-[var(--border)] bg-[var(--surface)]";
 
   return (
-    <div className={`rounded-2xl border p-4 shadow-card ${border}`}>
+    <div className={`rounded-2xl p-4 shadow-card ${border}`}>
       <div className="flex items-start justify-between gap-2">
         <div>
-          <h3 className="font-bold text-navy-900">{name}</h3>
-          {nameEn && <p className="text-xs text-royal-400">{nameEn}</p>}
+          <h3 className="font-bold" style={{ color: "var(--text)" }}>{name}</h3>
+          {nameEn && <p className="text-xs" style={{ color: "var(--muted)" }}>{nameEn}</p>}
         </div>
         {status === "met" && (
-          <span className="rounded-full bg-success-50 px-2 py-0.5 text-xs font-bold text-success-700">
+          <span className="rounded-full bg-success-100 px-2 py-0.5 text-xs font-bold text-success-700">
             ✓ متوفرة
           </span>
         )}
         {status === "missing" && (
-          <span className="rounded-full bg-coral-50 px-2 py-0.5 text-xs font-bold text-coral-700">
+          <span className="rounded-full bg-warning-100 px-2 py-0.5 text-xs font-bold text-warning-700">
             ✗ ناقصة
           </span>
         )}
@@ -50,14 +50,15 @@ export default function SkillCard({
             <span
               key={i}
               className={`h-2.5 flex-1 rounded-full ${
-                filled ? "bg-royal-500" : "bg-lavender-100"
+                filled ? "bg-gold-500" : ""
               }`}
+              style={filled ? undefined : { backgroundColor: "var(--border)" }}
             />
           );
         })}
       </div>
 
-      <div className="mt-2 flex items-center justify-between text-xs text-royal-500">
+      <div className="mt-2 flex items-center justify-between text-xs" style={{ color: "var(--muted)" }}>
         <span>{level != null ? levelLabels[level] ?? `مستوى ${level}` : "غير مُقيّمة"}</span>
         {requiredLevel != null && (
           <span>المطلوب: مستوى {requiredLevel}</span>

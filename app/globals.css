@@ -2,7 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Dark Mode (Default) ── */
 :root {
+  --surface: #0D2B2B;
+  --surface-raised: #1A3D3D;
+  --surface-overlay: #214A4A;
+  --border: #2A5A5A;
+  --border-strong: #3A7070;
+  --accent: #C9A84C;
+  --accent-hover: #D4B36A;
+  --accent-subtle: rgba(201, 168, 76, 0.12);
+  --text: #FFFFFF;
+  --text-secondary: #A8C5C5;
+  --muted: #6E8E8E;
+  --muted-strong: #8AABAB;
+  --bg: #0A1F1F;
+  --bg-subtle: #0D2B2B;
+  --shadow-card: 0 4px 24px -4px rgba(0, 0, 0, 0.3);
+  --shadow-card-hover: 0 12px 32px -4px rgba(0, 0, 0, 0.4);
+  --shadow-soft: 0 2px 16px -2px rgba(0, 0, 0, 0.25);
+  color-scheme: dark;
+}
+
+/* ── Light Mode ── */
+.dark body,
+.dark {
+  color-scheme: light;
+}
+
+:root.light {
+  --surface: #FFFFFF;
+  --surface-raised: #F8FAFA;
+  --surface-overlay: #F0F5F5;
+  --border: #D5E0E0;
+  --border-strong: #B8CCCC;
+  --accent: #C9A84C;
+  --accent-hover: #B8963E;
+  --accent-subtle: rgba(201, 168, 76, 0.08);
+  --text: #1A2E2E;
+  --text-secondary: #3D5A5A;
+  --muted: #6E8E8E;
+  --muted-strong: #4A6A6A;
+  --bg: #F5F7F7;
+  --bg-subtle: #EDF1F1;
+  --shadow-card: 0 4px 24px -4px rgba(10, 31, 31, 0.08);
+  --shadow-card-hover: 0 12px 32px -4px rgba(10, 31, 31, 0.12);
+  --shadow-soft: 0 2px 16px -2px rgba(10, 31, 31, 0.06);
   color-scheme: light;
 }
 
@@ -11,58 +56,104 @@ html {
 }
 
 body {
-  @apply bg-cream-50 text-navy-900 antialiased;
+  @apply antialiased;
+  background-color: var(--bg);
+  color: var(--text);
 }
 
-/* Smooth transitions for all interactive elements */
+/* Smooth transitions */
 a, button, input, select, textarea {
   @apply transition-all duration-200;
 }
 
-/* Selection color */
+/* Selection */
 ::selection {
-  background-color: rgba(139, 124, 246, 0.2);
-  color: #2D2A32;
+  background-color: rgba(201, 168, 76, 0.25);
+  color: var(--text);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
 }
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-l from-royal-600 via-royal-400 to-coral-400 px-7 py-3 font-bold text-white shadow-soft transition-all duration-300 hover:shadow-glow hover:brightness-105 hover:translate-y-[-1px] active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 font-bold shadow-soft transition-all duration-300 hover:shadow-glow hover:brightness-110 hover:translate-y-[-1px] active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed;
+    background: linear-gradient(135deg, #D4B36A, #C9A84C, #B8963E);
+    color: #0A1F1F;
+  }
+  :root.light .btn-primary {
+    color: #0A1F1F;
   }
 
   .btn-outline {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-royal-200 bg-white px-7 py-3 font-bold text-royal-600 transition-all duration-300 hover:border-royal-400 hover:bg-royal-50 hover:shadow-soft hover:translate-y-[-1px] active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 px-7 py-3 font-bold transition-all duration-300 hover:shadow-soft hover:translate-y-[-1px] active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed;
+    border-color: var(--border-strong);
+    color: var(--accent);
+    background: transparent;
+  }
+  .btn-outline:hover {
+    border-color: var(--accent);
+    background: var(--accent-subtle);
   }
 
   .btn-accent {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-coral-400 px-7 py-3 font-bold text-white shadow-soft transition-all duration-300 hover:bg-coral-500 hover:shadow-glow-rose hover:translate-y-[-1px] active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 font-bold shadow-soft transition-all duration-300 hover:translate-y-[-1px] active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed;
+    background: var(--surface-overlay);
+    color: var(--text);
   }
 
   .btn-soft {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-lavender-50 px-7 py-3 font-bold text-royal-600 transition-all duration-300 hover:bg-lavender-100 hover:shadow-soft disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed;
+    background: var(--accent-subtle);
+    color: var(--accent);
   }
 
   .card {
-    @apply rounded-2xl border border-lavender-100/60 bg-white p-6 shadow-card transition-all duration-300 hover:shadow-card-hover;
+    @apply rounded-2xl p-6 transition-all duration-300;
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-card);
+  }
+  .card:hover {
+    box-shadow: var(--shadow-card-hover);
   }
 
   .input {
-    @apply w-full rounded-xl border border-cream-300 bg-white px-4 py-3 text-navy-800 outline-none transition-all duration-200 placeholder:text-navy-400 focus:border-royal-400 focus:ring-2 focus:ring-royal-100 focus:ring-offset-0;
+    @apply w-full rounded-xl px-4 py-3 outline-none transition-all duration-200;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .input::placeholder {
+    color: var(--muted);
+  }
+  .input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
   }
 
   .section-title {
-    @apply text-2xl font-extrabold text-navy-900 md:text-3xl;
-  }
-
-  .gradient-primary {
-    @apply bg-gradient-to-l from-royal-600 via-royal-400 to-coral-400;
+    @apply text-2xl font-extrabold md:text-3xl;
+    color: var(--text);
   }
 
   .glass {
-    @apply rounded-2xl border border-white/50 bg-white/70 shadow-soft backdrop-blur-xl;
+    @apply rounded-2xl backdrop-blur-xl;
+    background: color-mix(in srgb, var(--surface-raised) 70%, transparent);
+    border: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+    box-shadow: var(--shadow-soft);
   }
 
   .gradient-bg {
-    @apply bg-gradient-to-br from-cream-50 via-white to-lavender-50;
+    background: var(--bg);
   }
 }

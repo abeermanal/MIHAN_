@@ -70,7 +70,7 @@ export default function AssessmentClient() {
     }
   }
 
-  if (loading) return <p className="text-center text-royal-500">جارٍ التحميل…</p>;
+  if (loading) return <p className="text-center text-muted">جارٍ التحميل…</p>;
   if (skills.length === 0)
     return <SetupNotice error={error ?? undefined} />;
 
@@ -79,53 +79,49 @@ export default function AssessmentClient() {
 
   return (
     <div className="space-y-6 pb-28">
-      {/* Header */}
-      <header className="rounded-3xl bg-gradient-to-l from-royal-600 via-royal-500 to-coral-400 px-8 py-10 text-white">
+      <header className="rounded-3xl bg-teal-gradient px-8 py-10 text-white">
         <h1 className="text-3xl font-extrabold">تقييم المهارات</h1>
         <p className="mt-2 text-sm text-white/80">
           حددي مستواك في كل مهارة — سيستخدمه النظام لحساب توافقك مع الفرص.
         </p>
       </header>
 
-      {/* Progress bar at top */}
       <div className="card space-y-3">
-        <div className="flex items-center justify-between text-sm font-bold text-navy-800">
+        <div className="flex items-center justify-between text-sm font-bold" style={{ color: "var(--text)" }}>
           <span>التقدم في التقييم</span>
-          <span className="text-royal-500">{answered} / {skills.length}</span>
+          <span className="text-accent">{answered} / {skills.length}</span>
         </div>
-        <div className="h-2.5 w-full overflow-hidden rounded-full bg-lavender-50">
+        <div className="h-2.5 w-full overflow-hidden rounded-full" style={{ background: "var(--surface)" }}>
           <div
-            className="h-full rounded-full bg-gradient-to-l from-royal-500 to-coral-400 transition-all duration-500"
+            className="h-full rounded-full bg-gold-gradient transition-all duration-500"
             style={{ width: `${pct}%` }}
           />
         </div>
-        <p className="text-xs text-navy-400">أجيبي على جميع المهارات للحصول على أفضل توصيات</p>
+        <p className="text-xs" style={{ color: "var(--muted)" }}>أجيبي على جميع المهارات للحصول على أفضل توصيات</p>
       </div>
 
       {error && (
-        <div className="rounded-2xl bg-coral-50 p-4 text-coral-700">{error}</div>
+        <div className="rounded-2xl p-4" style={{ background: "rgba(220, 53, 69, 0.1)", color: "#DC3545" }}>{error}</div>
       )}
 
-      {/* Skills grid */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {skills.map((s, idx) => {
           const selected = answers[s.id] != null;
           return (
             <div
               key={s.id}
-              className={`card transition-all duration-200 ${
-                selected
-                  ? "border-2 border-royal-400 bg-royal-50/50 shadow-soft"
-                  : "border border-lavender-100/60 hover:shadow-sm"
-              }`}
+              className="card transition-all duration-200"
+              style={{
+                borderColor: selected ? "var(--accent)" : undefined,
+                background: selected ? "var(--accent-subtle)" : undefined,
+              }}
             >
               <div className="mb-3">
-                <span className="text-xs font-bold text-royal-400">#{idx + 1}</span>
-                <h3 className="text-base font-extrabold text-navy-900">{s.name_ar}</h3>
-                <p className="text-xs text-royal-400">{s.name_en}</p>
+                <span className="text-xs font-bold text-accent">#{idx + 1}</span>
+                <h3 className="text-base font-extrabold" style={{ color: "var(--text)" }}>{s.name_ar}</h3>
+                <p className="text-xs text-muted">{s.name_en}</p>
               </div>
 
-              {/* Level pill buttons */}
               <div className="flex flex-wrap gap-2">
                 {levelOptions.map((o) => {
                   const isActive = answers[s.id] === o.value;
@@ -140,18 +136,21 @@ export default function AssessmentClient() {
                           return next;
                         })
                       }
-                      className={`flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-bold transition-all duration-150 ${
+                      className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold transition-all duration-150 ${
                         isActive
-                          ? "border-royal-500 bg-royal-600 text-white shadow-soft"
-                          : "border-lavender-200 bg-white text-navy-700 hover:border-royal-300"
+                          ? "bg-gold-gradient shadow-soft"
+                          : "border hover:border-accent"
                       }`}
+                      style={{
+                        color: isActive ? "#0A1F1F" : "var(--accent)",
+                        borderColor: isActive ? undefined : "var(--border)",
+                      }}
                     >
                       <span
                         className={`inline-flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-extrabold ${
-                          isActive
-                            ? "bg-white text-royal-600"
-                            : "bg-lavender-50 text-royal-500"
+                          isActive ? "bg-white/20" : ""
                         }`}
+                        style={{ color: isActive ? "#0A1F1F" : "var(--accent)" }}
                       >
                         {o.value}
                       </span>
@@ -165,14 +164,19 @@ export default function AssessmentClient() {
         })}
       </div>
 
-      {/* Sticky bottom bar */}
       <div className="fixed bottom-0 left-0 right-0 z-50">
-        <div className="glass mx-auto flex max-w-4xl items-center justify-between border-t border-lavender-100/40 px-6 py-4 shadow-card backdrop-blur-xl">
+        <div
+          className="glass mx-auto flex max-w-4xl items-center justify-between px-6 py-4"
+          style={{ borderTop: "1px solid var(--border)" }}
+        >
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-royal-500 to-coral-400 text-xs font-extrabold text-white">
+            <div
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-gradient text-xs font-extrabold"
+              style={{ color: "#0A1F1F" }}
+            >
               {answered}/{skills.length}
             </div>
-            <span className="text-sm font-bold text-navy-700">تم الإجابة على {answered} من {skills.length}</span>
+            <span className="text-sm font-bold" style={{ color: "var(--text)" }}>تم الإجابة على {answered} من {skills.length}</span>
           </div>
           <button
             className="btn-primary"

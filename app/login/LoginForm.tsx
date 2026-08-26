@@ -60,57 +60,67 @@ export default function LoginForm() {
 
   return (
     <div className="flex min-h-[80vh]">
-      {/* Decorative right panel */}
-      <div className="relative hidden w-1/2 overflow-hidden bg-gradient-to-br from-royal-600 via-royal-500 to-coral-400 lg:flex lg:items-center lg:justify-center">
-        <div className="pointer-events-none absolute -left-32 -top-32 h-[500px] w-[500px] rounded-full bg-white/10 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-40 -right-20 h-[400px] w-[400px] rounded-full bg-coral-300/20 blur-3xl" />
-        <div className="pointer-events-none absolute left-1/3 top-1/3 h-[250px] w-[250px] rounded-full bg-lavender-300/20 blur-3xl" />
+      <div
+        className="relative hidden w-1/2 overflow-hidden lg:flex lg:items-center lg:justify-center"
+        style={{
+          background: "linear-gradient(135deg, #0d3b35 0%, #115e54 40%, #0f4a41 70%, #0a2f2a 100%)",
+        }}
+      >
+        <div className="pointer-events-none absolute -left-32 -top-32 h-[500px] w-[500px] rounded-full blur-3xl" style={{ backgroundColor: "rgba(212,175,55,0.08)" }} />
+        <div className="pointer-events-none absolute -bottom-40 -right-20 h-[400px] w-[400px] rounded-full blur-3xl" style={{ backgroundColor: "rgba(212,175,55,0.06)" }} />
+        <div className="pointer-events-none absolute left-1/3 top-1/3 h-[250px] w-[250px] rounded-full blur-3xl" style={{ backgroundColor: "rgba(255,255,255,0.04)" }} />
         <div className="relative z-10 px-12 text-center">
-          <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-3xl bg-white/15 backdrop-blur-sm shadow-glow">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
-              <circle cx="12" cy="7" r="4" />
+          <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-3xl shadow-glow" style={{ backgroundColor: "rgba(212,175,55,0.15)", backdropFilter: "blur(8px)" }}>
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <path d="M24 4L44 24L24 44L4 24L24 4Z" stroke="#D4AF37" strokeWidth="2.5" fill="none" />
+              <path d="M24 10L38 24L24 38L10 24L24 10Z" stroke="#D4AF37" strokeWidth="1.5" fill="none" opacity="0.6" />
+              <circle cx="24" cy="24" r="4" fill="#D4AF37" />
             </svg>
           </div>
-          <h2 className="text-4xl font-black text-white">مِهَن</h2>
-          <p className="mt-3 text-lg font-medium text-white/80">
+          <h2 className="text-4xl font-black" style={{ color: "#D4AF37" }}>مِهَن</h2>
+          <p className="mt-3 text-lg font-medium" style={{ color: "rgba(255,255,255,0.7)" }}>
             منصة التوجيه المهني للنساء
           </p>
         </div>
       </div>
 
-      {/* Form panel */}
       <div className="flex w-full items-center justify-center px-6 py-12 lg:w-1/2">
         <div className="w-full max-w-md">
-          <div className="rounded-3xl border border-lavender-100/60 bg-white p-8 shadow-card">
-            {/* Mobile logo */}
+          <div
+            className="rounded-3xl p-8 shadow-card"
+            style={{
+              backgroundColor: "var(--surface-raised)",
+              border: "1px solid var(--border)",
+            }}
+          >
             <div className="mb-8 text-center lg:hidden">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-3xl bg-gradient-to-br from-royal-600 via-royal-400 to-coral-400 shadow-soft">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
-                  <circle cx="12" cy="7" r="4" />
+              <div
+                className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-3xl shadow-soft"
+                style={{ backgroundColor: "var(--accent)" }}
+              >
+                <svg width="32" height="32" viewBox="0 0 48 48" fill="none">
+                  <path d="M24 4L44 24L24 44L4 24L24 4Z" stroke="white" strokeWidth="2.5" fill="none" />
+                  <path d="M24 10L38 24L24 38L10 24L24 10Z" stroke="white" strokeWidth="1.5" fill="none" opacity="0.6" />
+                  <circle cx="24" cy="24" r="4" fill="white" />
                 </svg>
               </div>
               <div className="flex items-center justify-center gap-2">
-                <span className="text-xl font-black text-navy-900">مِهَن</span>
-                <span className="text-[10px] font-bold tracking-[0.2em] text-royal-400">MIHAN</span>
+                <span className="text-xl font-black" style={{ color: "var(--text)" }}>مِهَن</span>
               </div>
             </div>
 
-            {/* Greeting */}
-            <h1 className="text-2xl font-extrabold text-navy-900">تسجيل الدخول</h1>
-            <p className="mt-2 text-royal-500">
-              أهلاً بعودتك 💜 سجلي الدخول لمتابعة مهاراتك ومسارك.
+            <h1 className="text-2xl font-extrabold" style={{ color: "var(--text)" }}>تسجيل الدخول</h1>
+            <p className="mt-2" style={{ color: "var(--text-secondary)" }}>
+              أهلاً بعودتك! سجلي الدخول لمتابعة مهاراتك ومسارك.
             </p>
 
             <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-              {/* Email */}
               <div>
-                <label htmlFor="email" className="mb-1 block font-bold text-navy-700">
+                <label htmlFor="email" className="mb-1 block font-bold" style={{ color: "var(--text)" }}>
                   البريد الإلكتروني
                 </label>
                 <div className="relative">
-                  <span className="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-navy-400">
+                  <span className="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2" style={{ color: "var(--muted)" }}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                       <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                       <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
@@ -130,13 +140,12 @@ export default function LoginForm() {
                 </div>
               </div>
 
-              {/* Password */}
               <div>
-                <label htmlFor="password" className="mb-1 block font-bold text-navy-700">
+                <label htmlFor="password" className="mb-1 block font-bold" style={{ color: "var(--text)" }}>
                   كلمة المرور
                 </label>
                 <div className="relative">
-                  <span className="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-navy-400">
+                  <span className="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2" style={{ color: "var(--muted)" }}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                     </svg>
@@ -155,23 +164,23 @@ export default function LoginForm() {
                 </div>
               </div>
 
-              {/* Error */}
               {error && (
-                <div className="flex items-start gap-2 rounded-2xl bg-coral-50 p-3 text-sm font-bold text-coral-700">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="mt-0.5 h-5 w-5 shrink-0 text-coral-400" viewBox="0 0 20 20" fill="currentColor">
+                <div
+                  className="flex items-start gap-2 rounded-2xl p-3 text-sm font-bold"
+                  style={{ backgroundColor: "rgba(212,175,55,0.1)", color: "var(--accent)" }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="mt-0.5 h-5 w-5 shrink-0" viewBox="0 0 20 20" fill="currentColor" style={{ color: "var(--accent)" }}>
                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                   </svg>
                   <span>{error}</span>
                 </div>
               )}
 
-              {/* Submit */}
               <button type="submit" className="btn-primary w-full" disabled={loading}>
                 {loading ? "جارٍ الدخول…" : "دخول"}
               </button>
             </form>
 
-            {/* Signup link */}
             <div className="mt-5 text-center">
               <Link href="/signup" className="btn-outline w-full">
                 ليس لديك حساب؟ أنشئي حساباً جديداً
@@ -179,8 +188,7 @@ export default function LoginForm() {
             </div>
           </div>
 
-          {/* Bottom decorative text */}
-          <p className="mt-6 text-center text-xs text-navy-400">
+          <p className="mt-6 text-center text-xs" style={{ color: "var(--muted)" }}>
             مِهَن — منصة التوجيه المهني للنساء
           </p>
         </div>

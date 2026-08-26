@@ -26,8 +26,8 @@ export default function OpportunitiesClient() {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
         <div className="text-center">
-          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-4 border-lavender-200 border-t-royal-500" />
-          <p className="text-lg font-bold text-royal-500">جارٍ التحميل…</p>
+          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-4 border-surface border-t-accent" />
+          <p className="text-lg font-bold text-accent">جارٍ التحميل…</p>
         </div>
       </div>
     );
@@ -40,14 +40,13 @@ export default function OpportunitiesClient() {
     if (score >= 70)
       return "bg-gradient-to-r from-success-500 to-success-400 text-white";
     if (score >= 40)
-      return "bg-gradient-to-r from-coral-400 to-coral-500 text-white";
-    return "bg-gradient-to-r from-coral-600 to-coral-700 text-white";
+      return "bg-gradient-to-r from-gold-400 to-gold-500 text-white";
+    return "bg-gradient-to-r from-red-500 to-red-600 text-white";
   }
 
   return (
     <div className="space-y-8">
-      {/* Header */}
-      <header className="rounded-3xl bg-gradient-to-l from-royal-600 via-royal-500 to-coral-400 px-8 py-10 text-white">
+      <header className="rounded-3xl bg-teal-gradient px-8 py-10 text-white">
         <div className="flex flex-wrap items-center justify-between gap-6">
           <div>
             <h1 className="section-title !text-white">الفرص الوظيفية</h1>
@@ -65,11 +64,10 @@ export default function OpportunitiesClient() {
         </div>
       </header>
 
-      {/* Best Opportunity */}
       {best && (
-        <div className="card border-r-4 border-royal-500 shadow-lg transition-all hover:shadow-xl">
-          <p className="text-sm font-bold text-royal-500">أفضل فرصة لك الآن</p>
-          <h2 className="mt-2 flex flex-wrap items-center gap-3 text-xl font-extrabold text-navy-900">
+        <div className="card border-r-4 border-accent shadow-lg transition-all hover:shadow-xl">
+          <p className="text-sm font-bold text-accent">أفضل فرصة لك الآن</p>
+          <h2 className="mt-2 flex flex-wrap items-center gap-3 text-xl font-extrabold" style={{ color: "var(--text)" }}>
             {best.organization && (
               <OrgLogo
                 name={best.organization.name}
@@ -82,25 +80,24 @@ export default function OpportunitiesClient() {
             </span>
           </h2>
           <div className="mt-4 flex items-center gap-4">
-            <div className="h-3 flex-1 overflow-hidden rounded-full bg-lavender-50">
+            <div className="h-3 flex-1 overflow-hidden rounded-full" style={{ background: "var(--surface)" }}>
               <div
-                className="h-full rounded-full bg-gradient-to-r from-royal-500 to-royal-600 transition-all"
+                className="h-full rounded-full bg-gold-gradient transition-all"
                 style={{ width: `${best.match.score}%` }}
               />
             </div>
-            <span className="text-2xl font-extrabold text-royal-600">
+            <span className="text-2xl font-extrabold text-accent">
               {best.match.score}%
             </span>
           </div>
         </div>
       )}
 
-      {/* Results List */}
       {rows.length === 0 ? (
         <div className="card flex flex-col items-center justify-center py-16 text-center">
           <span className="mb-4 text-5xl">🔍</span>
-          <h2 className="text-xl font-bold text-navy-900">لا توجد فرص حالياً</h2>
-          <p className="mt-2 text-royal-500">
+          <h2 className="text-xl font-bold" style={{ color: "var(--text)" }}>لا توجد فرص حالياً</h2>
+          <p className="mt-2 text-accent">
             قم بتحديث تقييمك للحصول على فرص مناسبة لمهاراتك.
           </p>
           <Link href="/assessment" className="btn-primary mt-6">
@@ -125,8 +122,8 @@ export default function OpportunitiesClient() {
                     />
                   )}
                   <div>
-                    <h3 className="font-bold text-navy-900">{opp.title_ar}</h3>
-                    <p className="text-sm text-royal-500">
+                    <h3 className="font-bold" style={{ color: "var(--text)" }}>{opp.title_ar}</h3>
+                    <p className="text-sm text-accent">
                       {opp.organization?.name ?? opp.company} · {opp.location} ·{" "}
                       {opp.employment_type}
                     </p>
@@ -145,7 +142,8 @@ export default function OpportunitiesClient() {
                   {opp.match.gaps.map((g) => (
                     <span
                       key={g.skillId}
-                      className="rounded-full bg-coral-50 px-3 py-1 text-xs font-medium text-coral-700"
+                      className="rounded-full px-3 py-1 text-xs font-medium"
+                      style={{ background: "var(--accent-subtle)", color: "var(--accent)" }}
                     >
                       {g.skillNameAr}
                     </span>

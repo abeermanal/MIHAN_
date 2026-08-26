@@ -9,8 +9,8 @@ import type { Opportunity, Organization } from "@/lib/types";
 type Status = "active" | "closed";
 
 const statusLabels: Record<Status, { text: string; className: string }> = {
-  active: { text: "نشطة", className: "bg-success-50 text-success-700" },
-  closed: { text: "مغلقة", className: "bg-lavender-100 text-royal-600" },
+  active: { text: "نشطة", className: "bg-success-100 text-success-700" },
+  closed: { text: "مغلقة", className: "bg-muted/15 text-muted-strong" },
 };
 
 function formatDate(iso?: string) {
@@ -110,7 +110,7 @@ export default function DashboardClient() {
     }
   }
 
-  if (loading) return <p className="text-center text-royal-500">جارٍ التحميل…</p>;
+  if (loading) return <p className="text-center" style={{ color: "var(--text-secondary)" }}>جارٍ التحميل…</p>;
   if (error && !org) return <SetupNotice error={error} />;
 
   const activeCount = rows.filter((r) => r.status !== "closed").length;
@@ -118,63 +118,79 @@ export default function DashboardClient() {
 
   return (
     <div className="space-y-6">
-      <header className="rounded-3xl bg-gradient-to-l from-royal-600 via-royal-500 to-coral-400 px-8 py-10 text-white">
+      <header className="rounded-3xl bg-teal-gradient px-8 py-10 text-white">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h1 className="section-title !text-white">لوحة المنظمة 🏢</h1>
+            <h1 className="section-title !text-white">لوحة المنظمة</h1>
             <p className="mt-2 text-white/80">
               مرحباً {org?.name} — تابعي فرصك المنشورة وأضيفي الجديد.
             </p>
           </div>
-          <Link href="/org/opportunities/new" className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-royal-600 shadow-soft transition-all duration-300 hover:shadow-glow hover:brightness-105">
+          <Link href="/org/opportunities/new" className="btn-primary">
             + إضافة فرصة جديدة
           </Link>
         </div>
       </header>
 
       {error && (
-        <div className="rounded-2xl bg-coral-50 p-4 text-sm font-bold text-coral-700">
+        <div className="rounded-2xl bg-warning-50 p-4 text-sm font-bold text-warning-700">
           {error}
         </div>
       )}
 
       <div className="grid gap-4 sm:grid-cols-3">
         <div className="card flex items-center gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-royal-500 to-coral-400 text-xl text-white shadow-soft">
-            📋
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gold-gradient text-white shadow-soft">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2" />
+              <rect x="8" y="2" width="8" height="4" rx="1" />
+              <path d="M9 12h6" />
+              <path d="M9 16h6" />
+            </svg>
           </div>
           <div>
-            <p className="text-2xl font-extrabold text-navy-900">{rows.length}</p>
-            <p className="text-sm text-royal-500">إجمالي الفرص</p>
+            <p className="text-2xl font-extrabold" style={{ color: "var(--text)" }}>{rows.length}</p>
+            <p className="text-sm" style={{ color: "var(--text-secondary)" }}>إجمالي الفرص</p>
           </div>
         </div>
         <div className="card flex items-center gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-success-50 text-xl">
-            ✅
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-success-100 text-success-700">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
           </div>
           <div>
-            <p className="text-2xl font-extrabold text-navy-900">{activeCount}</p>
-            <p className="text-sm text-royal-500">فرص نشطة</p>
+            <p className="text-2xl font-extrabold" style={{ color: "var(--text)" }}>{activeCount}</p>
+            <p className="text-sm" style={{ color: "var(--text-secondary)" }}>فرص نشطة</p>
           </div>
         </div>
         <div className="card flex items-center gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-lavender-50 text-xl">
-            🔒
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-muted/15 text-muted-strong">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" />
+              <path d="M7 11V7a5 5 0 0110 0v4" />
+            </svg>
           </div>
           <div>
-            <p className="text-2xl font-extrabold text-navy-900">{closedCount}</p>
-            <p className="text-sm text-royal-500">فرص مغلقة</p>
+            <p className="text-2xl font-extrabold" style={{ color: "var(--text)" }}>{closedCount}</p>
+            <p className="text-sm" style={{ color: "var(--text-secondary)" }}>فرص مغلقة</p>
           </div>
         </div>
       </div>
 
       {rows.length === 0 ? (
         <div className="card text-center">
-          <span className="text-5xl">📭</span>
-          <h2 className="mt-4 text-xl font-extrabold text-navy-900">
+          <span className="inline-flex h-20 w-20 mx-auto items-center justify-center rounded-2xl bg-gold-500/10 text-gold-400">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <path d="M12 8v8" />
+              <path d="M8 12h8" />
+            </svg>
+          </span>
+          <h2 className="mt-4 text-xl font-extrabold" style={{ color: "var(--text)" }}>
             لم تنشري أي فرصة بعد
           </h2>
-          <p className="mt-2 text-royal-500">
+          <p className="mt-2" style={{ color: "var(--text-secondary)" }}>
             ابدئي بنشر أول فرصة وظيفية أو تدريبية لتصل إلى الباحثات عن العمل.
           </p>
           <Link href="/org/opportunities/new" className="btn-primary mt-5 inline-flex">
@@ -185,7 +201,7 @@ export default function DashboardClient() {
         <div className="card overflow-x-auto rounded-2xl border">
           <table className="w-full min-w-[760px] text-right">
             <thead>
-              <tr className="border-b border-lavender-100/60 bg-lavender-50/50 text-sm text-navy-600">
+              <tr className="border-b text-sm" style={{ borderColor: "var(--border)", background: "var(--surface-overlay)", color: "var(--text-secondary)" }}>
                 <th className="px-5 py-3.5 font-bold">الفرصة</th>
                 <th className="px-5 py-3.5 font-bold">تاريخ النشر</th>
                 <th className="px-5 py-3.5 font-bold">المهارات المطلوبة</th>
@@ -200,16 +216,16 @@ export default function DashboardClient() {
                 return (
                   <tr
                     key={o.id}
-                    className="border-b border-lavender-50 transition hover:bg-lavender-50/60"
+                    className="border-b transition" style={{ borderColor: "var(--border)" }}
                   >
                     <td className="px-5 py-3.5">
-                      <p className="font-bold text-navy-900">{o.title_ar}</p>
-                      <p className="text-xs text-royal-400">
+                      <p className="font-bold" style={{ color: "var(--text)" }}>{o.title_ar}</p>
+                      <p className="text-xs" style={{ color: "var(--muted)" }}>
                         {o.location || "بدون موقع محدد"}
                       </p>
                     </td>
-                    <td className="px-5 py-3.5 text-royal-500">{formatDate(o.created_at)}</td>
-                    <td className="px-5 py-3.5 text-royal-500">
+                    <td className="px-5 py-3.5" style={{ color: "var(--text-secondary)" }}>{formatDate(o.created_at)}</td>
+                    <td className="px-5 py-3.5" style={{ color: "var(--text-secondary)" }}>
                       {(o.required_skills ?? []).length}
                     </td>
                     <td className="px-5 py-3.5">
@@ -226,20 +242,23 @@ export default function DashboardClient() {
                       <div className="flex items-center gap-3 text-sm font-bold">
                         <Link
                           href={`/opportunities/${o.id}`}
-                          className="text-royal-600 underline-offset-4 hover:text-navy-800 hover:underline"
+                          className="underline-offset-4 hover:underline"
+                          style={{ color: "var(--accent)" }}
                         >
                           عرض
                         </Link>
                         <Link
                           href={`/org/opportunities/${o.id}/edit`}
-                          className="text-coral-500 underline-offset-4 hover:text-coral-700 hover:underline"
+                          className="underline-offset-4 hover:underline"
+                          style={{ color: "var(--accent)" }}
                         >
                           تعديل
                         </Link>
                         <button
                           onClick={() => handleDelete(o)}
                           disabled={busy}
-                          className="text-rose-600 underline-offset-4 hover:text-rose-800 hover:underline disabled:opacity-50"
+                          className="underline-offset-4 hover:underline disabled:opacity-50"
+                          style={{ color: "#E57373" }}
                         >
                           حذف
                         </button>
@@ -252,6 +271,10 @@ export default function DashboardClient() {
           </table>
         </div>
       )}
+
+      <style>{`
+        tr:hover td { background: var(--accent-subtle); }
+      `}</style>
     </div>
   );
 }

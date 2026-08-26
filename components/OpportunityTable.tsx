@@ -3,25 +3,25 @@ import OrgLogo from "./OrgLogo";
 import type { OpportunityWithMatch } from "@/lib/types";
 
 function scoreColor(score: number) {
-  if (score >= 70) return "bg-success-50 text-success-700";
-  if (score >= 40) return "bg-coral-50 text-coral-700";
-  return "bg-rose-50 text-rose-700";
+  if (score >= 70) return "bg-success-100 text-success-700";
+  if (score >= 40) return "bg-gold-100 text-gold-700";
+  return "bg-rose-100 text-rose-700";
 }
 
 export default function OpportunityTable({ rows }: { rows: OpportunityWithMatch[] }) {
   if (rows.length === 0) {
     return (
-      <p className="card text-center text-royal-500">
+      <p className="card text-center" style={{ color: "var(--text-secondary)" }}>
         لا توجد فرص بعد — أضيفي البيانات الأولية عبر{" "}
-        <code className="rounded bg-lavender-100 px-1">POST /api/seed</code>.
+        <code className="rounded px-1" style={{ backgroundColor: "var(--border)" }}>POST /api/seed</code>.
       </p>
     );
   }
   return (
-    <div className="overflow-x-auto rounded-2xl border border-lavender-100/60 bg-white shadow-card">
+    <div className="overflow-x-auto rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-card">
       <table className="w-full min-w-[720px] text-right">
         <thead>
-          <tr className="border-b border-lavender-100/60 bg-lavender-50/50 text-sm text-royal-700">
+          <tr className="border-b border-[var(--border)] text-sm" style={{ backgroundColor: "var(--surface-overlay)", color: "var(--text-secondary)" }}>
             <th className="px-4 py-3 font-bold">الفرصة</th>
             <th className="px-4 py-3 font-bold">الشركة</th>
             <th className="px-4 py-3 font-bold">الموقع</th>
@@ -34,19 +34,19 @@ export default function OpportunityTable({ rows }: { rows: OpportunityWithMatch[
           {rows.map((o) => {
             const orgName = o.organization?.name ?? o.company ?? "—";
             return (
-              <tr key={o.id} className="border-b border-lavender-50 transition hover:bg-lavender-50/60">
-                <td className="px-4 py-3 font-bold text-navy-900">{o.title_ar}</td>
+              <tr key={o.id} className="border-b border-[var(--border)] transition" style={{ backgroundColor: "var(--surface)" }} onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--accent-subtle)"; }} onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--surface)"; }}>
+                <td className="px-4 py-3 font-bold" style={{ color: "var(--text)" }}>{o.title_ar}</td>
                 <td className="px-4 py-3">
                   <span className="flex items-center gap-2">
                     {o.organization && (
                       <OrgLogo name={orgName} logoUrl={o.organization.logo_url} />
                     )}
-                    <span className="text-royal-600">{orgName}</span>
+                    <span style={{ color: "var(--text-secondary)" }}>{orgName}</span>
                   </span>
                 </td>
-                <td className="px-4 py-3 text-royal-600">{o.location ?? "—"}</td>
+                <td className="px-4 py-3" style={{ color: "var(--text-secondary)" }}>{o.location ?? "—"}</td>
                 <td className="px-4 py-3">
-                  <span className="rounded-full bg-lavender-50 px-2.5 py-0.5 text-xs font-bold text-royal-600">
+                  <span className="rounded-full px-2.5 py-0.5 text-xs font-bold" style={{ backgroundColor: "var(--border)", color: "var(--text-secondary)" }}>
                     {o.employment_type ?? "—"}
                   </span>
                 </td>
@@ -62,7 +62,8 @@ export default function OpportunityTable({ rows }: { rows: OpportunityWithMatch[
                 <td className="px-4 py-3">
                   <Link
                     href={`/opportunities/${o.id}`}
-                    className="font-bold text-royal-600 underline-offset-4 hover:text-navy-800 hover:underline"
+                    className="font-bold underline-offset-4 hover:underline"
+                    style={{ color: "var(--accent)" }}
                   >
                     التفاصيل ←
                   </Link>

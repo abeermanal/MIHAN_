@@ -185,7 +185,7 @@ export default function OpportunityForm({ opportunityId }: Props) {
     }
   }
 
-  if (loading) return <p className="text-center text-royal-500">جارٍ التحميل…</p>;
+  if (loading) return <p className="text-center" style={{ color: "var(--text-secondary)" }}>جارٍ التحميل…</p>;
   if (error && !org) return <SetupNotice error={error} />;
 
   const selectedCount = Object.keys(selected).length;
@@ -194,16 +194,17 @@ export default function OpportunityForm({ opportunityId }: Props) {
     <div className="mx-auto max-w-3xl space-y-6">
       <Link
         href="/org/dashboard"
-        className="inline-block font-bold text-royal-500 transition hover:text-royal-700"
+        className="inline-block font-bold transition hover:opacity-80"
+        style={{ color: "var(--accent)" }}
       >
         → رجوع إلى لوحة المنظمة
       </Link>
 
       <header>
         <h1 className="section-title">
-          {isEdit ? "تعديل الفرصة ✏️" : "إضافة فرصة جديدة 🎯"}
+          {isEdit ? "تعديل الفرصة" : "إضافة فرصة جديدة"}
         </h1>
-        <p className="mt-2 text-royal-500">
+        <p className="mt-2" style={{ color: "var(--text-secondary)" }}>
           {isEdit
             ? "حدّثي تفاصيل الفرصة ثم احفظي التعديلات."
             : "انشري فرصة وظيفية أو تدريبية لتظهر للباحثات عن العمل."}
@@ -212,8 +213,8 @@ export default function OpportunityForm({ opportunityId }: Props) {
 
       <form onSubmit={handleSubmit} className="card space-y-5">
         <div>
-          <label htmlFor="title" className="mb-1 block font-bold text-navy-700">
-            عنوان الفرصة <span className="text-coral-500">*</span>
+          <label htmlFor="title" className="mb-1 block font-bold" style={{ color: "var(--text)" }}>
+            عنوان الفرصة <span style={{ color: "var(--accent)" }}>*</span>
           </label>
           <input
             id="title"
@@ -227,8 +228,8 @@ export default function OpportunityForm({ opportunityId }: Props) {
         </div>
 
         <div>
-          <label htmlFor="description" className="mb-1 block font-bold text-navy-700">
-            وصف الفرصة <span className="text-coral-500">*</span>
+          <label htmlFor="description" className="mb-1 block font-bold" style={{ color: "var(--text)" }}>
+            وصف الفرصة <span style={{ color: "var(--accent)" }}>*</span>
           </label>
           <textarea
             id="description"
@@ -243,7 +244,7 @@ export default function OpportunityForm({ opportunityId }: Props) {
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label htmlFor="company" className="mb-1 block font-bold text-navy-700">
+            <label htmlFor="company" className="mb-1 block font-bold" style={{ color: "var(--text)" }}>
               اسم الجهة
             </label>
             <input
@@ -255,14 +256,14 @@ export default function OpportunityForm({ opportunityId }: Props) {
               onChange={(e) => setCompany(e.target.value)}
             />
             {!isEdit && (
-              <p className="mt-1 text-xs text-royal-400">
+              <p className="mt-1 text-xs" style={{ color: "var(--muted)" }}>
                 يُعبأ تلقائياً من بروفايل منظمتك.
               </p>
             )}
           </div>
 
           <div>
-            <label htmlFor="location" className="mb-1 block font-bold text-navy-700">
+            <label htmlFor="location" className="mb-1 block font-bold" style={{ color: "var(--text)" }}>
               الموقع (اختياري)
             </label>
             <input
@@ -276,7 +277,7 @@ export default function OpportunityForm({ opportunityId }: Props) {
           </div>
 
           <div>
-            <label htmlFor="employmentType" className="mb-1 block font-bold text-navy-700">
+            <label htmlFor="employmentType" className="mb-1 block font-bold" style={{ color: "var(--text)" }}>
               نوع التعاقد
             </label>
             <select
@@ -295,7 +296,7 @@ export default function OpportunityForm({ opportunityId }: Props) {
           </div>
 
           <div>
-            <label htmlFor="url" className="mb-1 block font-bold text-navy-700">
+            <label htmlFor="url" className="mb-1 block font-bold" style={{ color: "var(--text)" }}>
               رابط التقديم (اختياري)
             </label>
             <input
@@ -310,17 +311,20 @@ export default function OpportunityForm({ opportunityId }: Props) {
           </div>
         </div>
 
-        <fieldset className="rounded-2xl border border-lavender-100/60 p-5">
-          <legend className="px-2 font-extrabold text-navy-900">
+        <fieldset className="rounded-2xl p-5" style={{ border: "1px solid var(--border)" }}>
+          <legend className="px-2 font-extrabold" style={{ color: "var(--text)" }}>
             المهارات المطلوبة{" "}
-            <span className="ms-1 inline-flex items-center rounded-full bg-royal-50 px-2.5 py-0.5 text-xs font-bold text-royal-600">
+            <span className="ms-1 inline-flex items-center rounded-full bg-gold-500/15 px-2.5 py-0.5 text-xs font-bold text-gold-400">
               {selectedCount} مختارة
             </span>
           </legend>
 
           <div className="relative mb-3">
-            <span className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-royal-400">
-              🔍
+            <span className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3" style={{ color: "var(--accent)" }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <path d="M21 21l-4.35-4.35" />
+              </svg>
             </span>
             <input
               type="search"
@@ -332,7 +336,7 @@ export default function OpportunityForm({ opportunityId }: Props) {
           </div>
 
           {filteredSkills.length === 0 ? (
-            <p className="py-3 text-center text-sm text-royal-500">
+            <p className="py-3 text-center text-sm" style={{ color: "var(--text-secondary)" }}>
               لا توجد مهارات مطابقة — تأكدي من تشغيل البيانات الأولية عبر POST /api/seed.
             </p>
           ) : (
@@ -342,35 +346,35 @@ export default function OpportunityForm({ opportunityId }: Props) {
                 return (
                   <li
                     key={s.id}
-                    className={`rounded-2xl border p-3 transition ${
-                      sel
-                        ? "border-royal-300 bg-royal-50"
-                        : "border-transparent hover:bg-lavender-50/50"
-                    }`}
+                    className="rounded-2xl border p-3 transition"
+                    style={{
+                      borderColor: sel ? "var(--accent)" : "transparent",
+                      background: sel ? "var(--accent-subtle)" : "transparent",
+                    }}
                   >
                     <label className="flex cursor-pointer items-center gap-2.5">
                       <input
                         type="checkbox"
                         checked={Boolean(sel)}
                         onChange={() => toggleSkill(s.id)}
-                        className="h-4 w-4 accent-royal-600"
+                        className="h-4 w-4 accent-gold-500"
                       />
-                      <span className="font-bold text-navy-900">{s.name_ar}</span>
-                      <span dir="ltr" className="text-xs text-royal-400">
+                      <span className="font-bold" style={{ color: "var(--text)" }}>{s.name_ar}</span>
+                      <span dir="ltr" className="text-xs" style={{ color: "var(--muted)" }}>
                         {s.name_en}
                       </span>
                     </label>
 
                     {sel && (
-                      <div className="mt-3 flex flex-wrap items-center gap-4 rounded-xl bg-white/60 p-3 ps-7">
-                        <label className="flex items-center gap-1.5 text-sm text-royal-600">
+                      <div className="mt-3 flex flex-wrap items-center gap-4 rounded-xl p-3 ps-7" style={{ background: "var(--surface)" }}>
+                        <label className="flex items-center gap-1.5 text-sm" style={{ color: "var(--text-secondary)" }}>
                           المستوى المطلوب:
                           <select
                             value={sel.level}
                             onChange={(e) =>
                               updateSkill(s.id, { level: Number(e.target.value) })
                             }
-                            className="rounded-xl border border-lavender-200 bg-white px-2 py-1 text-sm outline-none focus:border-royal-500"
+                            className="input text-sm px-2 py-1 !w-auto"
                           >
                             {[0, 1, 2, 3, 4, 5].map((lv) => (
                               <option key={lv} value={lv}>
@@ -379,14 +383,14 @@ export default function OpportunityForm({ opportunityId }: Props) {
                             ))}
                           </select>
                         </label>
-                        <label className="flex cursor-pointer items-center gap-1.5 text-sm text-royal-600">
+                        <label className="flex cursor-pointer items-center gap-1.5 text-sm" style={{ color: "var(--text-secondary)" }}>
                           <input
                             type="checkbox"
                             checked={sel.is_required}
                             onChange={(e) =>
                               updateSkill(s.id, { is_required: e.target.checked })
                             }
-                            className="h-4 w-4 accent-coral-500"
+                            className="h-4 w-4 accent-gold-500"
                           />
                           إلزامية
                         </label>
@@ -400,13 +404,13 @@ export default function OpportunityForm({ opportunityId }: Props) {
         </fieldset>
 
         {error && (
-          <div className="rounded-2xl bg-coral-50 p-3 text-sm font-bold text-coral-700">
+          <div className="rounded-2xl bg-warning-50 p-3 text-sm font-bold text-warning-700">
             {error}
           </div>
         )}
 
         <div className="flex flex-wrap items-center justify-end gap-3">
-          <Link href="/org/dashboard" className="font-bold text-royal-500 transition hover:text-royal-700">
+          <Link href="/org/dashboard" className="font-bold transition hover:opacity-80" style={{ color: "var(--text-secondary)" }}>
             إلغاء
           </Link>
           <button type="submit" className="btn-primary" disabled={saving}>

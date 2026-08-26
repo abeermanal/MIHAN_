@@ -90,8 +90,8 @@ export default function AddSkillForm() {
         >
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label htmlFor="skill-name-ar" className="mb-1 block font-bold text-navy-700">
-                اسم المهارة (عربي) <span className="text-coral-500">*</span>
+              <label htmlFor="skill-name-ar" className="mb-1 block font-bold" style={{ color: "var(--text)" }}>
+                اسم المهارة (عربي) <span className="text-gold-500">*</span>
               </label>
               <input
                 id="skill-name-ar"
@@ -104,7 +104,7 @@ export default function AddSkillForm() {
             </div>
 
             <div>
-              <label htmlFor="skill-name-en" className="mb-1 block font-bold text-navy-700">
+              <label htmlFor="skill-name-en" className="mb-1 block font-bold" style={{ color: "var(--text)" }}>
                 الاسم بالإنجليزية (اختياري)
               </label>
               <input
@@ -119,7 +119,7 @@ export default function AddSkillForm() {
             </div>
 
             <div>
-              <label htmlFor="skill-category" className="mb-1 block font-bold text-navy-700">
+              <label htmlFor="skill-category" className="mb-1 block font-bold" style={{ color: "var(--text)" }}>
                 التصنيف
               </label>
               <select
@@ -137,7 +137,7 @@ export default function AddSkillForm() {
             </div>
 
             <div>
-              <label htmlFor="skill-level" className="mb-1 block font-bold text-navy-700">
+              <label htmlFor="skill-level" className="mb-1 block font-bold" style={{ color: "var(--text)" }}>
                 المستوى
               </label>
               <select
@@ -156,7 +156,7 @@ export default function AddSkillForm() {
           </div>
 
           {error && (
-            <p className="rounded-2xl bg-coral-50 p-3 text-sm font-bold text-coral-700">
+            <p className="rounded-2xl bg-warning-50 p-3 text-sm font-bold text-warning-700">
               {error}
             </p>
           )}

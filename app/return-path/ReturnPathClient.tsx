@@ -123,16 +123,15 @@ export default function ReturnPathClient() {
 
   return (
     <div className="space-y-10">
-      {/* Hero */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-l from-coral-300 via-coral-200 to-lavender-200 px-8 py-14 text-center shadow-card md:px-16">
-        <div className="pointer-events-none absolute -left-12 -top-12 h-48 w-48 rounded-full bg-white/30 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-16 -right-10 h-52 w-52 rounded-full bg-royal-300/20 blur-3xl" />
-        <div className="pointer-events-none absolute right-1/3 top-4 h-32 w-32 rounded-full bg-white/20 blur-2xl" />
+      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-l from-teal-600 via-teal-500 to-teal-400 px-8 py-14 text-center shadow-card md:px-16">
+        <div className="pointer-events-none absolute -left-12 -top-12 h-48 w-48 rounded-full bg-gold-300/20 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-16 -right-10 h-52 w-52 rounded-full bg-teal-700/30 blur-3xl" />
+        <div className="pointer-events-none absolute right-1/3 top-4 h-32 w-32 rounded-full bg-gold-200/15 blur-2xl" />
 
-        <h1 className="relative text-4xl font-extrabold text-navy-900 md:text-5xl">
+        <h1 className="relative text-4xl font-extrabold text-gold-300 md:text-5xl">
           عودتك قوة 🌸
         </h1>
-        <p className="relative mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-navy-700">
+        <p className="relative mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/85">
           الانقطاع عن العمل ليس نهاية المسار — كل تجربة عشتِها اكتسبتِ منها مهارات.
           وثّقي خبراتك هنا، وسنحوّلها إلى ملف مهني يفتح لك الأبواب من جديد.
         </p>
@@ -142,10 +141,9 @@ export default function ReturnPathClient() {
 
       {!error && (
         <>
-          {/* Experience presets */}
           <section>
             <h2 className="section-title mb-2">ماذا فعلتِ خلال فترتك السابقة؟</h2>
-            <p className="mb-5 text-navy-500">
+            <p className="mb-5 text-text-secondary">
               اختاري ما ينطبق عليك — سنضيف المهارات المرتبطة تلقائياً إلى ملفك.
             </p>
 
@@ -158,13 +156,13 @@ export default function ReturnPathClient() {
                     onClick={() => togglePreset(p.label)}
                     className={`rounded-2xl border-2 p-4 text-right font-bold transition-all duration-200 ${
                       active
-                        ? "border-royal-500 bg-royal-50 text-navy-900 shadow-soft"
-                        : "border-lavender-100 bg-white hover:border-royal-200 text-royal-600"
+                        ? "border-gold-400 bg-gold-400/10 text-gold-300 shadow-soft"
+                        : "border-[var(--border)] bg-[var(--surface)] hover:border-gold-500/50 text-[var(--text-secondary)]"
                     }`}
                     aria-pressed={active}
                   >
                     {active && (
-                      <span className="ml-2 inline-flex h-5 w-5 items-center justify-center rounded-full bg-royal-500 text-xs text-white">
+                      <span className="ml-2 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gold-400 text-xs text-teal-900">
                         ✓
                       </span>
                     )}
@@ -175,7 +173,7 @@ export default function ReturnPathClient() {
             </div>
 
             <div className="card mt-6">
-              <label htmlFor="exp" className="mb-2 block text-sm font-bold text-navy-700">
+              <label htmlFor="exp" className="mb-2 block text-sm font-bold text-[var(--text)]">
                 أو اكتبي خبرتك بحرية
               </label>
               <textarea
@@ -204,7 +202,6 @@ export default function ReturnPathClient() {
             )}
           </section>
 
-          {/* Current skills */}
           {userSkills.length > 0 && (
             <section>
               <h2 className="section-title mb-4">مهاراتك الحالية</h2>
@@ -225,8 +222,8 @@ export default function ReturnPathClient() {
 
       {loading && !error && (
         <div className="flex items-center justify-center py-12">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-lavender-200 border-t-royal-500" />
-          <span className="mr-3 text-royal-500">جارٍ التحميل…</span>
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-[var(--border)] border-t-gold-400" />
+          <span className="mr-3 text-gold-400">جارٍ التحميل…</span>
         </div>
       )}
     </div>
