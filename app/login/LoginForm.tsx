@@ -59,18 +59,21 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="flex min-h-screen">
-      {/* Decorative left panel */}
-      <div className="relative hidden w-1/2 overflow-hidden bg-navy-800 lg:flex lg:items-center lg:justify-center">
-        <div className="pointer-events-none absolute -left-32 -top-32 h-[500px] w-[500px] rounded-full bg-royal-500/30 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-40 -right-20 h-[400px] w-[400px] rounded-full bg-coral-400/25 blur-3xl" />
-        <div className="pointer-events-none absolute left-1/3 top-1/3 h-[250px] w-[250px] rounded-full bg-lavender-400/20 blur-3xl" />
+    <div className="flex min-h-[80vh]">
+      {/* Decorative right panel */}
+      <div className="relative hidden w-1/2 overflow-hidden bg-gradient-to-br from-royal-600 via-royal-500 to-coral-400 lg:flex lg:items-center lg:justify-center">
+        <div className="pointer-events-none absolute -left-32 -top-32 h-[500px] w-[500px] rounded-full bg-white/10 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-40 -right-20 h-[400px] w-[400px] rounded-full bg-coral-300/20 blur-3xl" />
+        <div className="pointer-events-none absolute left-1/3 top-1/3 h-[250px] w-[250px] rounded-full bg-lavender-300/20 blur-3xl" />
         <div className="relative z-10 px-12 text-center">
-          <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-br from-royal-500 to-coral-400 shadow-glow">
-            <span className="text-5xl font-black text-white">م</span>
+          <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-3xl bg-white/15 backdrop-blur-sm shadow-glow">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
           </div>
           <h2 className="text-4xl font-black text-white">مِهَن</h2>
-          <p className="mt-3 text-lg font-medium text-lavender-200">
+          <p className="mt-3 text-lg font-medium text-white/80">
             منصة التوجيه المهني للنساء
           </p>
         </div>
@@ -79,25 +82,31 @@ export default function LoginForm() {
       {/* Form panel */}
       <div className="flex w-full items-center justify-center px-6 py-12 lg:w-1/2">
         <div className="w-full max-w-md">
-          <div className="card p-8">
+          <div className="rounded-3xl border border-lavender-100/60 bg-white p-8 shadow-card">
             {/* Mobile logo */}
             <div className="mb-8 text-center lg:hidden">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-royal-500 to-coral-400 shadow-glow">
-                <span className="text-3xl font-black text-white">م</span>
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-3xl bg-gradient-to-br from-royal-600 via-royal-400 to-coral-400 shadow-soft">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
               </div>
-              <span className="text-xl font-black text-navy-800">مِهَن / MIHAN</span>
+              <div className="flex items-center justify-center gap-2">
+                <span className="text-xl font-black text-navy-900">مِهَن</span>
+                <span className="text-[10px] font-bold tracking-[0.2em] text-royal-400">MIHAN</span>
+              </div>
             </div>
 
             {/* Greeting */}
-            <h1 className="text-2xl font-extrabold text-navy-800">تسجيل الدخول</h1>
-            <p className="mt-2 text-royal-600">
+            <h1 className="text-2xl font-extrabold text-navy-900">تسجيل الدخول</h1>
+            <p className="mt-2 text-royal-500">
               أهلاً بعودتك 💜 سجلي الدخول لمتابعة مهاراتك ومسارك.
             </p>
 
             <form onSubmit={handleSubmit} className="mt-6 space-y-4">
               {/* Email */}
               <div>
-                <label htmlFor="email" className="mb-1 block font-bold text-royal-700">
+                <label htmlFor="email" className="mb-1 block font-bold text-navy-700">
                   البريد الإلكتروني
                 </label>
                 <div className="relative">
@@ -123,7 +132,7 @@ export default function LoginForm() {
 
               {/* Password */}
               <div>
-                <label htmlFor="password" className="mb-1 block font-bold text-royal-700">
+                <label htmlFor="password" className="mb-1 block font-bold text-navy-700">
                   كلمة المرور
                 </label>
                 <div className="relative">
@@ -148,8 +157,8 @@ export default function LoginForm() {
 
               {/* Error */}
               {error && (
-                <div className="flex items-start gap-2 rounded-xl bg-coral-50 p-3 text-sm font-bold text-coral-700">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="mt-0.5 h-5 w-5 shrink-0 text-coral-500" viewBox="0 0 20 20" fill="currentColor">
+                <div className="flex items-start gap-2 rounded-2xl bg-coral-50 p-3 text-sm font-bold text-coral-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="mt-0.5 h-5 w-5 shrink-0 text-coral-400" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                   </svg>
                   <span>{error}</span>

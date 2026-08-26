@@ -194,7 +194,7 @@ export default function OpportunityForm({ opportunityId }: Props) {
     <div className="mx-auto max-w-3xl space-y-6">
       <Link
         href="/org/dashboard"
-        className="inline-block font-bold text-royal-600 transition hover:text-royal-800"
+        className="inline-block font-bold text-royal-500 transition hover:text-royal-700"
       >
         → رجوع إلى لوحة المنظمة
       </Link>
@@ -310,10 +310,10 @@ export default function OpportunityForm({ opportunityId }: Props) {
           </div>
         </div>
 
-        <fieldset className="rounded-2xl border border-cream-200 p-5">
-          <legend className="px-2 font-extrabold text-navy-800">
+        <fieldset className="rounded-2xl border border-lavender-100/60 p-5">
+          <legend className="px-2 font-extrabold text-navy-900">
             المهارات المطلوبة{" "}
-            <span className="ms-1 inline-flex items-center rounded-full bg-royal-100 px-2.5 py-0.5 text-xs font-bold text-royal-600">
+            <span className="ms-1 inline-flex items-center rounded-full bg-royal-50 px-2.5 py-0.5 text-xs font-bold text-royal-600">
               {selectedCount} مختارة
             </span>
           </legend>
@@ -345,7 +345,7 @@ export default function OpportunityForm({ opportunityId }: Props) {
                     className={`rounded-2xl border p-3 transition ${
                       sel
                         ? "border-royal-300 bg-royal-50"
-                        : "border-transparent hover:bg-royal-50/50"
+                        : "border-transparent hover:bg-lavender-50/50"
                     }`}
                   >
                     <label className="flex cursor-pointer items-center gap-2.5">
@@ -355,7 +355,7 @@ export default function OpportunityForm({ opportunityId }: Props) {
                         onChange={() => toggleSkill(s.id)}
                         className="h-4 w-4 accent-royal-600"
                       />
-                      <span className="font-bold text-navy-800">{s.name_ar}</span>
+                      <span className="font-bold text-navy-900">{s.name_ar}</span>
                       <span dir="ltr" className="text-xs text-royal-400">
                         {s.name_en}
                       </span>
@@ -370,7 +370,7 @@ export default function OpportunityForm({ opportunityId }: Props) {
                             onChange={(e) =>
                               updateSkill(s.id, { level: Number(e.target.value) })
                             }
-                            className="rounded-lg border border-royal-200 bg-white px-2 py-1 text-sm outline-none focus:border-royal-500"
+                            className="rounded-xl border border-lavender-200 bg-white px-2 py-1 text-sm outline-none focus:border-royal-500"
                           >
                             {[0, 1, 2, 3, 4, 5].map((lv) => (
                               <option key={lv} value={lv}>
@@ -400,7 +400,7 @@ export default function OpportunityForm({ opportunityId }: Props) {
         </fieldset>
 
         {error && (
-          <div className="rounded-xl bg-coral-50 p-3 text-sm font-bold text-coral-700">
+          <div className="rounded-2xl bg-coral-50 p-3 text-sm font-bold text-coral-700">
             {error}
           </div>
         )}

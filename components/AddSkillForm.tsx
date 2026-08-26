@@ -156,12 +156,12 @@ export default function AddSkillForm() {
           </div>
 
           {error && (
-            <p className="rounded-xl bg-coral-50 p-3 text-sm font-bold text-coral-700">
+            <p className="rounded-2xl bg-coral-50 p-3 text-sm font-bold text-coral-700">
               {error}
             </p>
           )}
           {success && (
-            <p className="rounded-xl bg-emerald-50 p-3 text-sm font-bold text-emerald-700">
+            <p className="rounded-2xl bg-success-50 p-3 text-sm font-bold text-success-700">
               ✓ تمت إضافة المهارة إلى جوازك
             </p>
           )}

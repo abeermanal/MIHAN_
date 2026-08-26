@@ -67,32 +67,38 @@ export default function CoachClient() {
   return (
     <div className="mx-auto flex h-[calc(100vh-13rem)] max-w-3xl flex-col gap-4">
       {/* Gradient header */}
-      <div className="flex items-center gap-3 rounded-2xl bg-gradient-to-l from-royal-600 to-navy-800 px-5 py-4 text-white shadow-md">
-        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-coral-400 to-coral-600 text-sm font-extrabold text-white shadow-sm">
-          م
+      <div className="flex items-center gap-3 rounded-2xl bg-gradient-to-l from-royal-600 via-royal-500 to-coral-400 px-5 py-4 text-white shadow-soft">
+        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-white/15 backdrop-blur-sm text-sm font-extrabold text-white shadow-sm">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
         </div>
         <div>
           <h1 className="text-lg font-extrabold">المدربة الذكية</h1>
-          <p className="text-xs text-cream-100/70">نصائح مخصصة بناءً على ملفك المهني ومهاراتك</p>
+          <p className="text-xs text-white/70">نصائح مخصصة بناءً على ملفك المهني ومهاراتك</p>
         </div>
       </div>
 
       {/* Chat area */}
-      <div className="flex-1 space-y-4 overflow-y-auto rounded-2xl border border-royal-100 bg-white p-4 shadow-card">
+      <div className="flex-1 space-y-4 overflow-y-auto rounded-2xl border border-lavender-100/60 bg-white p-4 shadow-card">
         {messages.map((m, i) => (
           <div
             key={i}
             className={`flex gap-2.5 ${m.role === "user" ? "justify-start" : "justify-end"}`}
           >
             {m.role === "assistant" && (
-              <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-royal-500 to-navy-600 text-xs font-extrabold text-white">
-                م
+              <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-royal-500 to-coral-400 text-xs font-extrabold text-white">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
               </div>
             )}
             <div
               className={`max-w-[80%] whitespace-pre-line rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                 m.role === "user"
-                  ? "rounded-br-sm bg-coral-50 text-navy-800"
+                  ? "rounded-br-sm bg-lavender-50 text-navy-800"
                   : "rounded-bl-sm gradient-primary text-white"
               }`}
             >
@@ -104,10 +110,13 @@ export default function CoachClient() {
         {/* Typing indicator */}
         {sending && (
           <div className="flex justify-end gap-2.5">
-            <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-royal-500 to-navy-600 text-xs font-extrabold text-white">
-              م
+            <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-royal-500 to-coral-400 text-xs font-extrabold text-white">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
             </div>
-            <div className="flex items-center gap-1 rounded-2xl rounded-bl-sm bg-gradient-to-br from-royal-400 to-royal-600 px-4 py-3 text-sm text-white">
+            <div className="flex items-center gap-1 rounded-2xl rounded-bl-sm bg-gradient-to-br from-royal-400 to-royal-500 px-4 py-3 text-sm text-white">
               <span className="animate-pulse">جارٍ الكتابة</span>
               <span className="flex gap-0.5">
                 <span className="inline-block h-1 w-1 animate-bounce rounded-full bg-white" style={{ animationDelay: "0ms" }} />
@@ -127,7 +136,7 @@ export default function CoachClient() {
             key={s}
             onClick={() => send(s)}
             disabled={sending}
-            className="rounded-full border border-royal-200 bg-white px-4 py-2 text-xs font-bold text-royal-600 transition-all duration-150 hover:border-coral-400 hover:bg-coral-50 hover:text-navy-800 disabled:opacity-50"
+            className="rounded-full border border-lavender-200 bg-white px-4 py-2 text-xs font-bold text-royal-600 transition-all duration-200 hover:border-royal-300 hover:bg-lavender-50 hover:text-navy-800 disabled:opacity-50"
           >
             {s}
           </button>

@@ -124,15 +124,15 @@ export default function ReturnPathClient() {
   return (
     <div className="space-y-10">
       {/* Hero */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-l from-coral-400 via-coral-300 to-royal-300 px-8 py-14 text-center shadow-card md:px-16">
-        <div className="pointer-events-none absolute -left-12 -top-12 h-48 w-48 rounded-full bg-white/20 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-16 -right-10 h-52 w-52 rounded-full bg-royal-400/20 blur-3xl" />
-        <div className="pointer-events-none absolute right-1/3 top-4 h-32 w-32 rounded-full bg-cream-200/30 blur-2xl" />
+      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-l from-coral-300 via-coral-200 to-lavender-200 px-8 py-14 text-center shadow-card md:px-16">
+        <div className="pointer-events-none absolute -left-12 -top-12 h-48 w-48 rounded-full bg-white/30 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-16 -right-10 h-52 w-52 rounded-full bg-royal-300/20 blur-3xl" />
+        <div className="pointer-events-none absolute right-1/3 top-4 h-32 w-32 rounded-full bg-white/20 blur-2xl" />
 
-        <h1 className="relative text-4xl font-extrabold text-navy-950 md:text-5xl">
+        <h1 className="relative text-4xl font-extrabold text-navy-900 md:text-5xl">
           عودتك قوة 🌸
         </h1>
-        <p className="relative mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-navy-900">
+        <p className="relative mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-navy-700">
           الانقطاع عن العمل ليس نهاية المسار — كل تجربة عشتِها اكتسبتِ منها مهارات.
           وثّقي خبراتك هنا، وسنحوّلها إلى ملف مهني يفتح لك الأبواب من جديد.
         </p>
@@ -145,7 +145,7 @@ export default function ReturnPathClient() {
           {/* Experience presets */}
           <section>
             <h2 className="section-title mb-2">ماذا فعلتِ خلال فترتك السابقة؟</h2>
-            <p className="mb-5 text-royal-600">
+            <p className="mb-5 text-navy-500">
               اختاري ما ينطبق عليك — سنضيف المهارات المرتبطة تلقائياً إلى ملفك.
             </p>
 
@@ -156,10 +156,10 @@ export default function ReturnPathClient() {
                   <button
                     key={p.label}
                     onClick={() => togglePreset(p.label)}
-                    className={`rounded-2xl border-2 p-4 text-right font-bold transition ${
+                    className={`rounded-2xl border-2 p-4 text-right font-bold transition-all duration-200 ${
                       active
-                        ? "border-2 border-royal-500 bg-royal-50 text-navy-800"
-                        : "border-cream-200 bg-white hover:border-royal-300 text-royal-600"
+                        ? "border-royal-500 bg-royal-50 text-navy-900 shadow-soft"
+                        : "border-lavender-100 bg-white hover:border-royal-200 text-royal-600"
                     }`}
                     aria-pressed={active}
                   >
@@ -175,7 +175,7 @@ export default function ReturnPathClient() {
             </div>
 
             <div className="card mt-6">
-              <label htmlFor="exp" className="mb-2 block text-sm font-bold text-royal-700">
+              <label htmlFor="exp" className="mb-2 block text-sm font-bold text-navy-700">
                 أو اكتبي خبرتك بحرية
               </label>
               <textarea
@@ -197,9 +197,9 @@ export default function ReturnPathClient() {
             </div>
 
             {message && (
-              <div className="mt-5 flex items-start gap-3 rounded-xl bg-emerald-50 p-4">
-                <span className="mt-0.5 text-lg text-emerald-600">✓</span>
-                <p className="font-bold text-emerald-700">{message}</p>
+              <div className="mt-5 flex items-start gap-3 rounded-2xl bg-success-50 p-4">
+                <span className="mt-0.5 text-lg text-success-600">✓</span>
+                <p className="font-bold text-success-700">{message}</p>
               </div>
             )}
           </section>
@@ -225,7 +225,7 @@ export default function ReturnPathClient() {
 
       {loading && !error && (
         <div className="flex items-center justify-center py-12">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-royal-200 border-t-royal-600" />
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-lavender-200 border-t-royal-500" />
           <span className="mr-3 text-royal-500">جارٍ التحميل…</span>
         </div>
       )}

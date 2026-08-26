@@ -52,8 +52,8 @@ export default function OpportunityDetailClient({ id }: { id: string }) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
         <div className="text-center">
-          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-4 border-royal-200 border-t-royal-600" />
-          <p className="text-lg font-bold text-royal-600">جارٍ التحميل…</p>
+          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-4 border-lavender-200 border-t-royal-500" />
+          <p className="text-lg font-bold text-royal-500">جارٍ التحميل…</p>
         </div>
       </div>
     );
@@ -63,7 +63,7 @@ export default function OpportunityDetailClient({ id }: { id: string }) {
       <div className="flex min-h-[60vh] items-center justify-center">
         <div className="card max-w-md text-center">
           <span className="mb-4 block text-5xl">⚠️</span>
-          <h2 className="text-xl font-bold text-navy-800">
+          <h2 className="text-xl font-bold text-navy-900">
             {error ?? "الفرصة غير موجودة"}
           </h2>
           <p className="mt-2 text-royal-500">
@@ -82,9 +82,9 @@ export default function OpportunityDetailClient({ id }: { id: string }) {
   const offset = circumference - (score / 100) * circumference;
 
   function getScoreColor(s: number) {
-    if (s >= 70) return "from-green-500 to-emerald-500";
+    if (s >= 70) return "from-success-500 to-success-400";
     if (s >= 40) return "from-coral-400 to-coral-500";
-    return "from-red-400 to-red-500";
+    return "from-coral-600 to-coral-700";
   }
 
   return (
@@ -92,7 +92,7 @@ export default function OpportunityDetailClient({ id }: { id: string }) {
       {/* Back Link */}
       <Link
         href="/opportunities"
-        className="inline-flex items-center gap-2 font-bold text-royal-600 transition-colors hover:text-royal-800"
+        className="inline-flex items-center gap-2 font-bold text-royal-500 transition-colors hover:text-royal-700"
       >
         → رجوع إلى كل الفرص
       </Link>
@@ -109,10 +109,10 @@ export default function OpportunityDetailClient({ id }: { id: string }) {
               />
             )}
             <div>
-              <h1 className="text-2xl font-extrabold text-navy-800 md:text-3xl">
+              <h1 className="text-2xl font-extrabold text-navy-900 md:text-3xl">
                 {opp.title_ar}
               </h1>
-              <p className="mt-2 text-royal-600">
+              <p className="mt-2 text-royal-500">
                 {opp.organization?.name ?? opp.company} · {opp.location} ·{" "}
                 {opp.employment_type}
               </p>
@@ -127,7 +127,7 @@ export default function OpportunityDetailClient({ id }: { id: string }) {
                 cy="50"
                 r="45"
                 fill="none"
-                stroke="#e5e7eb"
+                stroke="#F0EBFF"
                 strokeWidth="8"
               />
               <circle
@@ -147,13 +147,13 @@ export default function OpportunityDetailClient({ id }: { id: string }) {
               />
               <defs>
                 <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor={score >= 70 ? "#22c55e" : score >= 40 ? "#f87171" : "#ef4444"} />
-                  <stop offset="100%" stopColor={score >= 70 ? "#10b981" : score >= 40 ? "#ef4444" : "#dc2626"} />
+                  <stop offset="0%" stopColor={score >= 70 ? "#4CAF87" : score >= 40 ? "#D4A5A5" : "#c8928f"} />
+                  <stop offset="100%" stopColor={score >= 70 ? "#4CAF87" : score >= 40 ? "#D4A5A5" : "#9e605e"} />
                 </linearGradient>
               </defs>
             </svg>
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span className="text-2xl font-extrabold text-navy-800">{score}%</span>
+              <span className="text-2xl font-extrabold text-navy-900">{score}%</span>
               <span className="text-xs text-royal-500">التوافق</span>
             </div>
           </div>
@@ -177,7 +177,7 @@ export default function OpportunityDetailClient({ id }: { id: string }) {
       {opp.description && (
         <div className="card">
           <h2 className="section-title mb-3">الوصف</h2>
-          <p className="leading-relaxed text-royal-700">{opp.description}</p>
+          <p className="leading-relaxed text-navy-600">{opp.description}</p>
         </div>
       )}
 
@@ -189,15 +189,15 @@ export default function OpportunityDetailClient({ id }: { id: string }) {
             <div key={g.skillId} className="card transition-all hover:shadow-md">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <h3 className="font-bold text-navy-800">{g.skillNameAr}</h3>
+                  <h3 className="font-bold text-navy-900">{g.skillNameAr}</h3>
                   <p className="text-sm text-royal-500">{g.skillNameEn}</p>
                 </div>
                 {g.met ? (
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-green-100 text-green-600">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-success-50 text-success-600">
                     ✓
                   </span>
                 ) : (
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-coral-100 text-coral-600">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-coral-50 text-coral-600">
                     ✗
                   </span>
                 )}
@@ -208,9 +208,9 @@ export default function OpportunityDetailClient({ id }: { id: string }) {
                   <span>المستوى: {g.userLevel}</span>
                   <span>المطلوب: {g.requiredLevel}</span>
                 </div>
-                <div className="h-2 overflow-hidden rounded-full bg-gray-200">
+                <div className="h-2 overflow-hidden rounded-full bg-lavender-50">
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-royal-500 to-royal-700 transition-all"
+                    className="h-full rounded-full bg-gradient-to-r from-royal-500 to-royal-600 transition-all"
                     style={{
                       width: `${Math.min(((g.userLevel ?? 0) / g.requiredLevel) * 100, 100)}%`,
                     }}
@@ -230,8 +230,8 @@ export default function OpportunityDetailClient({ id }: { id: string }) {
           </h2>
           <div className="space-y-5">
             {missingRequired.map((g) => (
-              <div key={g.skillId} className="glass rounded-xl p-4">
-                <p className="font-bold text-navy-800">
+              <div key={g.skillId} className="glass rounded-2xl p-4">
+                <p className="font-bold text-navy-900">
                   {g.skillNameAr}{" "}
                   <span className="text-xs font-normal text-royal-400">
                     ({g.skillNameEn}) — المطلوب مستوى {g.requiredLevel}

@@ -9,8 +9,8 @@ import type { Opportunity, Organization } from "@/lib/types";
 type Status = "active" | "closed";
 
 const statusLabels: Record<Status, { text: string; className: string }> = {
-  active: { text: "نشطة", className: "bg-emerald-100 text-emerald-700" },
-  closed: { text: "مغلقة", className: "bg-royal-100 text-royal-600" },
+  active: { text: "نشطة", className: "bg-success-50 text-success-700" },
+  closed: { text: "مغلقة", className: "bg-lavender-100 text-royal-600" },
 };
 
 function formatDate(iso?: string) {
@@ -118,51 +118,51 @@ export default function DashboardClient() {
 
   return (
     <div className="space-y-6">
-      <header className="rounded-3xl bg-gradient-to-br from-navy-900 to-royal-900 px-8 py-10 text-white">
+      <header className="rounded-3xl bg-gradient-to-l from-royal-600 via-royal-500 to-coral-400 px-8 py-10 text-white">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <h1 className="section-title !text-white">لوحة المنظمة 🏢</h1>
-            <p className="mt-2 text-lavender-200">
+            <p className="mt-2 text-white/80">
               مرحباً {org?.name} — تابعي فرصك المنشورة وأضيفي الجديد.
             </p>
           </div>
-          <Link href="/org/opportunities/new" className="btn-accent">
+          <Link href="/org/opportunities/new" className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-royal-600 shadow-soft transition-all duration-300 hover:shadow-glow hover:brightness-105">
             + إضافة فرصة جديدة
           </Link>
         </div>
       </header>
 
       {error && (
-        <div className="rounded-xl bg-coral-50 p-4 text-sm font-bold text-coral-700">
+        <div className="rounded-2xl bg-coral-50 p-4 text-sm font-bold text-coral-700">
           {error}
         </div>
       )}
 
       <div className="grid gap-4 sm:grid-cols-3">
         <div className="card flex items-center gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-navy-900 to-royal-900 text-xl text-white">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-royal-500 to-coral-400 text-xl text-white shadow-soft">
             📋
           </div>
           <div>
-            <p className="text-2xl font-extrabold text-navy-800">{rows.length}</p>
+            <p className="text-2xl font-extrabold text-navy-900">{rows.length}</p>
             <p className="text-sm text-royal-500">إجمالي الفرص</p>
           </div>
         </div>
         <div className="card flex items-center gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-100 text-xl">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-success-50 text-xl">
             ✅
           </div>
           <div>
-            <p className="text-2xl font-extrabold text-navy-800">{activeCount}</p>
+            <p className="text-2xl font-extrabold text-navy-900">{activeCount}</p>
             <p className="text-sm text-royal-500">فرص نشطة</p>
           </div>
         </div>
         <div className="card flex items-center gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-royal-100 text-xl">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-lavender-50 text-xl">
             🔒
           </div>
           <div>
-            <p className="text-2xl font-extrabold text-navy-800">{closedCount}</p>
+            <p className="text-2xl font-extrabold text-navy-900">{closedCount}</p>
             <p className="text-sm text-royal-500">فرص مغلقة</p>
           </div>
         </div>
@@ -171,7 +171,7 @@ export default function DashboardClient() {
       {rows.length === 0 ? (
         <div className="card text-center">
           <span className="text-5xl">📭</span>
-          <h2 className="mt-4 text-xl font-extrabold text-navy-800">
+          <h2 className="mt-4 text-xl font-extrabold text-navy-900">
             لم تنشري أي فرصة بعد
           </h2>
           <p className="mt-2 text-royal-500">
@@ -185,7 +185,7 @@ export default function DashboardClient() {
         <div className="card overflow-x-auto rounded-2xl border">
           <table className="w-full min-w-[760px] text-right">
             <thead>
-              <tr className="border-b border-cream-200 bg-cream-50 text-sm text-navy-600">
+              <tr className="border-b border-lavender-100/60 bg-lavender-50/50 text-sm text-navy-600">
                 <th className="px-5 py-3.5 font-bold">الفرصة</th>
                 <th className="px-5 py-3.5 font-bold">تاريخ النشر</th>
                 <th className="px-5 py-3.5 font-bold">المهارات المطلوبة</th>
@@ -200,16 +200,16 @@ export default function DashboardClient() {
                 return (
                   <tr
                     key={o.id}
-                    className="border-b border-cream-100 transition hover:bg-royal-50/60"
+                    className="border-b border-lavender-50 transition hover:bg-lavender-50/60"
                   >
                     <td className="px-5 py-3.5">
-                      <p className="font-bold text-navy-800">{o.title_ar}</p>
+                      <p className="font-bold text-navy-900">{o.title_ar}</p>
                       <p className="text-xs text-royal-400">
                         {o.location || "بدون موقع محدد"}
                       </p>
                     </td>
-                    <td className="px-5 py-3.5 text-royal-600">{formatDate(o.created_at)}</td>
-                    <td className="px-5 py-3.5 text-royal-600">
+                    <td className="px-5 py-3.5 text-royal-500">{formatDate(o.created_at)}</td>
+                    <td className="px-5 py-3.5 text-royal-500">
                       {(o.required_skills ?? []).length}
                     </td>
                     <td className="px-5 py-3.5">

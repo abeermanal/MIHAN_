@@ -3,9 +3,9 @@ import OrgLogo from "./OrgLogo";
 import type { OpportunityWithMatch } from "@/lib/types";
 
 function scoreColor(score: number) {
-  if (score >= 70) return "bg-emerald-100 text-emerald-700";
-  if (score >= 40) return "bg-coral-100 text-coral-700";
-  return "bg-rose-100 text-rose-700";
+  if (score >= 70) return "bg-success-50 text-success-700";
+  if (score >= 40) return "bg-coral-50 text-coral-700";
+  return "bg-rose-50 text-rose-700";
 }
 
 export default function OpportunityTable({ rows }: { rows: OpportunityWithMatch[] }) {
@@ -13,15 +13,15 @@ export default function OpportunityTable({ rows }: { rows: OpportunityWithMatch[
     return (
       <p className="card text-center text-royal-500">
         لا توجد فرص بعد — أضيفي البيانات الأولية عبر{" "}
-        <code className="rounded bg-royal-100 px-1">POST /api/seed</code>.
+        <code className="rounded bg-lavender-100 px-1">POST /api/seed</code>.
       </p>
     );
   }
   return (
-    <div className="overflow-x-auto rounded-2xl border border-royal-100 bg-white shadow-card">
+    <div className="overflow-x-auto rounded-2xl border border-lavender-100/60 bg-white shadow-card">
       <table className="w-full min-w-[720px] text-right">
         <thead>
-          <tr className="border-b border-royal-100 bg-royal-50 text-sm text-royal-700">
+          <tr className="border-b border-lavender-100/60 bg-lavender-50/50 text-sm text-royal-700">
             <th className="px-4 py-3 font-bold">الفرصة</th>
             <th className="px-4 py-3 font-bold">الشركة</th>
             <th className="px-4 py-3 font-bold">الموقع</th>
@@ -34,8 +34,8 @@ export default function OpportunityTable({ rows }: { rows: OpportunityWithMatch[
           {rows.map((o) => {
             const orgName = o.organization?.name ?? o.company ?? "—";
             return (
-              <tr key={o.id} className="border-b border-royal-50 transition hover:bg-royal-50/60">
-                <td className="px-4 py-3 font-bold text-navy-800">{o.title_ar}</td>
+              <tr key={o.id} className="border-b border-lavender-50 transition hover:bg-lavender-50/60">
+                <td className="px-4 py-3 font-bold text-navy-900">{o.title_ar}</td>
                 <td className="px-4 py-3">
                   <span className="flex items-center gap-2">
                     {o.organization && (
@@ -46,7 +46,7 @@ export default function OpportunityTable({ rows }: { rows: OpportunityWithMatch[
                 </td>
                 <td className="px-4 py-3 text-royal-600">{o.location ?? "—"}</td>
                 <td className="px-4 py-3">
-                  <span className="rounded-full bg-royal-100 px-2.5 py-0.5 text-xs font-bold text-royal-600">
+                  <span className="rounded-full bg-lavender-50 px-2.5 py-0.5 text-xs font-bold text-royal-600">
                     {o.employment_type ?? "—"}
                   </span>
                 </td>

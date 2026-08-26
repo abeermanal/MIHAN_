@@ -24,9 +24,9 @@ interface PassportSkill {
 const categoryMeta: Record<string, { label: string; className: string }> = {
   technical: { label: "تقنية", className: "bg-royal-100 text-royal-700" },
   soft: { label: "شخصية", className: "bg-coral-100 text-coral-700" },
-  analytical: { label: "تحليل", className: "bg-sky-100 text-sky-700" },
-  design: { label: "تصميم", className: "bg-pink-100 text-pink-700" },
-  marketing: { label: "تسويق", className: "bg-emerald-100 text-emerald-700" },
+  analytical: { label: "تحليل", className: "bg-lavender-100 text-lavender-700" },
+  design: { label: "تصميم", className: "bg-coral-50 text-coral-600" },
+  marketing: { label: "تسويق", className: "bg-success-50 text-success-700" },
   general: { label: "عامة", className: "bg-cream-100 text-royal-500" },
 };
 
@@ -48,7 +48,7 @@ function Stars({ level }: { level: number }) {
   return (
     <span dir="ltr" className="text-base tracking-wide">
       {[1, 2, 3, 4, 5].map((i) => (
-        <span key={i} className={i <= level ? "text-coral-400" : "text-cream-300"}>
+        <span key={i} className={i <= level ? "text-coral-400" : "text-lavender-200"}>
           ★
         </span>
       ))}
@@ -111,40 +111,43 @@ export default async function SkillPassportPage() {
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <h1 className="section-title">جواز المهارات 🛂</h1>
-          <p className="mt-2 text-royal-600">
+          <p className="mt-2 text-royal-500">
             مهاراتك المكتسبة من الاختبارات والمشاريع والخبرات
           </p>
         </div>
         <AddSkillForm />
       </header>
 
-      <section className="rounded-3xl bg-gradient-to-l from-navy-900 to-royal-900 p-8 text-white">
+      <section className="rounded-3xl bg-gradient-to-l from-royal-600 via-royal-500 to-coral-400 p-8 text-white">
         <div className="flex flex-wrap items-center justify-between gap-6">
           <div className="flex items-center gap-4">
-            <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-white/10 text-xl font-extrabold text-coral-300 gradient-primary">
-              م
+            <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-white/15 text-xl font-extrabold text-white backdrop-blur-sm">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
             </span>
             <div>
-              <p className="text-xs font-bold tracking-wide text-lavender-300">
+              <p className="text-xs font-bold tracking-wide text-white/70">
                 جواز المهارات الرقمي — MIHAN
               </p>
               <h2 className="mt-1 text-lg font-extrabold">{displayName}</h2>
             </div>
           </div>
           <dl className="flex gap-4">
-            <div className="rounded-2xl bg-white/10 px-5 py-3 text-center">
-              <dt className="text-xs text-lavender-300">إجمالي المهارات</dt>
-              <dd className="mt-0.5 text-2xl font-extrabold text-coral-300">
+            <div className="rounded-2xl bg-white/10 px-5 py-3 text-center backdrop-blur-sm">
+              <dt className="text-xs text-white/70">إجمالي المهارات</dt>
+              <dd className="mt-0.5 text-2xl font-extrabold text-coral-100">
                 {passportSkills.length}
               </dd>
             </div>
-            <div className="rounded-2xl bg-white/10 px-5 py-3 text-center">
-              <dt className="text-xs text-lavender-300">مهارات مقيّمة</dt>
-              <dd className="mt-0.5 text-2xl font-extrabold text-coral-300">{rated.length}</dd>
+            <div className="rounded-2xl bg-white/10 px-5 py-3 text-center backdrop-blur-sm">
+              <dt className="text-xs text-white/70">مهارات مقيّمة</dt>
+              <dd className="mt-0.5 text-2xl font-extrabold text-coral-100">{rated.length}</dd>
             </div>
-            <div className="rounded-2xl bg-white/10 px-5 py-3 text-center">
-              <dt className="text-xs text-lavender-300">المتوسط</dt>
-              <dd className="mt-0.5 text-2xl font-extrabold text-coral-300">
+            <div className="rounded-2xl bg-white/10 px-5 py-3 text-center backdrop-blur-sm">
+              <dt className="text-xs text-white/70">المتوسط</dt>
+              <dd className="mt-0.5 text-2xl font-extrabold text-coral-100">
                 {avgLevel !== null ? `${avgLevel}/5` : "—"}
               </dd>
             </div>
@@ -155,7 +158,7 @@ export default async function SkillPassportPage() {
       {rated.length === 0 ? (
         <div className="card p-8 text-center">
           <span className="text-4xl">🌱</span>
-          <p className="mx-auto mt-3 max-w-md leading-relaxed text-royal-600">
+          <p className="mx-auto mt-3 max-w-md leading-relaxed text-royal-500">
             لا توجد مهارات مقيّمة بعد. أضيفي مهارة أو أكملي التقييم.
           </p>
           <Link href="/assessment" className="btn-primary mt-5 inline-flex">
@@ -164,7 +167,7 @@ export default async function SkillPassportPage() {
         </div>
       ) : (
         <section>
-          <h2 className="mb-4 text-lg font-extrabold text-navy-800">
+          <h2 className="mb-4 text-lg font-extrabold text-navy-900">
             مهاراتي المقيّمة ({rated.length})
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -172,7 +175,7 @@ export default async function SkillPassportPage() {
               <article key={s.id} className="card space-y-3 p-5">
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <h3 className="font-extrabold text-navy-800">
+                    <h3 className="font-extrabold text-navy-900">
                       {s.name_ar || s.name_en}
                     </h3>
                     <p dir="ltr" className="text-xs text-royal-400">
@@ -181,7 +184,7 @@ export default async function SkillPassportPage() {
                   </div>
                   <CategoryBadge category={s.category} />
                 </div>
-                <div className="flex items-center justify-between border-t border-cream-200 pt-3">
+                <div className="flex items-center justify-between border-t border-lavender-100/60 pt-3">
                   <Stars level={s.level ?? 0} />
                   <span className="text-xs font-bold text-royal-500">
                     {levelLabels[s.level ?? 0]} ({s.level}/5)
@@ -197,7 +200,7 @@ export default async function SkillPassportPage() {
         <section>
           <h2 className="mb-4 flex items-center gap-2 text-sm font-bold text-navy-700">
             مهارات في الكتالوج لم تقيّميها بعد
-            <span className="inline-flex h-5 min-w-[20px] items-center justify-center rounded-full bg-cream-200 px-1.5 text-[11px] font-extrabold text-navy-600">
+            <span className="inline-flex h-5 min-w-[20px] items-center justify-center rounded-full bg-lavender-100 px-1.5 text-[11px] font-extrabold text-royal-600">
               {unrated.length}
             </span>
           </h2>
@@ -205,7 +208,7 @@ export default async function SkillPassportPage() {
             {unrated.map((s) => (
               <li
                 key={s.id}
-                className="flex items-center justify-between gap-2 rounded-xl border border-cream-200 bg-white px-3 py-2.5"
+                className="flex items-center justify-between gap-2 rounded-2xl border border-lavender-100/60 bg-white px-3 py-2.5"
               >
                 <div className="min-w-0">
                   <p className="truncate text-sm font-bold text-navy-700">
@@ -215,7 +218,7 @@ export default async function SkillPassportPage() {
                     {s.name_en}
                   </p>
                 </div>
-                <span className="shrink-0 rounded-full bg-cream-100 px-2 py-0.5 text-[11px] font-bold text-royal-400">
+                <span className="shrink-0 rounded-full bg-lavender-50 px-2 py-0.5 text-[11px] font-bold text-royal-400">
                   غير مقيّمة
                 </span>
               </li>

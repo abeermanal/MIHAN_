@@ -30,7 +30,7 @@ const typeColors: Record<string, string> = {
   article: "bg-royal-100 text-royal-700",
   video: "bg-coral-100 text-coral-700",
   course: "bg-lavender-100 text-lavender-700",
-  practice: "bg-navy-100 text-navy-700",
+  practice: "bg-cream-100 text-navy-600",
 };
 
 export default function LearningPathClient() {
@@ -121,16 +121,16 @@ export default function LearningPathClient() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <header className="rounded-3xl bg-gradient-to-l from-navy-900 to-royal-900 px-8 py-10 text-white">
+      <header className="rounded-3xl bg-gradient-to-l from-royal-600 via-royal-500 to-coral-400 px-8 py-10 text-white">
         <h1 className="text-3xl font-extrabold">مسار التعلم</h1>
-        <p className="mt-2 text-sm text-cream-100/80">
+        <p className="mt-2 text-sm text-white/80">
           اختاري فرصة، وسنولّد لك خطة تعلم مجانية لسد الفجوات بينك وبينها.
         </p>
       </header>
 
       {/* Opportunity selector */}
       <section className="card">
-        <label htmlFor="opp" className="mb-2 block text-sm font-bold text-royal-700">
+        <label htmlFor="opp" className="mb-2 block text-sm font-bold text-navy-700">
           الفرصة المستهدفة
         </label>
         <div className="flex flex-wrap items-end gap-3">
@@ -158,7 +158,7 @@ export default function LearningPathClient() {
             </Link>
           )}
         </div>
-        {error && <p className="mt-3 rounded-xl bg-rose-50 p-3 text-rose-700">{error}</p>}
+        {error && <p className="mt-3 rounded-2xl bg-coral-50 p-3 text-coral-700">{error}</p>}
       </section>
 
       {/* Progress section with circular ring */}
@@ -175,7 +175,7 @@ export default function LearningPathClient() {
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="6"
-                  className="text-navy-100"
+                  className="text-lavender-100"
                 />
                 <circle
                   cx="48"
@@ -191,23 +191,23 @@ export default function LearningPathClient() {
                 />
                 <defs>
                   <linearGradient id="progressGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#5b21b6" />
-                    <stop offset="100%" stopColor="#1e3a5f" />
+                    <stop offset="0%" stopColor="#6C4AB6" />
+                    <stop offset="100%" stopColor="#D4A5A5" />
                   </linearGradient>
                 </defs>
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-2xl font-extrabold text-navy-800">{pct}%</span>
+                <span className="text-2xl font-extrabold text-navy-900">{pct}%</span>
               </div>
             </div>
             <div>
-              <p className="text-lg font-extrabold text-navy-800">تقدمك في الخطة</p>
+              <p className="text-lg font-extrabold text-navy-900">تقدمك في الخطة</p>
               <p className="text-sm text-royal-500">
                 {completed} مكتمل من أصل {items.length} عنصر
               </p>
-              <div className="mt-2 h-2 w-48 overflow-hidden rounded-full bg-navy-100">
+              <div className="mt-2 h-2 w-48 overflow-hidden rounded-full bg-lavender-50">
                 <div
-                  className="h-full rounded-full bg-gradient-to-l from-royal-500 to-navy-600 transition-all duration-500"
+                  className="h-full rounded-full bg-gradient-to-l from-royal-500 to-coral-400 transition-all duration-500"
                   style={{ width: `${pct}%` }}
                 />
               </div>
@@ -219,12 +219,12 @@ export default function LearningPathClient() {
       {/* Empty state */}
       {items.length === 0 ? (
         <div className="card flex flex-col items-center justify-center py-16 text-center">
-          <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-royal-100 to-navy-100">
+          <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-lavender-50 to-royal-50">
             <svg className="h-10 w-10 text-royal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
             </svg>
           </div>
-          <h3 className="text-lg font-extrabold text-navy-800">لا توجد عناصر بعد</h3>
+          <h3 className="text-lg font-extrabold text-navy-900">لا توجد عناصر بعد</h3>
           <p className="mt-1 text-sm text-royal-400">اختاري فرصة بالأعلى وأنشئي خطتك للبدء</p>
         </div>
       ) : (
@@ -236,31 +236,31 @@ export default function LearningPathClient() {
               <section key={skillName}>
                 {/* Group header */}
                 <div className="mb-3 flex items-center gap-3">
-                  <h2 className="text-lg font-extrabold text-navy-800">{skillName}</h2>
-                  <span className="rounded-full bg-royal-100 px-3 py-0.5 text-xs font-bold text-royal-600">
+                  <h2 className="text-lg font-extrabold text-navy-900">{skillName}</h2>
+                  <span className="rounded-full bg-royal-50 px-3 py-0.5 text-xs font-bold text-royal-600">
                     {completedInGroup}/{skillItems.length}
                   </span>
                 </div>
 
                 {/* Timeline */}
-                <div className="relative mr-5 border-r-2 border-royal-200 pr-8">
+                <div className="relative mr-5 border-r-2 border-lavender-200 pr-8">
                   {skillItems.map((item) => (
                     <div key={item.id} className="relative mb-4 last:mb-0">
                       {/* Timeline connector */}
                       <div
                         className={`absolute -right-[calc(2rem+5px)] top-3 h-3 w-3 rounded-full border-2 transition-colors duration-200 ${
                           item.is_completed
-                            ? "border-emerald-500 bg-emerald-500"
-                            : "border-royal-300 bg-white"
+                            ? "border-success-500 bg-success-500"
+                            : "border-lavender-300 bg-white"
                         }`}
                       />
 
                       {/* Item card */}
                       <div
-                        className={`group relative rounded-xl border p-4 transition-all duration-200 ${
+                        className={`group relative rounded-2xl border p-4 transition-all duration-200 ${
                           item.is_completed
-                            ? "border-emerald-200 bg-emerald-50"
-                            : "border-royal-100 bg-white hover:shadow-sm"
+                            ? "border-success-200 bg-success-50"
+                            : "border-lavender-100 bg-white hover:shadow-sm"
                         }`}
                       >
                         <div className="flex items-center gap-3">
@@ -273,7 +273,7 @@ export default function LearningPathClient() {
                               className="peer sr-only"
                               aria-label={`تحديد ${item.title}`}
                             />
-                            <div className="flex h-5 w-5 items-center justify-center rounded border-2 border-royal-300 transition-all peer-checked:border-royal-600 peer-checked:bg-royal-600">
+                            <div className="flex h-5 w-5 items-center justify-center rounded border-2 border-lavender-300 transition-all peer-checked:border-royal-500 peer-checked:bg-royal-500">
                               {item.is_completed && (
                                 <svg className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
@@ -289,8 +289,8 @@ export default function LearningPathClient() {
                               rel="noopener noreferrer"
                               className={`block truncate font-bold underline-offset-4 hover:underline ${
                                 item.is_completed
-                                  ? "text-emerald-700 line-through"
-                                  : "text-navy-800"
+                                  ? "text-success-700 line-through"
+                                  : "text-navy-900"
                               }`}
                             >
                               {item.title}
@@ -298,13 +298,13 @@ export default function LearningPathClient() {
                             <div className="mt-1 flex items-center gap-2">
                               <span
                                 className={`inline-block rounded-full px-2 py-0.5 text-[10px] font-bold ${
-                                  typeColors[item.resource_type] ?? "bg-navy-100 text-navy-600"
+                                  typeColors[item.resource_type] ?? "bg-lavender-100 text-navy-600"
                                 }`}
                               >
                                 {typeLabels[item.resource_type] ?? item.resource_type}
                               </span>
                               {item.is_completed && (
-                                <span className="text-[10px] font-bold text-emerald-600">مكتمل ✓</span>
+                                <span className="text-[10px] font-bold text-success-600">مكتمل ✓</span>
                               )}
                             </div>
                           </div>
@@ -312,7 +312,7 @@ export default function LearningPathClient() {
                           {/* Delete button */}
                           <button
                             onClick={() => remove(item)}
-                            className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg text-rose-400 opacity-0 transition-all hover:bg-rose-50 hover:text-rose-600 group-hover:opacity-100"
+                            className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-xl text-rose-400 opacity-0 transition-all hover:bg-rose-50 hover:text-rose-600 group-hover:opacity-100"
                             title="حذف"
                           >
                             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

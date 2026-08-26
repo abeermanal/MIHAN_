@@ -19,25 +19,25 @@ export default function SkillCard({
 }: SkillCardProps) {
   const border =
     status === "met"
-      ? "border-emerald-200 bg-emerald-50/50"
+      ? "border-success-200 bg-success-50/50"
       : status === "missing"
-        ? "border-rose-200 bg-rose-50/50"
-        : "border-royal-100 bg-white";
+        ? "border-coral-200 bg-coral-50/50"
+        : "border-lavender-100/60 bg-white";
 
   return (
     <div className={`rounded-2xl border p-4 shadow-card ${border}`}>
       <div className="flex items-start justify-between gap-2">
         <div>
-          <h3 className="font-bold text-navy-800">{name}</h3>
+          <h3 className="font-bold text-navy-900">{name}</h3>
           {nameEn && <p className="text-xs text-royal-400">{nameEn}</p>}
         </div>
         {status === "met" && (
-          <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-700">
+          <span className="rounded-full bg-success-50 px-2 py-0.5 text-xs font-bold text-success-700">
             ✓ متوفرة
           </span>
         )}
         {status === "missing" && (
-          <span className="rounded-full bg-rose-100 px-2 py-0.5 text-xs font-bold text-rose-700">
+          <span className="rounded-full bg-coral-50 px-2 py-0.5 text-xs font-bold text-coral-700">
             ✗ ناقصة
           </span>
         )}
@@ -50,7 +50,7 @@ export default function SkillCard({
             <span
               key={i}
               className={`h-2.5 flex-1 rounded-full ${
-                filled ? "bg-royal-500" : "bg-royal-100"
+                filled ? "bg-royal-500" : "bg-lavender-100"
               }`}
             />
           );
