@@ -6,22 +6,12 @@ import { useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { getSupabaseBrowserClient } from "@/lib/supabaseClient";
 
-const seekerLinks = [
+const navLinks = [
   { href: "/", label: "الرئيسية" },
-  { href: "/assessment", label: "التقييم" },
-  { href: "/opportunities", label: "الفرص" },
-  { href: "/skill-passport", label: "جواز المهارات" },
-  { href: "/learning-path", label: "خطة التعلم" },
-  { href: "/coach", label: "المدربة الذكية" },
-  { href: "/return-path", label: "طريق العودة" },
-  { href: "/about", label: "من نحن" },
-];
-
-const orgLinks = [
-  { href: "/", label: "الرئيسية" },
-  { href: "/opportunities", label: "الفرص" },
-  { href: "/org/dashboard", label: "لوحة المنظمة" },
-  { href: "/about", label: "من نحن" },
+  { href: "/assessment", label: "اكتشفي مهاراتك" },
+  { href: "/learning-path", label: "المسارات المهنية" },
+  { href: "/coach", label: "كيف تعمل المنصة؟" },
+  { href: "/about", label: "عن مِهَن" },
 ];
 
 function isActive(pathname: string, href: string) {
@@ -33,7 +23,6 @@ export default function Navbar() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
-  const [isOrg, setIsOrg] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false);
 
   useEffect(() => {
@@ -42,13 +31,11 @@ export default function Navbar() {
 
     supabase.auth.getUser().then(({ data }) => {
       setUser(data.user);
-      setIsOrg(data.user?.user_metadata?.user_type === "organization");
     });
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
-      setIsOrg(session?.user?.user_metadata?.user_type === "organization");
     });
 
     return () => subscription.unsubscribe();
@@ -66,32 +53,33 @@ export default function Navbar() {
     }
   }
 
-  // عرض مختصر للبريد: الجزء قبل @
   const displayName =
     (user?.user_metadata?.full_name as string | undefined)?.trim() ||
-    (isOrg ? user?.user_metadata?.org_profile?.name : null) ||
     user?.email?.split("@")[0];
 
-  const links = isOrg ? orgLinks : seekerLinks;
-
   return (
-    <header className="sticky top-0 z-40 border-b border-plum-100 bg-white/90 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-cream-200 bg-cream-50/90 backdrop-blur-md">
       <nav className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
-        <Link href="/" className="flex items-center gap-2 text-xl font-extrabold text-plum-700">
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-plum-600 text-lg text-gold-300">M</span>
-          MIHAN
+        <Link href="/" className="flex items-center gap-3">
+          <span className="grid h-10 w-10 place-items-center rounded-xl gradient-primary text-lg font-extrabold text-white">
+            م
+          </span>
+          <div className="flex flex-col leading-none">
+            <span className="text-lg font-extrabold text-navy-800">مِهَن</span>
+            <span className="text-[10px] font-bold tracking-wider text-royal-500">MIHAN</span>
+          </div>
         </Link>
 
         <ul className="hidden items-center gap-1 lg:flex">
-          {links.map((l) => (
+          {navLinks.map((l) => (
             <li key={l.href}>
               <Link
                 href={l.href}
                 aria-current={isActive(pathname, l.href) ? "page" : undefined}
-                className={`rounded-lg px-3 py-2 font-bold transition ${
+                className={`rounded-lg px-3 py-2 text-sm font-bold transition ${
                   isActive(pathname, l.href)
-                    ? "bg-plum-100 text-plum-800"
-                    : "text-plum-500 hover:bg-plum-50 hover:text-plum-700"
+                    ? "bg-royal-50 text-royal-700"
+                    : "text-navy-500 hover:bg-cream-100 hover:text-navy-700"
                 }`}
               >
                 {l.label}
@@ -104,7 +92,7 @@ export default function Navbar() {
           {user ? (
             <>
               <span
-                className="max-w-[160px] truncate rounded-lg bg-plum-50 px-3 py-1.5 text-sm font-bold text-plum-700"
+                className="max-w-[160px] truncate rounded-lg bg-cream-100 px-3 py-1.5 text-sm font-bold text-navy-700"
                 title={user.email ?? ""}
                 dir="ltr"
               >
@@ -113,20 +101,25 @@ export default function Navbar() {
               <button
                 onClick={handleLogout}
                 disabled={loggingOut}
-                className="rounded-lg border-2 border-plum-200 px-3 py-1.5 text-sm font-bold text-plum-600 transition hover:border-plum-400 hover:text-plum-800 disabled:opacity-50"
+                className="rounded-lg border-2 border-cream-300 px-3 py-1.5 text-sm font-bold text-navy-600 transition hover:border-coral-300 hover:text-coral-500 disabled:opacity-50"
               >
                 {loggingOut ? "…" : "خروج"}
               </button>
             </>
           ) : (
-            <Link href="/login" className="btn-primary px-4 py-2 text-sm">
-              تسجيل الدخول
-            </Link>
+            <>
+              <Link href="/login" className="btn-outline px-4 py-2 text-sm">
+                تسجيل الدخول
+              </Link>
+              <Link href="/signup" className="btn-primary px-4 py-2 text-sm">
+                ابدئي رحلتك
+              </Link>
+            </>
           )}
         </div>
 
         <button
-          className="rounded-lg p-2 text-plum-700 hover:bg-plum-50 lg:hidden"
+          className="rounded-lg p-2 text-navy-700 hover:bg-cream-100 lg:hidden"
           onClick={() => setOpen(!open)}
           aria-label="القائمة"
           aria-expanded={open}
@@ -138,29 +131,31 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <ul className="border-t border-plum-100 bg-white px-4 pb-3 lg:hidden">
-          {links.map((l) => (
-            <li key={l.href}>
-              <Link
-                href={l.href}
-                onClick={() => setOpen(false)}
-                aria-current={isActive(pathname, l.href) ? "page" : undefined}
-                className={`block rounded-lg px-3 py-2.5 font-bold ${
-                  isActive(pathname, l.href)
-                    ? "bg-plum-100 text-plum-800"
-                    : "text-plum-600"
-                }`}
-              >
-                {l.label}
-              </Link>
-            </li>
-          ))}
+        <div className="border-t border-cream-200 bg-cream-50 px-4 pb-4 pt-2 lg:hidden">
+          <ul className="space-y-1">
+            {navLinks.map((l) => (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  aria-current={isActive(pathname, l.href) ? "page" : undefined}
+                  className={`block rounded-lg px-3 py-2.5 font-bold ${
+                    isActive(pathname, l.href)
+                      ? "bg-royal-50 text-royal-700"
+                      : "text-navy-600 hover:bg-cream-100"
+                  }`}
+                >
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-          <li className="mt-2 border-t border-plum-100 pt-3">
+          <div className="mt-3 space-y-2 border-t border-cream-200 pt-3">
             {user ? (
               <div className="flex items-center justify-between gap-2">
                 <span
-                  className="max-w-[180px] truncate rounded-lg bg-plum-50 px-3 py-1.5 text-sm font-bold text-plum-700"
+                  className="max-w-[180px] truncate rounded-lg bg-cream-100 px-3 py-1.5 text-sm font-bold text-navy-700"
                   title={user.email ?? ""}
                   dir="ltr"
                 >
@@ -172,22 +167,31 @@ export default function Navbar() {
                     handleLogout();
                   }}
                   disabled={loggingOut}
-                  className="rounded-lg border-2 border-plum-200 px-3 py-1.5 text-sm font-bold text-plum-600 disabled:opacity-50"
+                  className="rounded-lg border-2 border-cream-300 px-3 py-1.5 text-sm font-bold text-navy-600 disabled:opacity-50"
                 >
                   تسجيل الخروج
                 </button>
               </div>
             ) : (
-              <Link
-                href="/login"
-                onClick={() => setOpen(false)}
-                className="block rounded-lg bg-plum-600 px-3 py-2.5 text-center font-bold text-white"
-              >
-                تسجيل الدخول
-              </Link>
+              <>
+                <Link
+                  href="/login"
+                  onClick={() => setOpen(false)}
+                  className="block rounded-xl border-2 border-royal-200 px-4 py-2.5 text-center text-sm font-bold text-royal-600"
+                >
+                  تسجيل الدخول
+                </Link>
+                <Link
+                  href="/signup"
+                  onClick={() => setOpen(false)}
+                  className="block rounded-xl gradient-primary px-4 py-2.5 text-center text-sm font-bold text-white"
+                >
+                  ابدئي رحلتك
+                </Link>
+              </>
             )}
-          </li>
-        </ul>
+          </div>
+        </div>
       )}
     </header>
   );

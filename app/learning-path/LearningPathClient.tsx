@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import ProgressBar from "@/components/ProgressBar";
 import SetupNotice from "@/components/SetupNotice";
 
 interface Item {
@@ -25,6 +24,13 @@ const typeLabels: Record<string, string> = {
   video: "فيديو",
   course: "دورة",
   practice: "تطبيق عملي",
+};
+
+const typeColors: Record<string, string> = {
+  article: "bg-royal-100 text-royal-700",
+  video: "bg-coral-100 text-coral-700",
+  course: "bg-lavender-100 text-lavender-700",
+  practice: "bg-navy-100 text-navy-700",
 };
 
 export default function LearningPathClient() {
@@ -96,35 +102,39 @@ export default function LearningPathClient() {
     await fetch(`/api/learning-path/${item.id}`, { method: "DELETE" });
   }
 
-  if (loading) return <p className="text-center text-plum-500">جارٍ التحميل…</p>;
+  if (loading) return <p className="text-center text-royal-500">جارٍ التحميل…</p>;
   if (error && items.length === 0 && opportunities.length === 0)
     return <SetupNotice error={error} />;
 
   const completed = items.filter((i) => i.is_completed).length;
   const pct = items.length ? Math.round((completed / items.length) * 100) : 0;
 
-  // تجميع حسب المهارة
   const grouped = items.reduce<Record<string, Item[]>>((acc, item) => {
     const key = item.skills?.name_ar ?? "عناصر عامة";
     (acc[key] ??= []).push(item);
     return acc;
   }, {});
 
+  const circumference = 2 * Math.PI * 42;
+  const dashOffset = circumference - (pct / 100) * circumference;
+
   return (
     <div className="space-y-6">
-      <header>
-        <h1 className="section-title">مسار التعلم 📚</h1>
-        <p className="mt-2 text-plum-600">
+      {/* Header */}
+      <header className="rounded-3xl bg-gradient-to-l from-navy-900 to-royal-900 px-8 py-10 text-white">
+        <h1 className="text-3xl font-extrabold">مسار التعلم</h1>
+        <p className="mt-2 text-sm text-cream-100/80">
           اختاري فرصة، وسنولّد لك خطة تعلم مجانية لسد الفجوات بينك وبينها.
         </p>
       </header>
 
+      {/* Opportunity selector */}
       <section className="card">
+        <label htmlFor="opp" className="mb-2 block text-sm font-bold text-royal-700">
+          الفرصة المستهدفة
+        </label>
         <div className="flex flex-wrap items-end gap-3">
           <div className="min-w-[240px] flex-1">
-            <label htmlFor="opp" className="mb-1 block text-sm font-bold text-plum-700">
-              الفرصة المستهدفة
-            </label>
             <select
               id="opp"
               className="input"
@@ -143,7 +153,7 @@ export default function LearningPathClient() {
             {creating ? "جارٍ الإنشاء…" : "إنشاء / تحديث الخطة"}
           </button>
           {opportunities.length === 0 && (
-            <Link href="/assessment" className="btn-gold">
+            <Link href="/assessment" className="btn-accent">
               ابدئي من التقييم
             </Link>
           )}
@@ -151,74 +161,173 @@ export default function LearningPathClient() {
         {error && <p className="mt-3 rounded-xl bg-rose-50 p-3 text-rose-700">{error}</p>}
       </section>
 
+      {/* Progress section with circular ring */}
       {items.length > 0 && (
         <section className="card">
-          <div className="mb-2 flex items-center justify-between font-bold text-plum-700">
-            <span>تقدمك في الخطة</span>
-            <span>
-              {completed} / {items.length} ({pct}%)
-            </span>
+          <div className="flex items-center gap-6">
+            {/* SVG circular progress */}
+            <div className="relative h-28 w-28 flex-shrink-0">
+              <svg className="h-full w-full -rotate-90" viewBox="0 0 96 96">
+                <circle
+                  cx="48"
+                  cy="48"
+                  r="42"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="6"
+                  className="text-navy-100"
+                />
+                <circle
+                  cx="48"
+                  cy="48"
+                  r="42"
+                  fill="none"
+                  stroke="url(#progressGrad)"
+                  strokeWidth="6"
+                  strokeLinecap="round"
+                  strokeDasharray={circumference}
+                  strokeDashoffset={dashOffset}
+                  className="transition-all duration-700"
+                />
+                <defs>
+                  <linearGradient id="progressGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#5b21b6" />
+                    <stop offset="100%" stopColor="#1e3a5f" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <span className="text-2xl font-extrabold text-navy-800">{pct}%</span>
+              </div>
+            </div>
+            <div>
+              <p className="text-lg font-extrabold text-navy-800">تقدمك في الخطة</p>
+              <p className="text-sm text-royal-500">
+                {completed} مكتمل من أصل {items.length} عنصر
+              </p>
+              <div className="mt-2 h-2 w-48 overflow-hidden rounded-full bg-navy-100">
+                <div
+                  className="h-full rounded-full bg-gradient-to-l from-royal-500 to-navy-600 transition-all duration-500"
+                  style={{ width: `${pct}%` }}
+                />
+              </div>
+            </div>
           </div>
-          <ProgressBar value={pct} color="green" />
         </section>
       )}
 
+      {/* Empty state */}
       {items.length === 0 ? (
-        <p className="card text-center text-plum-500">
-          لا توجد عناصر بعد — اختاري فرصة بالأعلى وأنشئي خطتك.
-        </p>
+        <div className="card flex flex-col items-center justify-center py-16 text-center">
+          <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-royal-100 to-navy-100">
+            <svg className="h-10 w-10 text-royal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+            </svg>
+          </div>
+          <h3 className="text-lg font-extrabold text-navy-800">لا توجد عناصر بعد</h3>
+          <p className="mt-1 text-sm text-royal-400">اختاري فرصة بالأعلى وأنشئي خطتك للبدء</p>
+        </div>
       ) : (
-        Object.entries(grouped).map(([skillName, skillItems]) => (
-          <section key={skillName} className="card">
-            <h2 className="text-lg font-extrabold text-plum-800">{skillName}</h2>
-            <ul className="mt-3 space-y-3">
-              {skillItems.map((item) => (
-                <li
-                  key={item.id}
-                  className={`flex flex-wrap items-center justify-between gap-3 rounded-xl border p-3 ${
-                    item.is_completed
-                      ? "border-emerald-200 bg-emerald-50"
-                      : "border-plum-100 bg-white"
-                  }`}
-                >
-                  <div className="flex min-w-0 items-center gap-3">
-                    <input
-                      type="checkbox"
-                      checked={item.is_completed}
-                      onChange={() => toggle(item)}
-                      className="h-5 w-5 accent-plum-600"
-                      aria-label={`تحديد ${item.title}`}
-                    />
-                    <div className="min-w-0">
-                      <a
-                        href={item.resource_url ?? "#"}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`block truncate font-bold underline-offset-4 hover:underline ${
+        /* Roadmap timeline */
+        <div className="space-y-6">
+          {Object.entries(grouped).map(([skillName, skillItems]) => {
+            const completedInGroup = skillItems.filter((i) => i.is_completed).length;
+            return (
+              <section key={skillName}>
+                {/* Group header */}
+                <div className="mb-3 flex items-center gap-3">
+                  <h2 className="text-lg font-extrabold text-navy-800">{skillName}</h2>
+                  <span className="rounded-full bg-royal-100 px-3 py-0.5 text-xs font-bold text-royal-600">
+                    {completedInGroup}/{skillItems.length}
+                  </span>
+                </div>
+
+                {/* Timeline */}
+                <div className="relative mr-5 border-r-2 border-royal-200 pr-8">
+                  {skillItems.map((item) => (
+                    <div key={item.id} className="relative mb-4 last:mb-0">
+                      {/* Timeline connector */}
+                      <div
+                        className={`absolute -right-[calc(2rem+5px)] top-3 h-3 w-3 rounded-full border-2 transition-colors duration-200 ${
                           item.is_completed
-                            ? "text-emerald-700 line-through"
-                            : "text-plum-800"
+                            ? "border-emerald-500 bg-emerald-500"
+                            : "border-royal-300 bg-white"
+                        }`}
+                      />
+
+                      {/* Item card */}
+                      <div
+                        className={`group relative rounded-xl border p-4 transition-all duration-200 ${
+                          item.is_completed
+                            ? "border-emerald-200 bg-emerald-50"
+                            : "border-royal-100 bg-white hover:shadow-sm"
                         }`}
                       >
-                        {item.title}
-                      </a>
-                      <span className="text-xs text-plum-400">
-                        {typeLabels[item.resource_type] ?? item.resource_type}
-                        {item.is_completed && " · مكتمل ✓"}
-                      </span>
+                        <div className="flex items-center gap-3">
+                          {/* Custom checkbox */}
+                          <label className="relative flex cursor-pointer items-center">
+                            <input
+                              type="checkbox"
+                              checked={item.is_completed}
+                              onChange={() => toggle(item)}
+                              className="peer sr-only"
+                              aria-label={`تحديد ${item.title}`}
+                            />
+                            <div className="flex h-5 w-5 items-center justify-center rounded border-2 border-royal-300 transition-all peer-checked:border-royal-600 peer-checked:bg-royal-600">
+                              {item.is_completed && (
+                                <svg className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                </svg>
+                              )}
+                            </div>
+                          </label>
+
+                          <div className="min-w-0 flex-1">
+                            <a
+                              href={item.resource_url ?? "#"}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={`block truncate font-bold underline-offset-4 hover:underline ${
+                                item.is_completed
+                                  ? "text-emerald-700 line-through"
+                                  : "text-navy-800"
+                              }`}
+                            >
+                              {item.title}
+                            </a>
+                            <div className="mt-1 flex items-center gap-2">
+                              <span
+                                className={`inline-block rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                                  typeColors[item.resource_type] ?? "bg-navy-100 text-navy-600"
+                                }`}
+                              >
+                                {typeLabels[item.resource_type] ?? item.resource_type}
+                              </span>
+                              {item.is_completed && (
+                                <span className="text-[10px] font-bold text-emerald-600">مكتمل ✓</span>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Delete button */}
+                          <button
+                            onClick={() => remove(item)}
+                            className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg text-rose-400 opacity-0 transition-all hover:bg-rose-50 hover:text-rose-600 group-hover:opacity-100"
+                            title="حذف"
+                          >
+                            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <button
-                    onClick={() => remove(item)}
-                    className="text-sm font-bold text-rose-500 hover:text-rose-700"
-                  >
-                    حذف
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))
+                  ))}
+                </div>
+              </section>
+            );
+          })}
+        </div>
       )}
     </div>
   );

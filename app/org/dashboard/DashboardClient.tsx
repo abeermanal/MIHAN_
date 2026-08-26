@@ -10,7 +10,7 @@ type Status = "active" | "closed";
 
 const statusLabels: Record<Status, { text: string; className: string }> = {
   active: { text: "نشطة", className: "bg-emerald-100 text-emerald-700" },
-  closed: { text: "مغلقة", className: "bg-plum-100 text-plum-600" },
+  closed: { text: "مغلقة", className: "bg-royal-100 text-royal-600" },
 };
 
 function formatDate(iso?: string) {
@@ -41,7 +41,7 @@ export default function DashboardClient() {
       try {
         const meRes = await fetch("/api/org/me");
         if (meRes.status === 403) {
-          router.replace("/"); // باحثة عن عمل — ليست جهة عمل
+          router.replace("/");
           return;
         }
         if (!meRes.ok) throw new Error((await meRes.json()).error ?? "خطأ");
@@ -110,52 +110,87 @@ export default function DashboardClient() {
     }
   }
 
-  if (loading) return <p className="text-center text-plum-500">جارٍ التحميل…</p>;
+  if (loading) return <p className="text-center text-royal-500">جارٍ التحميل…</p>;
   if (error && !org) return <SetupNotice error={error} />;
+
+  const activeCount = rows.filter((r) => r.status !== "closed").length;
+  const closedCount = rows.filter((r) => r.status === "closed").length;
 
   return (
     <div className="space-y-6">
-      <header className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <h1 className="section-title">لوحة المنظمة 🏢</h1>
-          <p className="mt-2 text-plum-600">
-            مرحباً {org?.name} — تابعي فرصك المنشورة وأضيفي الجديد.
-          </p>
+      <header className="rounded-3xl bg-gradient-to-br from-navy-900 to-royal-900 px-8 py-10 text-white">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h1 className="section-title !text-white">لوحة المنظمة 🏢</h1>
+            <p className="mt-2 text-lavender-200">
+              مرحباً {org?.name} — تابعي فرصك المنشورة وأضيفي الجديد.
+            </p>
+          </div>
+          <Link href="/org/opportunities/new" className="btn-accent">
+            + إضافة فرصة جديدة
+          </Link>
         </div>
-        <Link href="/org/opportunities/new" className="btn-primary">
-          + إضافة فرصة جديدة
-        </Link>
       </header>
 
       {error && (
-        <p className="rounded-xl bg-rose-50 p-3 text-sm font-bold text-rose-700">
+        <div className="rounded-xl bg-coral-50 p-4 text-sm font-bold text-coral-700">
           {error}
-        </p>
+        </div>
       )}
+
+      <div className="grid gap-4 sm:grid-cols-3">
+        <div className="card flex items-center gap-4">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-navy-900 to-royal-900 text-xl text-white">
+            📋
+          </div>
+          <div>
+            <p className="text-2xl font-extrabold text-navy-800">{rows.length}</p>
+            <p className="text-sm text-royal-500">إجمالي الفرص</p>
+          </div>
+        </div>
+        <div className="card flex items-center gap-4">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-100 text-xl">
+            ✅
+          </div>
+          <div>
+            <p className="text-2xl font-extrabold text-navy-800">{activeCount}</p>
+            <p className="text-sm text-royal-500">فرص نشطة</p>
+          </div>
+        </div>
+        <div className="card flex items-center gap-4">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-royal-100 text-xl">
+            🔒
+          </div>
+          <div>
+            <p className="text-2xl font-extrabold text-navy-800">{closedCount}</p>
+            <p className="text-sm text-royal-500">فرص مغلقة</p>
+          </div>
+        </div>
+      </div>
 
       {rows.length === 0 ? (
         <div className="card text-center">
-          <span className="text-4xl">📭</span>
-          <h2 className="mt-3 text-xl font-extrabold text-plum-800">
+          <span className="text-5xl">📭</span>
+          <h2 className="mt-4 text-xl font-extrabold text-navy-800">
             لم تنشري أي فرصة بعد
           </h2>
-          <p className="mt-2 text-plum-600">
+          <p className="mt-2 text-royal-500">
             ابدئي بنشر أول فرصة وظيفية أو تدريبية لتصل إلى الباحثات عن العمل.
           </p>
-          <Link href="/org/opportunities/new" className="btn-gold mt-5 inline-flex">
+          <Link href="/org/opportunities/new" className="btn-primary mt-5 inline-flex">
             نشر أول فرصة
           </Link>
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-2xl border border-plum-100 bg-white shadow-card">
+        <div className="card overflow-x-auto rounded-2xl border">
           <table className="w-full min-w-[760px] text-right">
             <thead>
-              <tr className="border-b border-plum-100 bg-plum-50 text-sm text-plum-700">
-                <th className="px-4 py-3 font-bold">الفرصة</th>
-                <th className="px-4 py-3 font-bold">تاريخ النشر</th>
-                <th className="px-4 py-3 font-bold">المهارات المطلوبة</th>
-                <th className="px-4 py-3 font-bold">الحالة</th>
-                <th className="px-4 py-3 font-bold">إجراءات</th>
+              <tr className="border-b border-cream-200 bg-cream-50 text-sm text-navy-600">
+                <th className="px-5 py-3.5 font-bold">الفرصة</th>
+                <th className="px-5 py-3.5 font-bold">تاريخ النشر</th>
+                <th className="px-5 py-3.5 font-bold">المهارات المطلوبة</th>
+                <th className="px-5 py-3.5 font-bold">الحالة</th>
+                <th className="px-5 py-3.5 font-bold">إجراءات</th>
               </tr>
             </thead>
             <tbody>
@@ -165,39 +200,39 @@ export default function DashboardClient() {
                 return (
                   <tr
                     key={o.id}
-                    className="border-b border-plum-50 transition hover:bg-plum-50/60"
+                    className="border-b border-cream-100 transition hover:bg-royal-50/60"
                   >
-                    <td className="px-4 py-3">
-                      <p className="font-bold text-plum-800">{o.title_ar}</p>
-                      <p className="text-xs text-plum-400">
+                    <td className="px-5 py-3.5">
+                      <p className="font-bold text-navy-800">{o.title_ar}</p>
+                      <p className="text-xs text-royal-400">
                         {o.location || "بدون موقع محدد"}
                       </p>
                     </td>
-                    <td className="px-4 py-3 text-plum-600">{formatDate(o.created_at)}</td>
-                    <td className="px-4 py-3 text-plum-600">
+                    <td className="px-5 py-3.5 text-royal-600">{formatDate(o.created_at)}</td>
+                    <td className="px-5 py-3.5 text-royal-600">
                       {(o.required_skills ?? []).length}
                     </td>
-                    <td className="px-4 py-3">
+                    <td className="px-5 py-3.5">
                       <button
                         onClick={() => toggleStatus(o)}
                         disabled={busy}
                         title="اضغطي لتبديل الحالة"
-                        className={`rounded-full px-2.5 py-1 text-xs font-extrabold transition hover:opacity-80 disabled:opacity-50 ${statusLabels[status].className}`}
+                        className={`rounded-full px-3 py-1 text-xs font-extrabold transition hover:opacity-80 disabled:opacity-50 ${statusLabels[status].className}`}
                       >
                         {statusLabels[status].text}
                       </button>
                     </td>
-                    <td className="px-4 py-3">
+                    <td className="px-5 py-3.5">
                       <div className="flex items-center gap-3 text-sm font-bold">
                         <Link
                           href={`/opportunities/${o.id}`}
-                          className="text-plum-600 underline-offset-4 hover:text-plum-800 hover:underline"
+                          className="text-royal-600 underline-offset-4 hover:text-navy-800 hover:underline"
                         >
                           عرض
                         </Link>
                         <Link
                           href={`/org/opportunities/${o.id}/edit`}
-                          className="text-gold-700 underline-offset-4 hover:text-gold-800 hover:underline"
+                          className="text-coral-500 underline-offset-4 hover:text-coral-700 hover:underline"
                         >
                           تعديل
                         </Link>

@@ -5,7 +5,7 @@ import { requireUser } from "@/lib/supabaseServer";
 import AddSkillForm from "@/components/AddSkillForm";
 import SetupNotice from "@/components/SetupNotice";
 
-export const dynamic = "force-dynamic"; // الصفحة تعتمد على جلسة المستخدمة
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "جواز المهارات",
@@ -22,12 +22,12 @@ interface PassportSkill {
 }
 
 const categoryMeta: Record<string, { label: string; className: string }> = {
-  technical: { label: "تقنية", className: "bg-plum-100 text-plum-700" },
-  soft: { label: "شخصية", className: "bg-gold-100 text-gold-700" },
+  technical: { label: "تقنية", className: "bg-royal-100 text-royal-700" },
+  soft: { label: "شخصية", className: "bg-coral-100 text-coral-700" },
   analytical: { label: "تحليل", className: "bg-sky-100 text-sky-700" },
   design: { label: "تصميم", className: "bg-pink-100 text-pink-700" },
   marketing: { label: "تسويق", className: "bg-emerald-100 text-emerald-700" },
-  general: { label: "عامة", className: "bg-plum-50 text-plum-500" },
+  general: { label: "عامة", className: "bg-cream-100 text-royal-500" },
 };
 
 const levelLabels = ["", "مبتدئ", "أساسي", "جيد", "متقدم", "خبير"];
@@ -35,7 +35,7 @@ const levelLabels = ["", "مبتدئ", "أساسي", "جيد", "متقدم", "خ
 function CategoryBadge({ category }: { category: string }) {
   const meta = categoryMeta[category] ?? {
     label: category,
-    className: "bg-plum-50 text-plum-500",
+    className: "bg-cream-100 text-royal-500",
   };
   return (
     <span className={`rounded-full px-2.5 py-0.5 text-xs font-bold ${meta.className}`}>
@@ -48,7 +48,7 @@ function Stars({ level }: { level: number }) {
   return (
     <span dir="ltr" className="text-base tracking-wide">
       {[1, 2, 3, 4, 5].map((i) => (
-        <span key={i} className={i <= level ? "text-gold-400" : "text-plum-200"}>
+        <span key={i} className={i <= level ? "text-coral-400" : "text-cream-300"}>
           ★
         </span>
       ))}
@@ -64,7 +64,6 @@ export default async function SkillPassportPage() {
   }
   const { supabase, userId, user } = auth;
 
-  // نفس بيانات GET /api/skills لكن مباشرة من الخادم (نفس الشكل: skills + level)
   const [{ data: catalog, error: catalogError }, { data: userSkills, error: userError }] =
     await Promise.all([
       supabase.from("skills").select("*").order("name_en"),
@@ -112,41 +111,40 @@ export default async function SkillPassportPage() {
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <h1 className="section-title">جواز المهارات 🛂</h1>
-          <p className="mt-2 text-plum-600">
+          <p className="mt-2 text-royal-600">
             مهاراتك المكتسبة من الاختبارات والمشاريع والخبرات
           </p>
         </div>
         <AddSkillForm />
       </header>
 
-      {/* بطاقة الجواز */}
-      <section className="card bg-gradient-to-l from-plum-700 to-plum-600 text-white">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-white/15 text-xl font-extrabold text-gold-300">
-              M
+      <section className="rounded-3xl bg-gradient-to-l from-navy-900 to-royal-900 p-8 text-white">
+        <div className="flex flex-wrap items-center justify-between gap-6">
+          <div className="flex items-center gap-4">
+            <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-white/10 text-xl font-extrabold text-coral-300 gradient-primary">
+              م
             </span>
             <div>
-              <p className="text-xs font-bold tracking-wide text-gold-300">
+              <p className="text-xs font-bold tracking-wide text-lavender-300">
                 جواز المهارات الرقمي — MIHAN
               </p>
-              <h2 className="mt-0.5 text-lg font-extrabold">{displayName}</h2>
+              <h2 className="mt-1 text-lg font-extrabold">{displayName}</h2>
             </div>
           </div>
-          <dl className="grid grid-cols-3 gap-4 text-center sm:gap-6">
-            <div>
-              <dt className="text-xs text-plum-200">إجمالي المهارات</dt>
-              <dd className="mt-0.5 text-xl font-extrabold text-gold-300">
+          <dl className="flex gap-4">
+            <div className="rounded-2xl bg-white/10 px-5 py-3 text-center">
+              <dt className="text-xs text-lavender-300">إجمالي المهارات</dt>
+              <dd className="mt-0.5 text-2xl font-extrabold text-coral-300">
                 {passportSkills.length}
               </dd>
             </div>
-            <div>
-              <dt className="text-xs text-plum-200">مهارات مقيّمة</dt>
-              <dd className="mt-0.5 text-xl font-extrabold text-gold-300">{rated.length}</dd>
+            <div className="rounded-2xl bg-white/10 px-5 py-3 text-center">
+              <dt className="text-xs text-lavender-300">مهارات مقيّمة</dt>
+              <dd className="mt-0.5 text-2xl font-extrabold text-coral-300">{rated.length}</dd>
             </div>
-            <div>
-              <dt className="text-xs text-plum-200">متوسط المستوى</dt>
-              <dd className="mt-0.5 text-xl font-extrabold text-gold-300">
+            <div className="rounded-2xl bg-white/10 px-5 py-3 text-center">
+              <dt className="text-xs text-lavender-300">المتوسط</dt>
+              <dd className="mt-0.5 text-2xl font-extrabold text-coral-300">
                 {avgLevel !== null ? `${avgLevel}/5` : "—"}
               </dd>
             </div>
@@ -155,9 +153,9 @@ export default async function SkillPassportPage() {
       </section>
 
       {rated.length === 0 ? (
-        <div className="card text-center">
+        <div className="card p-8 text-center">
           <span className="text-4xl">🌱</span>
-          <p className="mx-auto mt-3 max-w-md leading-relaxed text-plum-600">
+          <p className="mx-auto mt-3 max-w-md leading-relaxed text-royal-600">
             لا توجد مهارات مقيّمة بعد. أضيفي مهارة أو أكملي التقييم.
           </p>
           <Link href="/assessment" className="btn-primary mt-5 inline-flex">
@@ -166,26 +164,26 @@ export default async function SkillPassportPage() {
         </div>
       ) : (
         <section>
-          <h2 className="mb-4 text-lg font-extrabold text-plum-800">
+          <h2 className="mb-4 text-lg font-extrabold text-navy-800">
             مهاراتي المقيّمة ({rated.length})
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {rated.map((s) => (
-              <article key={s.id} className="card space-y-3 p-4">
+              <article key={s.id} className="card space-y-3 p-5">
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <h3 className="font-extrabold text-plum-800">
+                    <h3 className="font-extrabold text-navy-800">
                       {s.name_ar || s.name_en}
                     </h3>
-                    <p dir="ltr" className="text-xs text-plum-400">
+                    <p dir="ltr" className="text-xs text-royal-400">
                       {s.name_en}
                     </p>
                   </div>
                   <CategoryBadge category={s.category} />
                 </div>
-                <div className="flex items-center justify-between border-t border-plum-50 pt-3">
+                <div className="flex items-center justify-between border-t border-cream-200 pt-3">
                   <Stars level={s.level ?? 0} />
-                  <span className="text-xs font-bold text-plum-500">
+                  <span className="text-xs font-bold text-royal-500">
                     {levelLabels[s.level ?? 0]} ({s.level}/5)
                   </span>
                 </div>
@@ -197,24 +195,27 @@ export default async function SkillPassportPage() {
 
       {unrated.length > 0 && (
         <section>
-          <h2 className="mb-4 text-sm font-bold text-plum-500">
-            مهارات في الكتالوج لم تقيّميها بعد ({unrated.length})
+          <h2 className="mb-4 flex items-center gap-2 text-sm font-bold text-navy-700">
+            مهارات في الكتالوج لم تقيّميها بعد
+            <span className="inline-flex h-5 min-w-[20px] items-center justify-center rounded-full bg-cream-200 px-1.5 text-[11px] font-extrabold text-navy-600">
+              {unrated.length}
+            </span>
           </h2>
           <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
             {unrated.map((s) => (
               <li
                 key={s.id}
-                className="flex items-center justify-between gap-2 rounded-xl border border-plum-50 bg-white px-3 py-2.5"
+                className="flex items-center justify-between gap-2 rounded-xl border border-cream-200 bg-white px-3 py-2.5"
               >
                 <div className="min-w-0">
-                  <p className="truncate text-sm font-bold text-plum-600">
+                  <p className="truncate text-sm font-bold text-navy-700">
                     {s.name_ar || s.name_en}
                   </p>
-                  <p dir="ltr" className="truncate text-xs text-plum-300">
+                  <p dir="ltr" className="truncate text-xs text-royal-400">
                     {s.name_en}
                   </p>
                 </div>
-                <span className="shrink-0 rounded-full bg-plum-50 px-2 py-0.5 text-[11px] font-bold text-plum-400">
+                <span className="shrink-0 rounded-full bg-cream-100 px-2 py-0.5 text-[11px] font-bold text-royal-400">
                   غير مقيّمة
                 </span>
               </li>

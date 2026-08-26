@@ -64,7 +64,7 @@ export default function AddSkillForm() {
       setNameEn("");
       setCategory("technical");
       setLevel(3);
-      router.refresh(); // إعادة توليد الصورة الخادمية لجواز المهارات
+      router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "حدث خطأ غير متوقع");
     } finally {
@@ -80,18 +80,18 @@ export default function AddSkillForm() {
         aria-expanded={open}
         className="btn-primary w-full px-4 py-2 text-sm sm:w-auto"
       >
-        {open ? "إغلاق النموذج ✕" : "+ إضافة مهارة"}
+        {open ? "إغلاق ✕" : "+ إضافة مهارة"}
       </button>
 
       {open && (
         <form
           onSubmit={handleSubmit}
-          className="mt-3 space-y-4 rounded-2xl border border-plum-100 bg-white p-4 shadow-card sm:p-5"
+          className="card mt-3 space-y-4 p-4 transition-all duration-300 sm:p-5"
         >
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label htmlFor="skill-name-ar" className="mb-1 block font-bold text-plum-700">
-                اسم المهارة (عربي) <span className="text-rose-500">*</span>
+              <label htmlFor="skill-name-ar" className="mb-1 block font-bold text-navy-700">
+                اسم المهارة (عربي) <span className="text-coral-500">*</span>
               </label>
               <input
                 id="skill-name-ar"
@@ -104,7 +104,7 @@ export default function AddSkillForm() {
             </div>
 
             <div>
-              <label htmlFor="skill-name-en" className="mb-1 block font-bold text-plum-700">
+              <label htmlFor="skill-name-en" className="mb-1 block font-bold text-navy-700">
                 الاسم بالإنجليزية (اختياري)
               </label>
               <input
@@ -119,7 +119,7 @@ export default function AddSkillForm() {
             </div>
 
             <div>
-              <label htmlFor="skill-category" className="mb-1 block font-bold text-plum-700">
+              <label htmlFor="skill-category" className="mb-1 block font-bold text-navy-700">
                 التصنيف
               </label>
               <select
@@ -137,7 +137,7 @@ export default function AddSkillForm() {
             </div>
 
             <div>
-              <label htmlFor="skill-level" className="mb-1 block font-bold text-plum-700">
+              <label htmlFor="skill-level" className="mb-1 block font-bold text-navy-700">
                 المستوى
               </label>
               <select
@@ -156,17 +156,17 @@ export default function AddSkillForm() {
           </div>
 
           {error && (
-            <p className="rounded-xl bg-rose-50 p-3 text-sm font-bold text-rose-700">
+            <p className="rounded-xl bg-coral-50 p-3 text-sm font-bold text-coral-700">
               {error}
             </p>
           )}
           {success && (
             <p className="rounded-xl bg-emerald-50 p-3 text-sm font-bold text-emerald-700">
-              تمت إضافة المهارة إلى جوازك ✅
+              ✓ تمت إضافة المهارة إلى جوازك
             </p>
           )}
 
-          <button type="submit" className="btn-gold w-full sm:w-auto" disabled={loading}>
+          <button type="submit" className="btn-accent w-full sm:w-auto" disabled={loading}>
             {loading ? "جارٍ الحفظ…" : "حفظ المهارة"}
           </button>
         </form>

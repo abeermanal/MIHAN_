@@ -12,7 +12,6 @@ interface SkillWithLevel {
   level: number | null;
 }
 
-/** خبرات شائعة لدى العائدات → المهارات المرتبطة بها */
 const EXPERIENCE_PRESETS: {
   label: string;
   skills: { name_en: string; level: number }[];
@@ -95,7 +94,6 @@ export default function ReturnPathClient() {
         return preset ? preset.skills : [];
       });
 
-      // خبرة مخصصة نصية → تُحفظ كمهارة تواصل + إدارة مشاريع بمستوى أساسي
       if (experience.trim()) {
         items.push({ name_en: "Communication", level: 3 });
       }
@@ -124,15 +122,19 @@ export default function ReturnPathClient() {
   const userSkills = skills.filter((s) => s.level != null);
 
   return (
-    <div className="space-y-8">
-      <section className="rounded-3xl bg-gradient-to-l from-gold-400 via-gold-300 to-plum-300 px-6 py-12 text-center shadow-card md:px-16">
-        <h1 className="text-3xl font-extrabold text-plum-950 md:text-4xl">
-          مرحباً بعودتك 🌸
+    <div className="space-y-10">
+      {/* Hero */}
+      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-l from-coral-400 via-coral-300 to-royal-300 px-8 py-14 text-center shadow-card md:px-16">
+        <div className="pointer-events-none absolute -left-12 -top-12 h-48 w-48 rounded-full bg-white/20 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-16 -right-10 h-52 w-52 rounded-full bg-royal-400/20 blur-3xl" />
+        <div className="pointer-events-none absolute right-1/3 top-4 h-32 w-32 rounded-full bg-cream-200/30 blur-2xl" />
+
+        <h1 className="relative text-4xl font-extrabold text-navy-950 md:text-5xl">
+          عودتك قوة 🌸
         </h1>
-        <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-plum-900">
-          الانقطاع عن العمل ليس نهاية المسار — كل تجربة عشتِها اكتسبتِ منها
-          مهارات. وثّقي خبراتك هنا، وسنحوّلها إلى ملف مهني يفتح لك الأبواب من
-          جديد.
+        <p className="relative mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-navy-900">
+          الانقطاع عن العمل ليس نهاية المسار — كل تجربة عشتِها اكتسبتِ منها مهارات.
+          وثّقي خبراتك هنا، وسنحوّلها إلى ملف مهني يفتح لك الأبواب من جديد.
         </p>
       </section>
 
@@ -140,11 +142,13 @@ export default function ReturnPathClient() {
 
       {!error && (
         <>
+          {/* Experience presets */}
           <section>
             <h2 className="section-title mb-2">ماذا فعلتِ خلال فترتك السابقة؟</h2>
-            <p className="mb-4 text-plum-600">
+            <p className="mb-5 text-royal-600">
               اختاري ما ينطبق عليك — سنضيف المهارات المرتبطة تلقائياً إلى ملفك.
             </p>
+
             <div className="grid gap-3 sm:grid-cols-2">
               {EXPERIENCE_PRESETS.map((p) => {
                 const active = selectedPresets.includes(p.label);
@@ -154,45 +158,53 @@ export default function ReturnPathClient() {
                     onClick={() => togglePreset(p.label)}
                     className={`rounded-2xl border-2 p-4 text-right font-bold transition ${
                       active
-                        ? "border-plum-500 bg-plum-100 text-plum-800"
-                        : "border-plum-100 bg-white text-plum-600 hover:border-plum-300"
+                        ? "border-2 border-royal-500 bg-royal-50 text-navy-800"
+                        : "border-cream-200 bg-white hover:border-royal-300 text-royal-600"
                     }`}
                     aria-pressed={active}
                   >
-                    {active && <span className="ml-1 text-plum-600">✓</span>} {p.label}
+                    {active && (
+                      <span className="ml-2 inline-flex h-5 w-5 items-center justify-center rounded-full bg-royal-500 text-xs text-white">
+                        ✓
+                      </span>
+                    )}
+                    {p.label}
                   </button>
                 );
               })}
             </div>
 
-            <div className="card mt-5">
-              <label htmlFor="exp" className="mb-1 block font-bold text-plum-700">
+            <div className="card mt-6">
+              <label htmlFor="exp" className="mb-2 block text-sm font-bold text-royal-700">
                 أو اكتبي خبرتك بحرية
               </label>
               <textarea
                 id="exp"
-                className="input min-h-[90px]"
+                className="input min-h-[100px]"
                 placeholder="مثال: أدرتُ مشروعاً منزلياً لبيع الحلويات لمدة سنتين…"
                 value={experience}
                 onChange={(e) => setExperience(e.target.value)}
               />
             </div>
 
-            <div className="mt-5 flex flex-wrap items-center gap-4">
+            <div className="mt-6 flex flex-wrap items-center gap-4">
               <button className="btn-primary" onClick={save} disabled={saving}>
                 {saving ? "جارٍ الحفظ…" : "إضافة الخبرات إلى مهاراتي"}
               </button>
-              <Link href="/opportunities" className="btn-gold">
+              <Link href="/opportunities" className="btn-accent">
                 تصفحي الفرص
               </Link>
             </div>
+
             {message && (
-              <p className="mt-4 rounded-xl bg-emerald-50 p-4 font-bold text-emerald-700">
-                {message}
-              </p>
+              <div className="mt-5 flex items-start gap-3 rounded-xl bg-emerald-50 p-4">
+                <span className="mt-0.5 text-lg text-emerald-600">✓</span>
+                <p className="font-bold text-emerald-700">{message}</p>
+              </div>
             )}
           </section>
 
+          {/* Current skills */}
           {userSkills.length > 0 && (
             <section>
               <h2 className="section-title mb-4">مهاراتك الحالية</h2>
@@ -211,7 +223,12 @@ export default function ReturnPathClient() {
         </>
       )}
 
-      {loading && !error && <p className="text-center text-plum-500">جارٍ التحميل…</p>}
+      {loading && !error && (
+        <div className="flex items-center justify-center py-12">
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-royal-200 border-t-royal-600" />
+          <span className="mr-3 text-royal-500">جارٍ التحميل…</span>
+        </div>
+      )}
     </div>
   );
 }

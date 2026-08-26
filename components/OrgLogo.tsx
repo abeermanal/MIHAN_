@@ -18,13 +18,13 @@ export default function OrgLogo({ name, logoUrl, size = "sm" }: Props) {
       <img
         src={logoUrl}
         alt={`شعار ${name}`}
-        className={`${s.img} shrink-0 rounded-lg border border-plum-100 bg-white object-contain p-0.5`}
+        className={`${s.img} shrink-0 rounded-lg border border-royal-100 bg-white object-contain p-0.5`}
       />
     );
   }
   return (
     <span
-      className={`grid ${s.box} shrink-0 place-items-center rounded-lg bg-plum-600 font-extrabold text-gold-300`}
+      className={`grid ${s.box} shrink-0 place-items-center rounded-lg bg-royal-600 font-extrabold text-coral-300`}
     >
       {name.trim().charAt(0) || "؟"}
     </span>

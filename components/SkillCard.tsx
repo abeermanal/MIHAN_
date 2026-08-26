@@ -22,14 +22,14 @@ export default function SkillCard({
       ? "border-emerald-200 bg-emerald-50/50"
       : status === "missing"
         ? "border-rose-200 bg-rose-50/50"
-        : "border-plum-100 bg-white";
+        : "border-royal-100 bg-white";
 
   return (
     <div className={`rounded-2xl border p-4 shadow-card ${border}`}>
       <div className="flex items-start justify-between gap-2">
         <div>
-          <h3 className="font-bold text-plum-800">{name}</h3>
-          {nameEn && <p className="text-xs text-plum-400">{nameEn}</p>}
+          <h3 className="font-bold text-navy-800">{name}</h3>
+          {nameEn && <p className="text-xs text-royal-400">{nameEn}</p>}
         </div>
         {status === "met" && (
           <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-700">
@@ -50,14 +50,14 @@ export default function SkillCard({
             <span
               key={i}
               className={`h-2.5 flex-1 rounded-full ${
-                filled ? "bg-plum-500" : "bg-plum-100"
+                filled ? "bg-royal-500" : "bg-royal-100"
               }`}
             />
           );
         })}
       </div>
 
-      <div className="mt-2 flex items-center justify-between text-xs text-plum-500">
+      <div className="mt-2 flex items-center justify-between text-xs text-royal-500">
         <span>{level != null ? levelLabels[level] ?? `مستوى ${level}` : "غير مُقيّمة"}</span>
         {requiredLevel != null && (
           <span>المطلوب: مستوى {requiredLevel}</span>

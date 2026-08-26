@@ -43,43 +43,49 @@ const values = [
 
 export default function AboutPage() {
   return (
-    <div dir="rtl" className="space-y-12">
-      {/* ترويسة الصفحة */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-l from-plum-700 via-plum-600 to-plum-800 px-6 py-14 text-center text-white shadow-card md:px-16">
-        <div className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-gold-400/20 blur-2xl" />
-        <div className="pointer-events-none absolute -bottom-12 -right-8 h-44 w-44 rounded-full bg-gold-300/15 blur-2xl" />
-        <h1 className="text-3xl font-extrabold leading-snug md:text-5xl">
+    <div dir="rtl" className="space-y-14">
+      {/* Hero */}
+      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-l from-navy-900 via-navy-800 to-royal-950 px-8 py-16 text-center text-white shadow-card md:px-16">
+        <div className="pointer-events-none absolute -left-12 -top-12 h-48 w-48 rounded-full bg-coral-400/15 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-16 -right-10 h-52 w-52 rounded-full bg-royal-400/15 blur-3xl" />
+        <div className="pointer-events-none absolute right-1/4 top-6 h-36 w-36 rounded-full bg-lavender-400/10 blur-2xl" />
+
+        <h1 className="relative text-4xl font-extrabold leading-snug md:text-5xl">
           من نحن
         </h1>
-        <p className="mx-auto mt-4 max-w-2xl text-lg text-plum-100">
+        <p className="relative mx-auto mt-5 max-w-2xl text-lg text-cream-300">
           مِهَن | MIHAN — منصة عربية لتمكين المرأة مهنياً
         </p>
         <span
           aria-hidden="true"
-          className="mt-6 inline-block h-1 w-24 rounded-full bg-gradient-to-l from-transparent via-gold-300 to-transparent"
+          className="relative mx-auto mt-6 block h-1 w-24 rounded-full bg-gradient-to-l from-transparent via-coral-400 to-transparent"
         />
       </section>
 
-      {/* الرسالة والرؤية */}
+      {/* Mission & Vision */}
       <section className="grid gap-6 md:grid-cols-2">
-        <article className="card border-t-4 border-t-plum-600">
-          <h2 className="flex items-center gap-2 text-xl font-extrabold text-plum-800 md:text-2xl">
-            <span aria-hidden="true" className="text-2xl">🎯</span>
+        <article className="card border-t-4 border-t-royal-600">
+          <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-royal-100 text-2xl">
+            🎯
+          </div>
+          <h2 className="text-xl font-extrabold text-navy-800 md:text-2xl">
             رسالتنا
           </h2>
-          <p className="mt-3 leading-relaxed text-plum-600">
+          <p className="mt-3 leading-relaxed text-royal-600">
             تساعد منصة مِهَن النساء والفتيات العربيات على اكتشاف مهاراتهن غير
             المكتشفة، وبناء مسار مهني واضح، والوصول إلى فرص عمل وتدريب تتناسب
             مع قدراتهن الحقيقية.
           </p>
         </article>
 
-        <article className="card border-t-4 border-t-gold-400">
-          <h2 className="flex items-center gap-2 text-xl font-extrabold text-plum-800 md:text-2xl">
-            <span aria-hidden="true" className="text-2xl">🌟</span>
+        <article className="card border-t-4 border-t-coral-400">
+          <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-coral-100 text-2xl">
+            🌟
+          </div>
+          <h2 className="text-xl font-extrabold text-navy-800 md:text-2xl">
             رؤيتنا
           </h2>
-          <p className="mt-3 leading-relaxed text-plum-600">
+          <p className="mt-3 leading-relaxed text-royal-600">
             نطمح إلى عالم تستطيع فيه كل امرأة عربية أن تثبت قيمتها المهنية
             بمهاراتها وإنجازاتها، دون أن تقف الشهادات أو الظروف عائقاً أمام
             طموحها.
@@ -87,54 +93,50 @@ export default function AboutPage() {
         </article>
       </section>
 
-      {/* القيم */}
+      {/* Values */}
       <section>
-        <h2 className="section-title mb-6 flex items-center justify-center gap-2 text-center">
-          <span aria-hidden="true" className="text-3xl">💜</span>
-          قيمنا
-        </h2>
+        <h2 className="section-title mb-6 text-center">قيمنا</h2>
         <ul className="grid gap-4 sm:grid-cols-2">
           {values.map((v) => (
             <li
               key={v.text}
-              className="card flex items-center gap-4 transition hover:-translate-y-0.5 hover:border-gold-300"
+              className="card flex items-center gap-4 transition hover:-translate-y-1 hover:border-coral-300"
             >
               <span
                 aria-hidden="true"
-                className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-plum-100 text-xl"
+                className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-gradient-to-br from-royal-500 to-royal-700 text-xl text-white shadow-sm"
               >
                 {v.emoji}
               </span>
-              <p className="font-bold leading-relaxed text-plum-700">{v.text}</p>
+              <p className="font-bold leading-relaxed text-navy-800">{v.text}</p>
             </li>
           ))}
         </ul>
       </section>
 
-      {/* المؤسِّسة والمطوِّرة */}
+      {/* Founder */}
       <section>
         <h2 className="section-title mb-6 text-center">المؤسِّسة والمطوِّرة</h2>
-        <article className="relative overflow-hidden rounded-3xl border-2 border-gold-300 bg-gradient-to-l from-gold-50 via-white to-plum-50 p-6 shadow-card md:p-10">
-          <div className="pointer-events-none absolute -left-16 -top-16 h-48 w-48 rounded-full bg-gold-200/30 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-16 -right-16 h-48 w-48 rounded-full bg-plum-200/40 blur-3xl" />
+        <article className="relative overflow-hidden rounded-3xl border-2 border-coral-300 bg-gradient-to-l from-coral-50 via-white to-royal-50 p-8 shadow-card md:p-10">
+          <div className="pointer-events-none absolute -left-16 -top-16 h-48 w-48 rounded-full bg-coral-200/30 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-16 -right-16 h-48 w-48 rounded-full bg-royal-200/40 blur-3xl" />
 
           <div className="relative flex flex-col items-center gap-6 text-center sm:flex-row sm:items-start sm:text-right">
-            {/* صورة رمزية بالأحرف الأولى */}
             <div
               aria-hidden="true"
-              className="grid h-24 w-24 shrink-0 place-items-center rounded-full bg-gradient-to-br from-plum-600 to-plum-800 text-4xl font-extrabold text-gold-300 shadow-card ring-4 ring-gold-300"
+              className="grid h-24 w-24 shrink-0 place-items-center rounded-full bg-gradient-to-br from-royal-600 to-navy-800 text-4xl font-extrabold text-white shadow-lg ring-4 ring-coral-300"
             >
               ع
             </div>
 
             <div className="space-y-3">
-              <h3 className="text-2xl font-extrabold text-plum-900">
+              <h3 className="text-2xl font-extrabold text-navy-900">
                 عبير محمد
               </h3>
-              <p className="inline-block rounded-lg bg-gold-100 px-3 py-1 font-bold text-gold-800">
+              <span className="inline-block rounded-full bg-coral-100 px-4 py-1 text-sm font-bold text-coral-700">
                 مبرمجة ومطوِّرة أنظمة ذكية
-              </p>
-              <p className="leading-relaxed text-plum-600">
+              </span>
+              <p className="leading-relaxed text-royal-600">
                 صمّمت وطوّرت منصة مِهَن من الصفر، إيماناً منها بأهمية تمكين
                 المرأة العربية عبر التكنولوجيا والذكاء الاصطناعي. تجمع عبير بين
                 خبرتها في تطوير الأنظمة الذكية وشغفها بإحداث أثر اجتماعي حقيقي.
@@ -144,17 +146,12 @@ export default function AboutPage() {
         </article>
       </section>
 
-      {/* دعوة لاتخاذ إجراء */}
+      {/* CTA */}
       <section className="text-center">
-        <Link href="/assessment" className="btn-gold">
+        <Link href="/assessment" className="btn-primary inline-block">
           ابدئي رحلتك مع مِهَن الآن
         </Link>
       </section>
-
-      {/* تذييل الصفحة */}
-      <footer className="border-t border-plum-100 pt-6 text-center text-sm font-bold text-plum-500">
-        MIHAN © 2026 — جميع الحقوق محفوظة
-      </footer>
     </div>
   );
 }

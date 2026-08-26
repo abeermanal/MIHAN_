@@ -50,7 +50,6 @@ export default function OpportunityForm({ opportunityId }: Props) {
 
     async function load() {
       try {
-        // حارس: يجب أن يكون الحساب جهة عمل
         const meRes = await fetch("/api/org/me");
         if (meRes.status === 403) {
           router.replace("/");
@@ -186,7 +185,7 @@ export default function OpportunityForm({ opportunityId }: Props) {
     }
   }
 
-  if (loading) return <p className="text-center text-plum-500">جارٍ التحميل…</p>;
+  if (loading) return <p className="text-center text-royal-500">جارٍ التحميل…</p>;
   if (error && !org) return <SetupNotice error={error} />;
 
   const selectedCount = Object.keys(selected).length;
@@ -195,7 +194,7 @@ export default function OpportunityForm({ opportunityId }: Props) {
     <div className="mx-auto max-w-3xl space-y-6">
       <Link
         href="/org/dashboard"
-        className="inline-block font-bold text-plum-500 hover:text-plum-700"
+        className="inline-block font-bold text-royal-600 transition hover:text-royal-800"
       >
         → رجوع إلى لوحة المنظمة
       </Link>
@@ -204,7 +203,7 @@ export default function OpportunityForm({ opportunityId }: Props) {
         <h1 className="section-title">
           {isEdit ? "تعديل الفرصة ✏️" : "إضافة فرصة جديدة 🎯"}
         </h1>
-        <p className="mt-2 text-plum-600">
+        <p className="mt-2 text-royal-500">
           {isEdit
             ? "حدّثي تفاصيل الفرصة ثم احفظي التعديلات."
             : "انشري فرصة وظيفية أو تدريبية لتظهر للباحثات عن العمل."}
@@ -213,8 +212,8 @@ export default function OpportunityForm({ opportunityId }: Props) {
 
       <form onSubmit={handleSubmit} className="card space-y-5">
         <div>
-          <label htmlFor="title" className="mb-1 block font-bold text-plum-700">
-            عنوان الفرصة <span className="text-rose-500">*</span>
+          <label htmlFor="title" className="mb-1 block font-bold text-navy-700">
+            عنوان الفرصة <span className="text-coral-500">*</span>
           </label>
           <input
             id="title"
@@ -228,8 +227,8 @@ export default function OpportunityForm({ opportunityId }: Props) {
         </div>
 
         <div>
-          <label htmlFor="description" className="mb-1 block font-bold text-plum-700">
-            وصف الفرصة <span className="text-rose-500">*</span>
+          <label htmlFor="description" className="mb-1 block font-bold text-navy-700">
+            وصف الفرصة <span className="text-coral-500">*</span>
           </label>
           <textarea
             id="description"
@@ -244,7 +243,7 @@ export default function OpportunityForm({ opportunityId }: Props) {
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label htmlFor="company" className="mb-1 block font-bold text-plum-700">
+            <label htmlFor="company" className="mb-1 block font-bold text-navy-700">
               اسم الجهة
             </label>
             <input
@@ -256,14 +255,14 @@ export default function OpportunityForm({ opportunityId }: Props) {
               onChange={(e) => setCompany(e.target.value)}
             />
             {!isEdit && (
-              <p className="mt-1 text-xs text-plum-400">
+              <p className="mt-1 text-xs text-royal-400">
                 يُعبأ تلقائياً من بروفايل منظمتك.
               </p>
             )}
           </div>
 
           <div>
-            <label htmlFor="location" className="mb-1 block font-bold text-plum-700">
+            <label htmlFor="location" className="mb-1 block font-bold text-navy-700">
               الموقع (اختياري)
             </label>
             <input
@@ -277,7 +276,7 @@ export default function OpportunityForm({ opportunityId }: Props) {
           </div>
 
           <div>
-            <label htmlFor="employmentType" className="mb-1 block font-bold text-plum-700">
+            <label htmlFor="employmentType" className="mb-1 block font-bold text-navy-700">
               نوع التعاقد
             </label>
             <select
@@ -296,7 +295,7 @@ export default function OpportunityForm({ opportunityId }: Props) {
           </div>
 
           <div>
-            <label htmlFor="url" className="mb-1 block font-bold text-plum-700">
+            <label htmlFor="url" className="mb-1 block font-bold text-navy-700">
               رابط التقديم (اختياري)
             </label>
             <input
@@ -311,25 +310,29 @@ export default function OpportunityForm({ opportunityId }: Props) {
           </div>
         </div>
 
-        {/* المهارات المطلوبة */}
-        <fieldset className="rounded-xl border border-plum-100 p-4">
-          <legend className="px-2 font-extrabold text-plum-800">
+        <fieldset className="rounded-2xl border border-cream-200 p-5">
+          <legend className="px-2 font-extrabold text-navy-800">
             المهارات المطلوبة{" "}
-            <span className="text-sm font-normal text-plum-500">
-              ({selectedCount} مختارة)
+            <span className="ms-1 inline-flex items-center rounded-full bg-royal-100 px-2.5 py-0.5 text-xs font-bold text-royal-600">
+              {selectedCount} مختارة
             </span>
           </legend>
 
-          <input
-            type="search"
-            className="input mb-3"
-            placeholder="ابحثي عن مهارة…"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+          <div className="relative mb-3">
+            <span className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-royal-400">
+              🔍
+            </span>
+            <input
+              type="search"
+              className="input ps-9"
+              placeholder="ابحثي عن مهارة…"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
 
           {filteredSkills.length === 0 ? (
-            <p className="py-3 text-center text-sm text-plum-500">
+            <p className="py-3 text-center text-sm text-royal-500">
               لا توجد مهارات مطابقة — تأكدي من تشغيل البيانات الأولية عبر POST /api/seed.
             </p>
           ) : (
@@ -339,8 +342,10 @@ export default function OpportunityForm({ opportunityId }: Props) {
                 return (
                   <li
                     key={s.id}
-                    className={`rounded-lg border p-2.5 transition ${
-                      sel ? "border-plum-300 bg-plum-50" : "border-transparent hover:bg-plum-50/60"
+                    className={`rounded-2xl border p-3 transition ${
+                      sel
+                        ? "border-royal-300 bg-royal-50"
+                        : "border-transparent hover:bg-royal-50/50"
                     }`}
                   >
                     <label className="flex cursor-pointer items-center gap-2.5">
@@ -348,24 +353,24 @@ export default function OpportunityForm({ opportunityId }: Props) {
                         type="checkbox"
                         checked={Boolean(sel)}
                         onChange={() => toggleSkill(s.id)}
-                        className="h-4 w-4 accent-plum-600"
+                        className="h-4 w-4 accent-royal-600"
                       />
-                      <span className="font-bold text-plum-800">{s.name_ar}</span>
-                      <span dir="ltr" className="text-xs text-plum-400">
+                      <span className="font-bold text-navy-800">{s.name_ar}</span>
+                      <span dir="ltr" className="text-xs text-royal-400">
                         {s.name_en}
                       </span>
                     </label>
 
                     {sel && (
-                      <div className="mt-2 flex flex-wrap items-center gap-3 ps-7">
-                        <label className="flex items-center gap-1.5 text-sm text-plum-600">
+                      <div className="mt-3 flex flex-wrap items-center gap-4 rounded-xl bg-white/60 p-3 ps-7">
+                        <label className="flex items-center gap-1.5 text-sm text-royal-600">
                           المستوى المطلوب:
                           <select
                             value={sel.level}
                             onChange={(e) =>
                               updateSkill(s.id, { level: Number(e.target.value) })
                             }
-                            className="rounded-lg border border-plum-200 bg-white px-2 py-1 text-sm outline-none focus:border-plum-500"
+                            className="rounded-lg border border-royal-200 bg-white px-2 py-1 text-sm outline-none focus:border-royal-500"
                           >
                             {[0, 1, 2, 3, 4, 5].map((lv) => (
                               <option key={lv} value={lv}>
@@ -374,14 +379,14 @@ export default function OpportunityForm({ opportunityId }: Props) {
                             ))}
                           </select>
                         </label>
-                        <label className="flex cursor-pointer items-center gap-1.5 text-sm text-plum-600">
+                        <label className="flex cursor-pointer items-center gap-1.5 text-sm text-royal-600">
                           <input
                             type="checkbox"
                             checked={sel.is_required}
                             onChange={(e) =>
                               updateSkill(s.id, { is_required: e.target.checked })
                             }
-                            className="h-4 w-4 accent-gold-500"
+                            className="h-4 w-4 accent-coral-500"
                           />
                           إلزامية
                         </label>
@@ -395,13 +400,13 @@ export default function OpportunityForm({ opportunityId }: Props) {
         </fieldset>
 
         {error && (
-          <p className="rounded-xl bg-rose-50 p-3 text-sm font-bold text-rose-700">
+          <div className="rounded-xl bg-coral-50 p-3 text-sm font-bold text-coral-700">
             {error}
-          </p>
+          </div>
         )}
 
         <div className="flex flex-wrap items-center justify-end gap-3">
-          <Link href="/org/dashboard" className="font-bold text-plum-500 hover:text-plum-700">
+          <Link href="/org/dashboard" className="font-bold text-royal-500 transition hover:text-royal-700">
             إلغاء
           </Link>
           <button type="submit" className="btn-primary" disabled={saving}>
