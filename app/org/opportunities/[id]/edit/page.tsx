@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import OpportunityForm from "../../OpportunityForm";
+import { requireOrgForPage } from "@/lib/orgGuard";
 
 export const metadata: Metadata = {
   title: "تعديل الفرصة",
@@ -10,6 +11,7 @@ interface Props {
   params: { id: string };
 }
 
-export default function EditOrgOpportunityPage({ params }: Props) {
+export default async function EditOrgOpportunityPage({ params }: Props) {
+  await requireOrgForPage();
   return <OpportunityForm opportunityId={params.id} />;
 }

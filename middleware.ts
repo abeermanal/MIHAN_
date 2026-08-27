@@ -20,10 +20,11 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // جلسة قائمة + زيارة صفحات الدخول → تحويل إلى الرئيسية
+  // جلسة قائمة + زيارة صفحات الدخول → تحويل حسب نوع الحساب
   if (user && (pathname === "/login" || pathname === "/signup")) {
+    const isOrg = user.user_metadata?.user_type === "organization";
     const url = request.nextUrl.clone();
-    url.pathname = "/";
+    url.pathname = isOrg ? "/org/dashboard" : "/";
     url.search = "";
     return NextResponse.redirect(url);
   }

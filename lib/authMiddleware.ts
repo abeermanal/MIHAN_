@@ -1,5 +1,5 @@
 import { createServerClient } from "@supabase/ssr";
-import type { SupabaseClient } from "@supabase/supabase-js";
+import type { SupabaseClient, User } from "@supabase/supabase-js";
 import { NextResponse, type NextRequest } from "next/server";
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -11,7 +11,7 @@ const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
  */
 export async function updateSession(
   request: NextRequest
-): Promise<{ user: { id: string; email?: string } | null; supabaseResponse: NextResponse }> {
+): Promise<{ user: User | null; supabaseResponse: NextResponse }> {
   let supabaseResponse = NextResponse.next({ request });
 
   // إذا لم تُضبط المفاتيح نمرر الطلب دون مصادقة (سيتولى مسارات API إرجاع 503).

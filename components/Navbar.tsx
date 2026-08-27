@@ -7,7 +7,7 @@ import type { User } from "@supabase/supabase-js";
 import { getSupabaseBrowserClient } from "@/lib/supabaseClient";
 import ThemeToggle from "@/components/ThemeToggle";
 
-const navLinks = [
+const seekerNavLinks = [
   { href: "/", label: "الرئيسية" },
   { href: "/assessment", label: "اكتشفي مهاراتك" },
   { href: "/opportunities", label: "الفرص" },
@@ -15,6 +15,13 @@ const navLinks = [
   { href: "/learning-path", label: "خطة التعلم" },
   { href: "/coach", label: "المدربة الذكية" },
   { href: "/return-path", label: "طريق العودة" },
+  { href: "/about", label: "عن مِهَن" },
+];
+
+const orgNavLinks = [
+  { href: "/org/dashboard", label: "لوحة المنظمة" },
+  { href: "/org/opportunities/new", label: "إضافة فرصة" },
+  { href: "/opportunities", label: "الفرص" },
   { href: "/about", label: "عن مِهَن" },
 ];
 
@@ -64,27 +71,61 @@ function GoldDiamondIcon() {
   );
 }
 
+type UserRole = "seeker" | "organization";
+
+function resolveRole(user: User | null): UserRole | null {
+  if (!user) return null;
+  if (user.user_metadata?.user_type === "organization") return "organization";
+  return "seeker";
+}
+
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const [role, setRole] = useState<UserRole | null>(null);
   const [loggingOut, setLoggingOut] = useState(false);
 
   useEffect(() => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
 
-    supabase.auth.getUser().then(({ data }) => {
-      setUser(data.user);
-    });
+    async function applyUser(next: User | null) {
+      setUser(next);
+      const fromMetadata = resolveRole(next);
+      if (fromMetadata) {
+        setRole(fromMetadata);
+        return;
+      }
+      if (!next) {
+        setRole(null);
+        return;
+      }
+      // حساب قديم بلا user_type — نتحقق من بروفايل الجهة عبر /api/org/me
+      try {
+        const res = await fetch("/api/org/me");
+        if (res.ok) {
+          const data = (await res.json()) as { organization?: unknown };
+          setRole(data?.organization ? "organization" : "seeker");
+        } else {
+          setRole("seeker");
+        }
+      } catch {
+        setRole("seeker");
+      }
+    }
+
+    supabase.auth.getUser().then(({ data }) => applyUser(data.user));
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
+      void applyUser(session?.user ?? null);
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
   async function handleLogout() {
@@ -98,6 +139,8 @@ export default function Navbar() {
       setLoggingOut(false);
     }
   }
+
+  const navLinks = role === "organization" ? orgNavLinks : seekerNavLinks;
 
   const displayName =
     (user?.user_metadata?.full_name as string | undefined)?.trim() ||
@@ -311,34 +354,36 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <div className="mt-2 pt-2" style={{ borderTop: "1px solid var(--border)" }}>
-            <p
-              className="px-4 pb-2 text-xs font-bold"
-              style={{ color: "var(--muted)" }}
-            >
-              روابط سريعة
-            </p>
-            <ul className="space-y-1">
-              {anchorLinks.map((l) => (
-                <li key={l.href}>
-                  <Link
-                    href={l.href}
-                    onClick={() => setOpen(false)}
-                    className="block rounded-2xl px-4 py-3 text-base font-bold"
-                    style={{ color: "var(--text-secondary)" }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = "var(--accent)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = "var(--text-secondary)";
-                    }}
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {role !== "organization" && (
+            <div className="mt-2 pt-2" style={{ borderTop: "1px solid var(--border)" }}>
+              <p
+                className="px-4 pb-2 text-xs font-bold"
+                style={{ color: "var(--muted)" }}
+              >
+                روابط سريعة
+              </p>
+              <ul className="space-y-1">
+                {anchorLinks.map((l) => (
+                  <li key={l.href}>
+                    <Link
+                      href={l.href}
+                      onClick={() => setOpen(false)}
+                      className="block rounded-2xl px-4 py-3 text-base font-bold"
+                      style={{ color: "var(--text-secondary)" }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = "var(--accent)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color = "var(--text-secondary)";
+                      }}
+                    >
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           <div
             className="mt-3 space-y-3 pt-4"

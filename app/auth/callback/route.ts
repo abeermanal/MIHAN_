@@ -1,18 +1,26 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { getSupabaseAuthed } from "@/lib/supabaseServer";
+import { isOrganizationUser } from "@/lib/organizations";
 
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
-  const nextParam = searchParams.get("next") ?? "/";
-  const next = nextParam.startsWith("/") ? nextParam : "/";
+  const nextParam = searchParams.get("next");
+  // نكرم next صراحةً فقط؛ وإلا نحوّل حسب نوع الحساب.
+  const next = nextParam ? (nextParam.startsWith("/") ? nextParam : null) : null;
 
   if (code) {
     try {
       const supabase = getSupabaseAuthed();
-      const { error } = await supabase.auth.exchangeCodeForSession(code);
+      const { data, error } = await supabase.auth.exchangeCodeForSession(code);
       if (!error) {
-        return NextResponse.redirect(`${origin}${next}`);
+        let target = next;
+        if (!target) {
+          const user = data.user;
+          target =
+            user && isOrganizationUser(user) ? "/org/dashboard" : "/";
+        }
+        return NextResponse.redirect(`${origin}${target}`);
       }
     } catch (err) {
       if (err instanceof Error && err.message === "SUPABASE_NOT_CONFIGURED") {

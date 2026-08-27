@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ReturnPathClient from "./ReturnPathClient";
+import { requireSeekerForPage } from "@/lib/orgGuard";
 
 export const metadata: Metadata = {
   title: "طريق العودة",
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
     "منصة دعم النساء العائدات للعمل بعد انقطاع — وثّقي خبراتك السابقة وحوّليها إلى مهارات معترف بها وابدئي من جديد بثقة.",
 };
 
-export default function ReturnPathPage() {
+export default async function ReturnPathPage() {
+  await requireSeekerForPage();
   return <ReturnPathClient />;
 }

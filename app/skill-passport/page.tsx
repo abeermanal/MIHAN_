@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { requireUser } from "@/lib/supabaseServer";
+import { isOrganizationUser } from "@/lib/organizations";
 import AddSkillForm from "@/components/AddSkillForm";
 import SetupNotice from "@/components/SetupNotice";
 
@@ -63,6 +64,7 @@ export default async function SkillPassportPage() {
     return <SetupNotice />;
   }
   const { supabase, userId, user } = auth;
+  if (isOrganizationUser(user)) redirect("/org/dashboard");
 
   const [{ data: catalog, error: catalogError }, { data: userSkills, error: userError }] =
     await Promise.all([
