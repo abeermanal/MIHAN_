@@ -45,11 +45,17 @@ export default function SocialLogin() {
     }
     setLoadingProvider(provider);
     try {
+      const options: { queryParams?: Record<string, string> } = {};
+      if (provider === "github") {
+        options.queryParams = { prompt: "consent" };
+      }
+
       const { error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
           redirectTo: `${window.location.origin}/auth/callback`,
-          queryParams: provider === "github" ? { prompt: "consent" } : {},
+          skipBrowserRedirect: false,
+          ...options,
         },
       });
       if (error) throw error;

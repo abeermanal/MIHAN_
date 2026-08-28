@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { getSupabaseAuthed } from "@/lib/supabaseServer";
+import { createServerClient } from "@supabase/ssr";
 import { isOrgAccount } from "@/lib/orgGuard";
 
 export async function GET(request: NextRequest) {
@@ -11,8 +11,26 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(`${origin}/login?error=no_code`);
   }
 
+  const response = NextResponse.redirect(`${origin}${next || "/"}`);
+
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) => {
+            response.cookies.set(name, value, options);
+          });
+        },
+      },
+    }
+  );
+
   try {
-    const supabase = getSupabaseAuthed();
     const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
     if (error) {
@@ -20,17 +38,16 @@ export async function GET(request: NextRequest) {
       return NextResponse.redirect(`${origin}/login?error=auth_code`);
     }
 
-    const user = data.user;
-    if (!user) {
-      return NextResponse.redirect(`${origin}/login?error=no_user`);
+    if (data?.user) {
+      const isOrg = await isOrgAccount(supabase, data.user);
+      const target = next && next.startsWith("/") ? next : isOrg ? "/org/dashboard" : "/";
+      response.headers.set("location", `${origin}${target}`);
+      return response;
     }
-
-    const isOrg = await isOrgAccount(supabase, user);
-    const target = next && next.startsWith("/") ? next : isOrg ? "/org/dashboard" : "/";
-
-    return NextResponse.redirect(`${origin}${target}`);
   } catch (err) {
     console.error("OAuth callback exception:", err);
     return NextResponse.redirect(`${origin}/login?error=callback`);
   }
+
+  return NextResponse.redirect(`${origin}/login?error=callback`);
 }
