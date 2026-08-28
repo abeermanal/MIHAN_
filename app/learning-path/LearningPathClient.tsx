@@ -27,9 +27,9 @@ const typeLabels: Record<string, string> = {
 };
 
 const typeColors: Record<string, string> = {
-  article: "bg-teal-100/50 text-teal-300",
-  video: "bg-gold-100/30 text-gold-400",
-  course: "bg-teal-200/30 text-teal-200",
+  article: "bg-teal-500/15 text-teal-700 dark:text-teal-300",
+  video: "bg-gold-500/15 text-gold-700 dark:text-gold-400",
+  course: "bg-teal-500/15 text-teal-700 dark:text-teal-200",
   practice: "bg-[var(--muted)] text-[var(--text-secondary)]",
 };
 
@@ -102,7 +102,7 @@ export default function LearningPathClient() {
     await fetch(`/api/learning-path/${item.id}`, { method: "DELETE" });
   }
 
-  if (loading) return <p className="text-center text-gold-400">جارٍ التحميل…</p>;
+  if (loading) return <p className="text-center text-gold-700 dark:text-gold-400">جارٍ التحميل…</p>;
   if (error && items.length === 0 && opportunities.length === 0)
     return <SetupNotice error={error} />;
 
@@ -197,7 +197,7 @@ export default function LearningPathClient() {
             </div>
             <div>
               <p className="text-lg font-extrabold text-[var(--text)]">تقدمك في الخطة</p>
-              <p className="text-sm text-gold-400">
+              <p className="text-sm text-gold-700 dark:text-gold-400">
                 {completed} مكتمل من أصل {items.length} عنصر
               </p>
               <div className="mt-2 h-2 w-48 overflow-hidden rounded-full bg-[var(--muted)]">
@@ -214,12 +214,12 @@ export default function LearningPathClient() {
       {items.length === 0 ? (
         <div className="card flex flex-col items-center justify-center py-16 text-center">
           <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gold-400/10">
-            <svg className="h-10 w-10 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <svg className="h-10 w-10 text-gold-700 dark:text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
             </svg>
           </div>
           <h3 className="text-lg font-extrabold text-[var(--text)]">لا توجد عناصر بعد</h3>
-          <p className="mt-1 text-sm text-gold-400">اختاري فرصة بالأعلى وأنشئي خطتك للبدء</p>
+          <p className="mt-1 text-sm text-gold-700 dark:text-gold-400">اختاري فرصة بالأعلى وأنشئي خطتك للبدء</p>
         </div>
       ) : (
         <div className="space-y-6">
@@ -229,7 +229,7 @@ export default function LearningPathClient() {
               <section key={skillName}>
                 <div className="mb-3 flex items-center gap-3">
                   <h2 className="text-lg font-extrabold text-[var(--text)]">{skillName}</h2>
-                  <span className="rounded-full bg-teal-500/15 px-3 py-0.5 text-xs font-bold text-teal-300">
+                  <span className="rounded-full bg-teal-500/15 px-3 py-0.5 text-xs font-bold text-teal-700 dark:text-teal-300">
                     {completedInGroup}/{skillItems.length}
                   </span>
                 </div>

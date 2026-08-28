@@ -314,7 +314,7 @@ export default function OpportunityForm({ opportunityId }: Props) {
         <fieldset className="rounded-2xl p-5" style={{ border: "1px solid var(--border)" }}>
           <legend className="px-2 font-extrabold" style={{ color: "var(--text)" }}>
             المهارات المطلوبة{" "}
-            <span className="ms-1 inline-flex items-center rounded-full bg-gold-500/15 px-2.5 py-0.5 text-xs font-bold text-gold-400">
+            <span className="ms-1 inline-flex items-center rounded-full bg-gold-500/15 px-2.5 py-0.5 text-xs font-bold text-gold-700 dark:text-gold-400">
               {selectedCount} مختارة
             </span>
           </legend>

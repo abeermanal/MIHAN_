@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getSupabaseBrowserClient } from "@/lib/supabaseClient";
 import { ensureOwnOrganization } from "@/lib/organizations";
+import Logo from "@/components/Logo";
+import SocialLogin from "@/components/SocialLogin";
 
 type AccountType = "seeker" | "organization";
 
@@ -115,14 +117,9 @@ export default function SignupForm() {
       <div className="pointer-events-none absolute -bottom-40 -right-20 h-[400px] w-[400px] rounded-full blur-3xl" style={{ backgroundColor: "rgba(212,175,55,0.06)" }} />
       <div className="pointer-events-none absolute left-1/3 top-1/3 h-[250px] w-[250px] rounded-full blur-3xl" style={{ backgroundColor: "rgba(255,255,255,0.04)" }} />
       <div className="relative z-10 px-12 text-center">
-        <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-3xl shadow-glow" style={{ backgroundColor: "rgba(212,175,55,0.15)", backdropFilter: "blur(8px)" }}>
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-            <path d="M24 4L44 24L24 44L4 24L24 4Z" stroke="#D4AF37" strokeWidth="2.5" fill="none" />
-            <path d="M24 10L38 24L24 38L10 24L24 10Z" stroke="#D4AF37" strokeWidth="1.5" fill="none" opacity="0.6" />
-            <circle cx="24" cy="24" r="4" fill="#D4AF37" />
-          </svg>
+        <div className="mb-6 flex justify-center">
+          <Logo size={56} variant="inverse" />
         </div>
-        <h2 className="text-4xl font-black" style={{ color: "#D4AF37" }}>مِهَن</h2>
         <p className="mt-3 text-lg font-medium" style={{ color: "rgba(255,255,255,0.7)" }}>
           منصة التوجيه المهني للنساء
         </p>
@@ -144,15 +141,8 @@ export default function SignupForm() {
               }}
             >
               <div className="mb-6 lg:hidden">
-                <div
-                  className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-3xl shadow-soft"
-                  style={{ backgroundColor: "var(--accent)" }}
-                >
-                  <svg width="32" height="32" viewBox="0 0 48 48" fill="none">
-                    <path d="M24 4L44 24L24 44L4 24L24 4Z" stroke="white" strokeWidth="2.5" fill="none" />
-                    <path d="M24 10L38 24L24 38L10 24L24 10Z" stroke="white" strokeWidth="1.5" fill="none" opacity="0.6" />
-                    <circle cx="24" cy="24" r="4" fill="white" />
-                  </svg>
+                <div className="flex justify-center">
+                  <Logo size={40} />
                 </div>
               </div>
 
@@ -163,7 +153,7 @@ export default function SignupForm() {
                 </svg>
               </div>
 
-              <h1 className="text-2xl font-extrabold" style={{ color: "var(--text)" }}>
+              <h1 className="text-2xl font-extrabold" style={{ color: "var(--heading)" }}>
                 تحققي من بريدك الإلكتروني
               </h1>
               <p className="mt-3 leading-relaxed" style={{ color: "var(--text-secondary)" }}>
@@ -210,22 +200,12 @@ export default function SignupForm() {
             }}
           >
             <div className="mb-8 text-center lg:hidden">
-              <div
-                className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-3xl shadow-soft"
-                style={{ backgroundColor: "var(--accent)" }}
-              >
-                <svg width="32" height="32" viewBox="0 0 48 48" fill="none">
-                  <path d="M24 4L44 24L24 44L4 24L24 4Z" stroke="white" strokeWidth="2.5" fill="none" />
-                  <path d="M24 10L38 24L24 38L10 24L24 10Z" stroke="white" strokeWidth="1.5" fill="none" opacity="0.6" />
-                  <circle cx="24" cy="24" r="4" fill="white" />
-                </svg>
-              </div>
-              <div className="flex items-center justify-center gap-2">
-                <span className="text-xl font-black" style={{ color: "var(--text)" }}>مِهَن</span>
+              <div className="flex justify-center">
+                <Logo size={40} />
               </div>
             </div>
 
-            <h1 className="text-2xl font-extrabold" style={{ color: "var(--text)" }}>حساب جديد</h1>
+            <h1 className="text-2xl font-extrabold" style={{ color: "var(--heading)" }}>حساب جديد</h1>
             <p className="mt-2" style={{ color: "var(--text-secondary)" }}>دقيقة واحدة وتكونين جاهزة للبدء.</p>
 
             <fieldset className="mt-6">
@@ -439,6 +419,10 @@ export default function SignupForm() {
                 {loading ? "جارٍ الإنشاء…" : "إنشاء الحساب"}
               </button>
             </form>
+
+            <div className="mt-2">
+              <SocialLogin />
+            </div>
 
             <div className="mt-5 text-center">
               <Link href="/login" className="btn-outline w-full">

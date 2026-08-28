@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { getSupabaseBrowserClient } from "@/lib/supabaseClient";
 import ThemeToggle from "@/components/ThemeToggle";
+import Logo from "@/components/Logo";
 
 const seekerNavLinks = [
   { href: "/", label: "الرئيسية" },
@@ -35,48 +36,17 @@ function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname.startsWith(href);
 }
 
-function GoldDiamondIcon() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-      <path
-        d="M14 2L26 14L14 26L2 14L14 2Z"
-        fill="url(#gold-grad)"
-        stroke="rgba(201,168,76,0.4)"
-        strokeWidth="1"
-      />
-      <path
-        d="M14 6L22 14L14 22L6 14L14 6Z"
-        fill="none"
-        stroke="rgba(255,255,255,0.2)"
-        strokeWidth="0.75"
-      />
-      <path
-        d="M14 2L14 26"
-        stroke="rgba(255,255,255,0.1)"
-        strokeWidth="0.5"
-      />
-      <path
-        d="M2 14L26 14"
-        stroke="rgba(255,255,255,0.1)"
-        strokeWidth="0.5"
-      />
-      <defs>
-        <linearGradient id="gold-grad" x1="2" y1="2" x2="26" y2="26">
-          <stop offset="0%" stopColor="#D4B36A" />
-          <stop offset="50%" stopColor="#C9A84C" />
-          <stop offset="100%" stopColor="#B8963E" />
-        </linearGradient>
-      </defs>
-    </svg>
-  );
-}
-
 type UserRole = "seeker" | "organization";
 
-function resolveRole(user: User | null): UserRole | null {
+/**
+ * لا نثق إلا بصنف "organization" الصريح من البيانات الوصفية للمستخدم.
+ * أي شيء آخر (بما فيه الحسابات القديمة بلا user_type) نتركه للتحقق منه
+ * عبر /api/org/me — فلا نعتبر المستخدم باحثة إلا بعد التأكد من غياب ملف الجهة.
+ */
+function resolveFromMetadata(user: User | null): UserRole | null {
   if (!user) return null;
   if (user.user_metadata?.user_type === "organization") return "organization";
-  return "seeker";
+  return null;
 }
 
 export default function Navbar() {
@@ -93,7 +63,7 @@ export default function Navbar() {
 
     async function applyUser(next: User | null) {
       setUser(next);
-      const fromMetadata = resolveRole(next);
+      const fromMetadata = resolveFromMetadata(next);
       if (fromMetadata) {
         setRole(fromMetadata);
         return;
@@ -102,17 +72,21 @@ export default function Navbar() {
         setRole(null);
         return;
       }
-      // حساب قديم بلا user_type — نتحقق من بروفايل الجهة عبر /api/org/me
+      // بلا صنف صريح (بما فيه الحسابات القديمة) — نتحقق من بروفايل الجهة عبر /api/org/me
       try {
         const res = await fetch("/api/org/me");
         if (res.ok) {
           const data = (await res.json()) as { organization?: unknown };
           setRole(data?.organization ? "organization" : "seeker");
-        } else {
+        } else if (res.status === 403) {
+          // الحساب ليس جهة عمل — باحثة
           setRole("seeker");
+        } else {
+          // لا يمكن التأكد (خطأ خادم) — نبقى على الحالة الحالية دون قفل التنقل
+          setRole(null);
         }
       } catch {
-        setRole("seeker");
+        setRole(null);
       }
     }
 
@@ -164,23 +138,7 @@ export default function Navbar() {
       }}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 lg:px-6">
-        <Link href="/" className="flex shrink-0 items-center gap-2.5">
-          <GoldDiamondIcon />
-          <div className="flex flex-col leading-none">
-            <span
-              className="text-lg font-extrabold"
-              style={{ color: "var(--text)" }}
-            >
-              مِهَن
-            </span>
-            <span
-              className="text-[10px] font-bold tracking-[0.2em]"
-              style={{ color: "var(--accent)" }}
-            >
-              MIHAN
-            </span>
-          </div>
-        </Link>
+        <Logo href="/" size={34} />
 
         <ul className="hidden items-center gap-0.5 overflow-x-auto lg:flex">
           {navLinks.map((l) => (
@@ -191,7 +149,7 @@ export default function Navbar() {
                 className="whitespace-nowrap rounded-full px-3 py-2 text-xs font-bold transition-all duration-200"
                 style={{
                   color: isActive(pathname, l.href)
-                    ? "var(--accent)"
+                    ? "var(--link)"
                     : "var(--muted)",
                   backgroundColor: isActive(pathname, l.href)
                     ? "var(--accent-subtle)"
@@ -252,8 +210,8 @@ export default function Navbar() {
                   color: "var(--text-secondary)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "var(--accent)";
-                  e.currentTarget.style.color = "var(--accent)";
+                  e.currentTarget.style.borderColor = "var(--link)";
+                  e.currentTarget.style.color = "var(--link)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.borderColor = "var(--border-strong)";
@@ -330,7 +288,7 @@ export default function Navbar() {
                   className="block rounded-2xl px-4 py-3.5 text-base font-bold transition-all duration-200"
                   style={{
                     color: isActive(pathname, l.href)
-                      ? "var(--accent)"
+                      ? "var(--link)"
                       : "var(--text)",
                     backgroundColor: isActive(pathname, l.href)
                       ? "var(--accent-subtle)"
@@ -371,7 +329,7 @@ export default function Navbar() {
                       className="block rounded-2xl px-4 py-3 text-base font-bold"
                       style={{ color: "var(--text-secondary)" }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.color = "var(--accent)";
+                        e.currentTarget.style.color = "var(--link)";
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.color = "var(--text-secondary)";
@@ -447,8 +405,8 @@ export default function Navbar() {
                   onClick={() => setOpen(false)}
                   className="block rounded-full px-4 py-3.5 text-center text-sm font-bold"
                   style={{
-                    border: "1.5px solid var(--accent)",
-                    color: "var(--accent)",
+                    border: "1.5px solid var(--link)",
+                    color: "var(--link)",
                   }}
                 >
                   تسجيل الدخول

@@ -10,6 +10,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        heading: {
+          DEFAULT: "var(--heading)",
+        },
+        link: {
+          DEFAULT: "var(--link)",
+        },
         surface: {
           DEFAULT: "var(--surface)",
           raised: "var(--surface-raised)",

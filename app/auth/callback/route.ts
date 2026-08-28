@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { getSupabaseAuthed } from "@/lib/supabaseServer";
-import { isOrganizationUser } from "@/lib/organizations";
+import { isOrgAccount } from "@/lib/orgGuard";
 
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
@@ -16,9 +16,10 @@ export async function GET(request: NextRequest) {
       if (!error) {
         let target = next;
         if (!target) {
-          const user = data.user;
-          target =
-            user && isOrganizationUser(user) ? "/org/dashboard" : "/";
+          // نحوّل بعد التسجيل حسب نوع الحساب (يشمل الحسابات القديمة بلا user_type)
+          const isOrg =
+            data.user && (await isOrgAccount(supabase, data.user));
+          target = isOrg ? "/org/dashboard" : "/";
         }
         return NextResponse.redirect(`${origin}${target}`);
       }

@@ -135,7 +135,7 @@ export default function CoachClient() {
             key={s}
             onClick={() => send(s)}
             disabled={sending}
-            className="rounded-full border border-gold-300/50 bg-transparent px-4 py-2 text-xs font-bold text-gold-400 transition-all duration-200 hover:bg-gold-400/10 hover:text-gold-300 disabled:opacity-50"
+            className="rounded-full border border-gold-400/50 bg-transparent px-4 py-2 text-xs font-bold text-gold-700 transition-all duration-200 hover:bg-gold-400/10 hover:text-gold-800 dark:border-gold-300/50 dark:text-gold-400 dark:hover:text-gold-300 disabled:opacity-50"
           >
             {s}
           </button>

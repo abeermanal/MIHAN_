@@ -12,10 +12,13 @@
   --accent: #C9A84C;
   --accent-hover: #D4B36A;
   --accent-subtle: rgba(201, 168, 76, 0.12);
+  --heading: #FFFFFF;
   --text: #FFFFFF;
   --text-secondary: #A8C5C5;
   --muted: #6E8E8E;
   --muted-strong: #8AABAB;
+  --link: #C9A84C;
+  --brand-mark: #C9A84C;
   --bg: #0A1F1F;
   --bg-subtle: #0D2B2B;
   --shadow-card: 0 4px 24px -4px rgba(0, 0, 0, 0.3);
@@ -39,10 +42,13 @@
   --accent: #C9A84C;
   --accent-hover: #B8963E;
   --accent-subtle: rgba(201, 168, 76, 0.08);
-  --text: #1A2E2E;
-  --text-secondary: #3D5A5A;
-  --muted: #6E8E8E;
+  --heading: #123333;
+  --text: #2D3A3A;
+  --text-secondary: #5A6E6E;
+  --muted: #6B7F7F;
   --muted-strong: #4A6A6A;
+  --link: #0F5E5E;
+  --brand-mark: #8A6D2B;
   --bg: #F5F7F7;
   --bg-subtle: #EDF1F1;
   --shadow-card: 0 4px 24px -4px rgba(10, 31, 31, 0.08);
@@ -143,7 +149,7 @@ a, button, input, select, textarea {
 
   .section-title {
     @apply text-2xl font-extrabold md:text-3xl;
-    color: var(--text);
+    color: var(--heading);
   }
 
   .glass {
@@ -156,4 +162,82 @@ a, button, input, select, textarea {
   .gradient-bg {
     background: var(--bg);
   }
+}
+
+/* ── Light Mode Overrides ── */
+
+/* Headings in light mode: rich dark teal */
+:root.light h1,
+:root.light h2,
+:root.light h3,
+:root.light h4,
+:root.light h5,
+:root.light h6,
+:root.light .section-title {
+  color: var(--heading);
+}
+
+/* Body text in light mode: dark teal gray */
+:root.light p,
+:root.light li,
+:root.light span,
+:root.light td,
+:root.light th,
+:root.light label,
+:root.light legend {
+  color: var(--text);
+}
+
+/* Muted / secondary text in light mode */
+:root.light .text-muted,
+:root.light [style*="color: var(--muted)"] {
+  color: var(--muted) !important;
+}
+
+/* Links in light mode: teal-700 for clear contrast */
+:root.light a:not([class*="btn-"]):not([class*="nav"]) {
+  color: var(--link);
+}
+:root.light a:not([class*="btn-"]):hover {
+  color: var(--accent-hover);
+}
+
+/* Buttons: white text on dark/gold backgrounds, readable text on light */
+:root.light .btn-primary {
+  color: #FFFFFF;
+}
+:root.light .btn-outline {
+  border-color: var(--link);
+  color: var(--link);
+}
+:root.light .btn-outline:hover {
+  border-color: var(--link);
+  background: rgba(15, 94, 94, 0.08);
+}
+:root.light .btn-soft {
+  color: var(--link);
+  background: rgba(15, 94, 94, 0.08);
+}
+:root.light .btn-accent {
+  color: var(--heading);
+}
+
+/* Cards in light mode */
+:root.light .card {
+  background: var(--surface-raised);
+  border-color: var(--border);
+}
+
+/* Inputs in light mode */
+:root.light .input {
+  color: var(--text);
+}
+:root.light .input::placeholder {
+  color: var(--muted);
+}
+
+/* Selection in light mode */
+:root.light ::selection {
+  background-color: rgba(201, 168, 76, 0.2);
+  color: var(--heading);
 }

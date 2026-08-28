@@ -214,14 +214,14 @@ export default function HomePage() {
               style={{
                 border: "1px solid var(--border)",
                 backgroundColor: "var(--accent-subtle)",
-                color: "var(--accent)",
+                color: "var(--link)",
               }}
             >
               منصة عربية للتمكين المهني
             </span>
             <h1
               className="text-2xl font-extrabold leading-tight sm:text-3xl md:text-5xl"
-              style={{ color: "var(--text)" }}
+              style={{ color: "var(--heading)" }}
             >
               اكتشفي مهاراتك...
               <br />
@@ -406,13 +406,13 @@ export default function HomePage() {
             </span>
             <h2
               className="text-2xl font-extrabold md:text-3xl"
-              style={{ color: "var(--text)" }}
+              style={{ color: "#FFFFFF" }}
             >
               أربع خطوات نحو مستقبلك
             </h2>
             <p
               className="mx-auto mt-3 max-w-lg text-sm sm:text-base"
-              style={{ color: "var(--text-secondary)" }}
+              style={{ color: "rgba(255,255,255,0.75)" }}
             >
               عملية بسيطة ومحسّنة تأخذك من اكتشاف المهارات إلى فرصة العمل
             </p>
@@ -454,13 +454,13 @@ export default function HomePage() {
                 </div>
                 <h3
                   className="mb-2 text-base font-extrabold"
-                  style={{ color: "var(--text)" }}
+                  style={{ color: "#FFFFFF" }}
                 >
                   {step.title}
                 </h3>
                 <p
                   className="text-sm leading-relaxed"
-                  style={{ color: "var(--text-secondary)" }}
+                  style={{ color: "rgba(255,255,255,0.8)" }}
                 >
                   {step.desc}
                 </p>
@@ -478,12 +478,13 @@ export default function HomePage() {
           <div className="space-y-5 sm:space-y-6">
             <span
               className="inline-block rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-bold text-white backdrop-blur-sm sm:text-xs"
+              style={{ color: "#FFFFFF" }}
             >
               مدعومة بالذكاء الاصطناعي
             </span>
             <h2
               className="text-xl font-extrabold leading-snug sm:text-2xl md:text-4xl"
-              style={{ color: "var(--text)" }}
+              style={{ color: "#FFFFFF" }}
             >
               الذكاء الاصطناعي يرى
               <br />
@@ -493,7 +494,7 @@ export default function HomePage() {
             </h2>
             <p
               className="max-w-md text-sm leading-relaxed sm:text-base"
-              style={{ color: "var(--text-secondary)" }}
+              style={{ color: "rgba(255,255,255,0.8)" }}
             >
               نستخدم نماذج ذكية تحلل مهاراتك وخبراتك لتكتشف فرصاً لا تظهر في
               البحث التقليدي — فرص مصممة لكِ تحديداً.
@@ -508,11 +509,11 @@ export default function HomePage() {
 
           <div className="relative flex flex-wrap items-center justify-center gap-2 sm:gap-3">
             {aiTags.map((tag, i) => (
-              <span
-                key={tag}
-                className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-bold text-white backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:bg-white/10 sm:px-4 sm:py-2 sm:text-sm"
-                style={{ animationDelay: `${i * 80}ms` }}
-              >
+                <span
+                  key={tag}
+                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-bold text-white backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:bg-white/10 sm:px-4 sm:py-2 sm:text-sm"
+                  style={{ color: "#FFFFFF", animationDelay: `${i * 80}ms` }}
+                >
                 {tag}
               </span>
             ))}

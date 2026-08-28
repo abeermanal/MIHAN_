@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { requireUser } from "@/lib/supabaseServer";
-import { isOrganizationUser } from "@/lib/organizations";
 import AddSkillForm from "@/components/AddSkillForm";
 import SetupNotice from "@/components/SetupNotice";
+import { requireSeekerForPage } from "@/lib/orgGuard";
 
 export const dynamic = "force-dynamic";
 
@@ -23,10 +23,10 @@ interface PassportSkill {
 }
 
 const categoryMeta: Record<string, { label: string; className: string }> = {
-  technical: { label: "تقنية", className: "bg-teal-500/15 text-teal-300" },
-  soft: { label: "شخصية", className: "bg-gold-500/15 text-gold-400" },
+  technical: { label: "تقنية", className: "bg-teal-500/15 text-teal-700 dark:text-teal-300" },
+  soft: { label: "شخصية", className: "bg-gold-500/15 text-gold-700 dark:text-gold-400" },
   analytical: { label: "تحليل", className: "bg-muted/15 text-muted-strong" },
-  design: { label: "تصميم", className: "bg-teal-500/15 text-teal-300" },
+  design: { label: "تصميم", className: "bg-teal-500/15 text-teal-700 dark:text-teal-300" },
   marketing: { label: "تسويق", className: "bg-success-100 text-success-700" },
   general: { label: "عامة", className: "bg-muted/15 text-muted-strong" },
 };
@@ -49,7 +49,7 @@ function Stars({ level }: { level: number }) {
   return (
     <span dir="ltr" className="text-base tracking-wide">
       {[1, 2, 3, 4, 5].map((i) => (
-        <span key={i} className={i <= level ? "text-gold-400" : "text-muted/40"}>
+        <span key={i} className={i <= level ? "text-gold-700 dark:text-gold-400" : "text-muted/40"}>
           ★
         </span>
       ))}
@@ -64,7 +64,9 @@ export default async function SkillPassportPage() {
     return <SetupNotice />;
   }
   const { supabase, userId, user } = auth;
-  if (isOrganizationUser(user)) redirect("/org/dashboard");
+
+  // حماية الصفحة من حسابات الجهات (بما فيها الحسابات القديمة بلا user_type)
+  await requireSeekerForPage();
 
   const [{ data: catalog, error: catalogError }, { data: userSkills, error: userError }] =
     await Promise.all([
@@ -158,7 +160,7 @@ export default async function SkillPassportPage() {
 
       {rated.length === 0 ? (
         <div className="card p-8 text-center">
-          <span className="inline-flex h-16 w-16 mx-auto items-center justify-center rounded-2xl bg-gold-500/10 text-gold-400">
+          <span className="inline-flex h-16 w-16 mx-auto items-center justify-center rounded-2xl bg-gold-500/10 text-gold-700 dark:text-gold-400">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M7 20h10" />
               <path d="M10 20c5.5-2.5 7-6 7-9a1 1 0 00-1.25-.97c-1.57.33-3.25.97-4.75.97s-3.18-.64-4.75-.97A1 1 0 007 11c0 3 1.45 6.5 7 9" />
@@ -208,7 +210,7 @@ export default async function SkillPassportPage() {
         <section>
           <h2 className="mb-4 flex items-center gap-2 text-sm font-bold" style={{ color: "var(--text)" }}>
             مهارات في الكتالوج لم تقيّميها بعد
-            <span className="inline-flex h-5 min-w-[20px] items-center justify-center rounded-full bg-gold-500/15 px-1.5 text-[11px] font-extrabold text-gold-400">
+            <span className="inline-flex h-5 min-w-[20px] items-center justify-center rounded-full bg-gold-500/15 px-1.5 text-[11px] font-extrabold text-gold-700 dark:text-gold-400">
               {unrated.length}
             </span>
           </h2>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Logo from "@/components/Logo";
 
 export const metadata: Metadata = {
   title: "من نحن",
@@ -88,7 +89,10 @@ export default function AboutPage() {
         <div className="pointer-events-none absolute -bottom-16 -right-10 h-52 w-52 rounded-full bg-teal-400/15 blur-3xl" />
         <div className="pointer-events-none absolute right-1/4 top-6 h-36 w-36 rounded-full bg-gold-400/10 blur-2xl" />
 
-        <h1 className="relative text-4xl font-extrabold leading-snug md:text-5xl">
+        <div className="relative flex justify-center">
+          <Logo size={56} variant="inverse" />
+        </div>
+        <h1 className="relative mt-5 text-4xl font-extrabold leading-snug text-white md:text-5xl">
           من نحن
         </h1>
         <p className="relative mx-auto mt-5 max-w-2xl text-lg text-white/80">
@@ -102,12 +106,12 @@ export default function AboutPage() {
 
       <section className="grid gap-6 md:grid-cols-2">
         <article className="card border-t-4 border-t-gold-500">
-          <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-gold-500/15 text-gold-400">
+          <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-gold-500/15 text-gold-700 dark:text-gold-400">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
             </svg>
           </div>
-          <h2 className="text-xl font-extrabold md:text-2xl" style={{ color: "var(--text)" }}>
+          <h2 className="text-xl font-extrabold md:text-2xl" style={{ color: "var(--heading)" }}>
             رسالتنا
           </h2>
           <p className="mt-3 leading-relaxed" style={{ color: "var(--text-secondary)" }}>
@@ -118,12 +122,12 @@ export default function AboutPage() {
         </article>
 
         <article className="card border-t-4 border-t-teal-400">
-          <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-teal-500/15 text-teal-300">
+          <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-teal-500/15 text-teal-700 dark:text-teal-300">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
             </svg>
           </div>
-          <h2 className="text-xl font-extrabold md:text-2xl" style={{ color: "var(--text)" }}>
+          <h2 className="text-xl font-extrabold md:text-2xl" style={{ color: "var(--heading)" }}>
             رؤيتنا
           </h2>
           <p className="mt-3 leading-relaxed" style={{ color: "var(--text-secondary)" }}>
@@ -169,10 +173,10 @@ export default function AboutPage() {
             </div>
 
             <div className="space-y-3">
-              <h3 className="text-2xl font-extrabold" style={{ color: "var(--text)" }}>
+              <h3 className="text-2xl font-extrabold" style={{ color: "var(--heading)" }}>
                 عبير محمد
               </h3>
-              <span className="inline-block rounded-full bg-gold-500/15 px-4 py-1 text-sm font-bold text-gold-400">
+              <span className="inline-block rounded-full bg-gold-500/15 px-4 py-1 text-sm font-bold text-gold-700 dark:text-gold-400">
                 مبرمجة ومطوِّرة أنظمة ذكية
               </span>
               <p className="leading-relaxed" style={{ color: "var(--text-secondary)" }}>

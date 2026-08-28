@@ -180,7 +180,7 @@ export default function DashboardClient() {
 
       {rows.length === 0 ? (
         <div className="card text-center">
-          <span className="inline-flex h-20 w-20 mx-auto items-center justify-center rounded-2xl bg-gold-500/10 text-gold-400">
+          <span className="inline-flex h-20 w-20 mx-auto items-center justify-center rounded-2xl bg-gold-500/10 text-gold-700 dark:text-gold-400">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <rect x="3" y="3" width="18" height="18" rx="2" />
               <path d="M12 8v8" />

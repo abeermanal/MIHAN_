@@ -156,7 +156,7 @@ export default function ReturnPathClient() {
                     onClick={() => togglePreset(p.label)}
                     className={`rounded-2xl border-2 p-4 text-right font-bold transition-all duration-200 ${
                       active
-                        ? "border-gold-400 bg-gold-400/10 text-gold-300 shadow-soft"
+                        ? "border-gold-400 bg-gold-400/10 text-gold-700 dark:text-gold-300 shadow-soft"
                         : "border-[var(--border)] bg-[var(--surface)] hover:border-gold-500/50 text-[var(--text-secondary)]"
                     }`}
                     aria-pressed={active}
@@ -223,7 +223,7 @@ export default function ReturnPathClient() {
       {loading && !error && (
         <div className="flex items-center justify-center py-12">
           <div className="h-8 w-8 animate-spin rounded-full border-4 border-[var(--border)] border-t-gold-400" />
-          <span className="mr-3 text-gold-400">جارٍ التحميل…</span>
+          <span className="mr-3 text-gold-700 dark:text-gold-400">جارٍ التحميل…</span>
         </div>
       )}
     </div>
