@@ -40,6 +40,6 @@ export const config = {
      * - favicon.ico وأصول الصور
      * - ملفات .env / manifest إن وجدت
      */
-    "/((?!_next/static|_next/image|favicon.ico|manifest\\.json|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|manifest\\.json|auth|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
   ],
 };
