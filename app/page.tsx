@@ -128,25 +128,31 @@ function ProgressRing({
   percent: number;
   label: string;
 }) {
-  const size = 96;
   const stroke = 7;
-  const r = (size - stroke) / 2;
+  const r = 45;
   const circ = 2 * Math.PI * r;
   const offset = circ - (percent / 100) * circ;
+  const ringSize = "clamp(56px, 16vw, 96px)";
   return (
-    <div className="flex flex-col items-center gap-1.5">
-      <svg width={size} height={size} className="h-auto w-full max-w-[96px] shrink-0">
+    <div className="flex min-w-0 flex-col items-center gap-1.5">
+      <svg
+        viewBox="0 0 100 100"
+        role="img"
+        aria-label={`${percent}% ${label}`}
+        className="shrink-0"
+        style={{ width: ringSize, height: ringSize }}
+      >
         <circle
-          cx={size / 2}
-          cy={size / 2}
+          cx="50"
+          cy="50"
           r={r}
           fill="none"
           stroke="var(--border)"
           strokeWidth={stroke}
         />
         <circle
-          cx={size / 2}
-          cy={size / 2}
+          cx="50"
+          cy="50"
           r={r}
           fill="none"
           stroke="url(#ring-grad-gold)"
@@ -154,7 +160,7 @@ function ProgressRing({
           strokeLinecap="round"
           strokeDasharray={circ}
           strokeDashoffset={offset}
-          transform={`rotate(-90 ${size / 2} ${size / 2})`}
+          transform="rotate(-90 50 50)"
           className="transition-all duration-1000"
         />
         <defs>
@@ -164,11 +170,11 @@ function ProgressRing({
           </linearGradient>
         </defs>
         <text
-          x={size / 2}
-          y={size / 2}
+          x="50"
+          y="50"
           textAnchor="middle"
           dominantBaseline="central"
-          fontSize="15"
+          fontSize="16"
           style={{
             fill: "var(--text)",
             fontWeight: 800,
@@ -178,7 +184,7 @@ function ProgressRing({
         </text>
       </svg>
       <span
-        className="text-[11px] font-bold"
+        className="text-center text-[10px] font-bold sm:text-[11px]"
         style={{ color: "var(--muted)" }}
       >
         {label}
@@ -294,21 +300,21 @@ export default function HomePage() {
                 ].map((s) => (
                   <div
                     key={s.name}
-                    className="rounded-2xl p-2.5 sm:p-3"
+                    className="rounded-2xl p-2 sm:p-3"
                     style={{
                       border: "1px solid var(--border)",
                       backgroundColor: "var(--surface)",
                     }}
                   >
-                    <div className="mb-2 flex items-center justify-between">
+                    <div className="mb-2 flex items-center justify-between gap-1">
                       <span
-                        className="text-[10px] font-bold sm:text-xs"
+                        className="min-w-0 truncate text-[11px] font-bold sm:text-xs"
                         style={{ color: "var(--text)" }}
                       >
                         {s.name}
                       </span>
                       <span
-                        className="text-[9px] font-bold sm:text-[10px]"
+                        className="shrink-0 text-[10px] font-bold sm:text-[10px]"
                         style={{ color: "var(--muted)" }}
                       >
                         {s.level}%
