@@ -46,7 +46,7 @@ export default function OpportunitiesClient() {
 
   return (
     <div className="space-y-8">
-      <header className="rounded-3xl bg-teal-gradient px-8 py-10 text-white">
+      <header className="rounded-3xl bg-teal-gradient p-6 text-white sm:px-8 sm:py-10">
         <div className="flex flex-wrap items-center justify-between gap-6">
           <div>
             <h1 className="section-title !text-white">الفرص الوظيفية</h1>

@@ -118,7 +118,7 @@ export default function DashboardClient() {
 
   return (
     <div className="space-y-6">
-      <header className="rounded-3xl bg-teal-gradient px-8 py-10 text-white">
+      <header className="rounded-3xl bg-teal-gradient p-6 text-white sm:px-8 sm:py-10">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <h1 className="section-title !text-white">لوحة المنظمة</h1>
@@ -198,77 +198,138 @@ export default function DashboardClient() {
           </Link>
         </div>
       ) : (
-        <div className="card overflow-x-auto rounded-2xl border">
-          <table className="w-full min-w-[760px] text-right">
-            <thead>
-              <tr className="border-b text-sm" style={{ borderColor: "var(--border)", background: "var(--surface-overlay)", color: "var(--text-secondary)" }}>
-                <th className="px-5 py-3.5 font-bold">الفرصة</th>
-                <th className="px-5 py-3.5 font-bold">تاريخ النشر</th>
-                <th className="px-5 py-3.5 font-bold">المهارات المطلوبة</th>
-                <th className="px-5 py-3.5 font-bold">الحالة</th>
-                <th className="px-5 py-3.5 font-bold">إجراءات</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((o) => {
-                const status = o.status === "closed" ? "closed" : "active";
-                const busy = busyId === o.id;
-                return (
-                  <tr
-                    key={o.id}
-                    className="border-b transition" style={{ borderColor: "var(--border)" }}
-                  >
-                    <td className="px-5 py-3.5">
+        <div className="card rounded-2xl border">
+          <div className="hidden overflow-x-auto md:block">
+            <table className="w-full text-right">
+              <thead>
+                <tr className="border-b text-sm" style={{ borderColor: "var(--border)", background: "var(--surface-overlay)", color: "var(--text-secondary)" }}>
+                  <th className="px-5 py-3.5 font-bold">الفرصة</th>
+                  <th className="px-5 py-3.5 font-bold">تاريخ النشر</th>
+                  <th className="px-5 py-3.5 font-bold">المهارات المطلوبة</th>
+                  <th className="px-5 py-3.5 font-bold">الحالة</th>
+                  <th className="px-5 py-3.5 font-bold">إجراءات</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((o) => {
+                  const status = o.status === "closed" ? "closed" : "active";
+                  const busy = busyId === o.id;
+                  return (
+                    <tr
+                      key={o.id}
+                      className="border-b" style={{ borderColor: "var(--border)" }}
+                    >
+                      <td className="px-5 py-3.5">
+                        <p className="font-bold" style={{ color: "var(--text)" }}>{o.title_ar}</p>
+                        <p className="text-xs" style={{ color: "var(--muted)" }}>
+                          {o.location || "بدون موقع محدد"}
+                        </p>
+                      </td>
+                      <td className="px-5 py-3.5" style={{ color: "var(--text-secondary)" }}>{formatDate(o.created_at)}</td>
+                      <td className="px-5 py-3.5" style={{ color: "var(--text-secondary)" }}>
+                        {(o.required_skills ?? []).length}
+                      </td>
+                      <td className="px-5 py-3.5">
+                        <button
+                          onClick={() => toggleStatus(o)}
+                          disabled={busy}
+                          title="اضغطي لتبديل الحالة"
+                          className={`rounded-full px-3 py-1 text-xs font-extrabold transition hover:opacity-80 disabled:opacity-50 ${statusLabels[status].className}`}
+                        >
+                          {statusLabels[status].text}
+                        </button>
+                      </td>
+                      <td className="px-5 py-3.5">
+                        <div className="flex items-center gap-3 text-sm font-bold">
+                          <Link
+                            href={`/opportunities/${o.id}`}
+                            className="underline-offset-4 hover:underline"
+                            style={{ color: "var(--accent)" }}
+                          >
+                            عرض
+                          </Link>
+                          <Link
+                            href={`/org/opportunities/${o.id}/edit`}
+                            className="underline-offset-4 hover:underline"
+                            style={{ color: "var(--accent)" }}
+                          >
+                            تعديل
+                          </Link>
+                          <button
+                            onClick={() => handleDelete(o)}
+                            disabled={busy}
+                            className="underline-offset-4 hover:underline disabled:opacity-50"
+                            style={{ color: "#E57373" }}
+                          >
+                            حذف
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="space-y-3 md:hidden">
+            {rows.map((o) => {
+              const status = o.status === "closed" ? "closed" : "active";
+              const busy = busyId === o.id;
+              return (
+                <div
+                  key={o.id}
+                  className="rounded-2xl border p-4"
+                  style={{ borderColor: "var(--border)", background: "var(--surface)" }}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
                       <p className="font-bold" style={{ color: "var(--text)" }}>{o.title_ar}</p>
-                      <p className="text-xs" style={{ color: "var(--muted)" }}>
+                      <p className="mt-1 text-xs" style={{ color: "var(--muted)" }}>
                         {o.location || "بدون موقع محدد"}
                       </p>
-                    </td>
-                    <td className="px-5 py-3.5" style={{ color: "var(--text-secondary)" }}>{formatDate(o.created_at)}</td>
-                    <td className="px-5 py-3.5" style={{ color: "var(--text-secondary)" }}>
-                      {(o.required_skills ?? []).length}
-                    </td>
-                    <td className="px-5 py-3.5">
-                      <button
-                        onClick={() => toggleStatus(o)}
-                        disabled={busy}
-                        title="اضغطي لتبديل الحالة"
-                        className={`rounded-full px-3 py-1 text-xs font-extrabold transition hover:opacity-80 disabled:opacity-50 ${statusLabels[status].className}`}
-                      >
-                        {statusLabels[status].text}
-                      </button>
-                    </td>
-                    <td className="px-5 py-3.5">
-                      <div className="flex items-center gap-3 text-sm font-bold">
-                        <Link
-                          href={`/opportunities/${o.id}`}
-                          className="underline-offset-4 hover:underline"
-                          style={{ color: "var(--accent)" }}
-                        >
-                          عرض
-                        </Link>
-                        <Link
-                          href={`/org/opportunities/${o.id}/edit`}
-                          className="underline-offset-4 hover:underline"
-                          style={{ color: "var(--accent)" }}
-                        >
-                          تعديل
-                        </Link>
-                        <button
-                          onClick={() => handleDelete(o)}
-                          disabled={busy}
-                          className="underline-offset-4 hover:underline disabled:opacity-50"
-                          style={{ color: "#E57373" }}
-                        >
-                          حذف
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                    </div>
+                    <button
+                      onClick={() => toggleStatus(o)}
+                      disabled={busy}
+                      title="اضغطي لتبديل الحالة"
+                      className={`shrink-0 rounded-full px-3 py-1 text-xs font-extrabold transition hover:opacity-80 disabled:opacity-50 ${statusLabels[status].className}`}
+                    >
+                      {statusLabels[status].text}
+                    </button>
+                  </div>
+                  <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs" style={{ color: "var(--text-secondary)" }}>
+                    <span>{formatDate(o.created_at)}</span>
+                    <span>{(o.required_skills ?? []).length} مهارة مطلوبة</span>
+                  </div>
+                  <div className="mt-3 flex items-center gap-4 text-sm font-bold">
+                    <Link
+                      href={`/opportunities/${o.id}`}
+                      className="underline-offset-4 hover:underline"
+                      style={{ color: "var(--accent)" }}
+                    >
+                      عرض
+                    </Link>
+                    <Link
+                      href={`/org/opportunities/${o.id}/edit`}
+                      className="underline-offset-4 hover:underline"
+                      style={{ color: "var(--accent)" }}
+                    >
+                      تعديل
+                    </Link>
+                    <button
+                      onClick={() => handleDelete(o)}
+                      disabled={busy}
+                      className="underline-offset-4 hover:underline disabled:opacity-50"
+                      style={{ color: "#E57373" }}
+                    >
+                      حذف
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
 

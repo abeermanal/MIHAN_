@@ -237,12 +237,12 @@ export default function OpportunityDetailClient({ id }: { id: string }) {
                         href={r.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-accent underline underline-offset-4 transition-colors hover:text-accent-hover"
+                        className="flex min-w-0 items-center gap-2 text-accent underline underline-offset-4 transition-colors hover:text-accent-hover"
                       >
-                        <span className="text-xs">{typeLabels[r.type]}</span>
+                        <span className="shrink-0 text-xs">{typeLabels[r.type]}</span>
                         <span>—</span>
-                        <span>{r.title}</span>
-                        <span className="text-accent">↗</span>
+                        <span className="min-w-0">{r.title}</span>
+                        <span className="shrink-0 text-accent">↗</span>
                       </a>
                     </li>
                   ))}

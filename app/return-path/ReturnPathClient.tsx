@@ -123,7 +123,7 @@ export default function ReturnPathClient() {
 
   return (
     <div className="space-y-10">
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-l from-teal-600 via-teal-500 to-teal-400 px-8 py-14 text-center shadow-card md:px-16">
+      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-l from-teal-600 via-teal-500 to-teal-400 px-6 py-12 text-center shadow-card sm:px-8 sm:py-14 md:px-16">
         <div className="pointer-events-none absolute -left-12 -top-12 h-48 w-48 rounded-full bg-gold-300/20 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-16 -right-10 h-52 w-52 rounded-full bg-teal-700/30 blur-3xl" />
         <div className="pointer-events-none absolute right-1/3 top-4 h-32 w-32 rounded-full bg-gold-200/15 blur-2xl" />

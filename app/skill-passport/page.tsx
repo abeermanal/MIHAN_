@@ -122,7 +122,7 @@ export default async function SkillPassportPage() {
         <AddSkillForm />
       </header>
 
-      <section className="rounded-3xl bg-teal-gradient p-8 text-white">
+      <section className="rounded-3xl bg-teal-gradient p-6 text-white sm:p-8">
         <div className="flex flex-wrap items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gold-500/20 text-gold-400 backdrop-blur-sm">
@@ -137,18 +137,18 @@ export default async function SkillPassportPage() {
               <h2 className="mt-1 text-lg font-extrabold">{displayName}</h2>
             </div>
           </div>
-          <dl className="flex gap-4">
-            <div className="rounded-2xl bg-white/10 px-5 py-3 text-center backdrop-blur-sm">
+          <dl className="flex w-full flex-wrap gap-3 sm:w-auto sm:gap-4">
+            <div className="min-w-[110px] flex-1 rounded-2xl bg-white/10 px-4 py-3 text-center backdrop-blur-sm sm:min-w-0 sm:flex-none sm:px-5">
               <dt className="text-xs text-white/70">إجمالي المهارات</dt>
               <dd className="mt-0.5 text-2xl font-extrabold text-gold-300">
                 {passportSkills.length}
               </dd>
             </div>
-            <div className="rounded-2xl bg-white/10 px-5 py-3 text-center backdrop-blur-sm">
+            <div className="min-w-[110px] flex-1 rounded-2xl bg-white/10 px-4 py-3 text-center backdrop-blur-sm sm:min-w-0 sm:flex-none sm:px-5">
               <dt className="text-xs text-white/70">مهارات مقيّمة</dt>
               <dd className="mt-0.5 text-2xl font-extrabold text-gold-300">{rated.length}</dd>
             </div>
-            <div className="rounded-2xl bg-white/10 px-5 py-3 text-center backdrop-blur-sm">
+            <div className="min-w-[110px] flex-1 rounded-2xl bg-white/10 px-4 py-3 text-center backdrop-blur-sm sm:min-w-0 sm:flex-none sm:px-5">
               <dt className="text-xs text-white/70">المتوسط</dt>
               <dd className="mt-0.5 text-2xl font-extrabold text-gold-300">
                 {avgLevel !== null ? `${avgLevel}/5` : "—"}

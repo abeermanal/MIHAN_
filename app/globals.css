@@ -59,12 +59,36 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
   @apply antialiased;
   background-color: var(--bg);
   color: var(--text);
+}
+
+/* Images never exceed their container */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Long unbreakable content (links, URLs, code) wraps instead of overflowing */
+a,
+p,
+span,
+li,
+td,
+th {
+  overflow-wrap: break-word;
+}
+
+textarea,
+input,
+select {
+  max-width: 100%;
 }
 
 /* Smooth transitions */

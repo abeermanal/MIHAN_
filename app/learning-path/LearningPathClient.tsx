@@ -161,8 +161,8 @@ export default function LearningPathClient() {
 
       {items.length > 0 && (
         <section className="card">
-          <div className="flex items-center gap-6">
-            <div className="relative h-28 w-28 flex-shrink-0">
+          <div className="flex flex-col items-center gap-6 sm:flex-row">
+            <div className="relative h-24 w-24 flex-shrink-0 sm:h-28 sm:w-28">
               <svg className="h-full w-full -rotate-90" viewBox="0 0 96 96">
                 <circle
                   cx="48"
@@ -195,12 +195,12 @@ export default function LearningPathClient() {
                 <span className="text-2xl font-extrabold text-[var(--text)]">{pct}%</span>
               </div>
             </div>
-            <div>
+            <div className="min-w-0 flex-1 text-center sm:text-right">
               <p className="text-lg font-extrabold text-[var(--text)]">تقدمك في الخطة</p>
               <p className="text-sm text-gold-700 dark:text-gold-400">
                 {completed} مكتمل من أصل {items.length} عنصر
               </p>
-              <div className="mt-2 h-2 w-48 overflow-hidden rounded-full bg-[var(--muted)]">
+              <div className="mx-auto mt-2 h-2 w-full max-w-[220px] overflow-hidden rounded-full bg-[var(--muted)] sm:mx-0 sm:w-48">
                 <div
                   className="h-full rounded-full bg-gradient-to-l from-gold-400 to-teal-400 transition-all duration-500"
                   style={{ width: `${pct}%` }}

@@ -78,7 +78,7 @@ export default function AssessmentClient() {
   const pct = skills.length ? Math.round((answered / skills.length) * 100) : 0;
 
   return (
-    <div className="space-y-6 pb-28">
+    <div className="space-y-6 pb-40 sm:pb-28">
       <header className="rounded-3xl bg-teal-gradient px-8 py-10 text-white">
         <h1 className="text-3xl font-extrabold">تقييم المهارات</h1>
         <p className="mt-2 text-sm text-white/80">
@@ -164,14 +164,14 @@ export default function AssessmentClient() {
         })}
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 z-50">
+      <div className="fixed inset-x-0 bottom-0 z-50">
         <div
-          className="glass mx-auto flex max-w-4xl items-center justify-between px-6 py-4"
+          className="glass mx-auto flex max-w-4xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-4"
           style={{ borderTop: "1px solid var(--border)" }}
         >
           <div className="flex items-center gap-3">
             <div
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-gradient text-xs font-extrabold"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold-gradient text-xs font-extrabold"
               style={{ color: "#0A1F1F" }}
             >
               {answered}/{skills.length}
@@ -179,7 +179,7 @@ export default function AssessmentClient() {
             <span className="text-sm font-bold" style={{ color: "var(--text)" }}>تم الإجابة على {answered} من {skills.length}</span>
           </div>
           <button
-            className="btn-primary"
+            className="btn-primary w-full sm:w-auto"
             onClick={save}
             disabled={saving || answered === 0}
           >

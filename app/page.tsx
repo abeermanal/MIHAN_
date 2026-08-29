@@ -135,7 +135,7 @@ function ProgressRing({
   const offset = circ - (percent / 100) * circ;
   return (
     <div className="flex flex-col items-center gap-1.5">
-      <svg width={size} height={size} className="shrink-0">
+      <svg width={size} height={size} className="h-auto w-full max-w-[96px] shrink-0">
         <circle
           cx={size / 2}
           cy={size / 2}
@@ -332,7 +332,7 @@ export default function HomePage() {
               </div>
 
               <div
-                className="flex items-center justify-around rounded-2xl p-3 sm:p-4"
+                className="grid grid-cols-3 items-center gap-2 rounded-2xl p-3 sm:gap-4 sm:p-4"
                 style={{
                   border: "1px solid var(--border)",
                   background:

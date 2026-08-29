@@ -96,7 +96,7 @@ export default function CoachClient() {
               </div>
             )}
             <div
-              className={`max-w-[80%] whitespace-pre-line rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+              className={`max-w-[85%] whitespace-pre-line break-words rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                 m.role === "user"
                   ? "rounded-br-sm bg-teal-100/40 text-teal-100"
                   : "rounded-bl-sm bg-gradient-to-l from-gold-400 to-gold-500 text-teal-950"
