@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-label="MIHAN">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0D2B2B"/>
+      <stop offset="100%" stop-color="#1A3D3D"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#D4B36A"/>
+      <stop offset="50%" stop-color="#C9A84C"/>
+      <stop offset="100%" stop-color="#B8963E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <circle cx="1010" cy="120" r="200" fill="#C9A84C" opacity="0.08"/>
+  <circle cx="180" cy="600" r="260" fill="#C9A84C" opacity="0.06"/>
+  <g fill="none" stroke="#2A5A5A" stroke-width="2">
+    <path d="M0 500 Q 300 430 600 500 T 1200 480"/>
+    <path d="M0 545 Q 300 475 600 545 T 1200 525"/>
+  </g>
+  <text x="600" y="300" text-anchor="middle" font-family="Tajawal, Segoe UI, sans-serif" font-size="120" font-weight="800" fill="url(#gold)" direction="ltr">MIHAN</text>
+  <text x="600" y="380" text-anchor="middle" font-family="Tajawal, Segoe UI, sans-serif" font-size="44" font-weight="500" fill="#A8C5C5">مِهَن &#183; منصة التوجيه المهني للنساء</text>
+</svg>

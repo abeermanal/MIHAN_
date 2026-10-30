@@ -16,6 +16,7 @@ const seekerNavLinks = [
   { href: "/learning-path", label: "خطة التعلم" },
   { href: "/coach", label: "المدربة الذكية" },
   { href: "/return-path", label: "طريق العودة" },
+  { href: "/blog", label: "المدونة" },
   { href: "/about", label: "عن مِهَن" },
 ];
 

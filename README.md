@@ -24,6 +24,8 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=...
 SUPABASE_SERVICE_ROLE_KEY=...   # اختياري لكن مستحسن لمسارات API
 OPENAI_API_KEY=...              # اختياري — بدونها تعمل المدربة بالقواعد الجاهزة
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_ADSENSE_CLIENT_ID=...   # اختياري — معرّف ناشر AdSense (ca-pub-...)
+NEXT_PUBLIC_CONTACT_EMAIL=...       # اختياري — بريد التواصل الرسمي
 ```
 
 ### 3) التثبيت والتشغيل
@@ -62,9 +64,38 @@ curl -X POST http://localhost:3000/api/seed
 | `app/learning-path/` | مسار التعلم |
 | `app/coach/` | المدربة الذكية |
 | `app/return-path/` | طريق العودة |
+| `app/blog/` | المدونة (قائمة المقالات) + `[slug]` صفحة المقال |
+| `app/privacy/` `app/terms/` `app/contact/` | الصفحات القانونية والتواصل |
 | `app/api/*` | projects, skills, opportunities, assessment, coach, seed, learning-path |
+| `data/blog-posts.ts` | مقالات المدونة (15 مقالاً) + دوال `getPostBySlug` و`getRelatedPosts` |
+| `components/BlogArticle.tsx` | عارض المقالات (عناوين، فقرات، قوائم، تمييز غامق) بلا مكتبة خارجية |
+| `lib/ads.ts` | معرّفات وحدات AdSense (تُملأ من لوحة AdSense) |
 | `lib/matchScore.ts` | حساب نسبة التوافق وعقوبة 20% للمهارة المطلوبة الناقصة |
 | `lib/resources.ts` | مصادر التعلم المجانية لكل مهارة |
+
+## 📝 المدونة
+
+المقالات في `data/blog-posts.ts` كـ`BlogPost[]`: `slug`, `title`, `excerpt`, `content`
+(نص Markdown مبسّط: `##` و`###` و`-` و`**`), `author`, `date`, `category`, `coverImage`.
+
+لإضافة مقال: أضيفي عنصراً جديداً في `BLOG_POSTS_RAW` داخل نفس الملف، ثم `npm run build`.
+الصفحات تُبنى مسبقاً (SSG) عبر `generateStaticParams`، و`app/sitemap.ts` يضيف روابطها تلقائياً.
+
+## 💰 تفعيل إعلانات AdSense
+
+الإعلانات مفعّلة **بشرطين** معاً حتى لا تظهر وحدات فارغة أو غير مصرّح بها:
+
+1. `NEXT_PUBLIC_ADSENSE_CLIENT_ID=ca-pub-XXXXXXXXXXXXXXXX` في `.env.local` (ونفسه في Vercel).
+2. ملء معرّفات الوحدات في `lib/ads.ts`:
+   - `inArticle` — وحدة داخل المقالات (بعد المقدمة).
+   - `blogTop` — أعلى قائمة المدونة.
+   - `blogBottom` — أسفل قائمة المدونة.
+
+السكربت يُحمَّل عبر `next/script` بـ`afterInteractive` في `app/layout.tsx`.
+الوحدات لها ارتفاع محجوز `min-h` لتفادي اهتزاز التخطيط (Cumulative Layout Shift).
+
+صفحات `privacy` و`terms` و`contact` مضافة كشرط أساسي لاعتماد AdSense، وتشرح
+استخدام ملفات ارتباط Google AdSense وبيانات المستخدم وحقوقه.
 
 ## 🧮 كيف تُحسب نسبة التوافق؟
 - كل متطلب مهارة له وزن: **إلزامية = 2**، **اختيارية = 1**.

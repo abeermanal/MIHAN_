@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Logo from "@/components/Logo";
+import AdSenseScript from "@/components/AdSenseScript";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -47,6 +48,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap"
           rel="stylesheet"
         />
+        <AdSenseScript />
       </head>
       <body className="flex min-h-screen flex-col font-sans">
         <Navbar />
@@ -143,6 +145,38 @@ export default function RootLayout({
                       className="transition hover:text-[var(--link)]"
                     >
                       عن مِهَن
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/blog"
+                      className="transition hover:text-[var(--link)]"
+                    >
+                      المدونة
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/contact"
+                      className="transition hover:text-[var(--link)]"
+                    >
+                      تواصلي معنا
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/privacy"
+                      className="transition hover:text-[var(--link)]"
+                    >
+                      سياسة الخصوصية
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/terms"
+                      className="transition hover:text-[var(--link)]"
+                    >
+                      شروط الاستخدام
                     </a>
                   </li>
                 </ul>
