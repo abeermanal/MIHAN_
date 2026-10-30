@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Logo from "@/components/Logo";
@@ -51,6 +52,12 @@ export default function RootLayout({
         <link
           href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap"
           rel="stylesheet"
+        />
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5963533274767345"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
         />
         <AdSenseScript />
       </head>
