@@ -43,6 +43,10 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl" className="dark">
       <head>
+        <meta
+          name="google-adsense-account"
+          content="ca-pub-5963533274767345"
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap"
