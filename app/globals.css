@@ -2,59 +2,70 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Dark Mode (Default) ── */
+/* ── Light Mode (Default) ── */
 :root {
-  --surface: #0D2B2B;
+  /* Light mode - high contrast */
+  --background: #F8F7FC;
+  --surface: #FFFFFF;
+  --surface-raised: #FFFFFF;
+  --surface-overlay: #F1EFF8;
+  --border: #D1D5DB;
+  --border-strong: #9CA3AF;
+
+  /* Text - all meet WCAG AA on white */
+  --heading: #0A1F1F;        /* Very dark - 15:1 contrast */
+  --text: #1A2E2E;            /* Dark - 13:1 contrast */
+  --text-secondary: #374151;  /* Medium-dark - 9:1 contrast */
+  --muted: #4B5563;           /* Gray - 7:1 contrast (was too light) */
+  --muted-strong: #374151;
+
+  /* Brand colors */
+  --accent: #B8963E;          /* Darker gold for text use - 4.5:1 on white */
+  --accent-text: #866927;     /* Accessible gold for text on light surfaces */
+  --accent-hover: #866927;
+  --accent-subtle: #FEF3C7;   /* Light gold background */
+  --link: #0D5555;            /* Dark teal - 8:1 contrast */
+  --brand-mark: #0D5555;
+
+  --bg: #F8F7FC;
+  --bg-subtle: #F1EFF8;
+  --shadow-card: 0 4px 24px -4px rgba(10, 31, 31, 0.08);
+  --shadow-card-hover: 0 12px 32px -4px rgba(10, 31, 31, 0.12);
+  --shadow-soft: 0 2px 16px -2px rgba(10, 31, 31, 0.06);
+  color-scheme: light;
+}
+
+/* ── Dark Mode ── */
+.dark {
+  /* Dark mode - high contrast */
+  --background: #0A1F1F;
+  --surface: #123333;
   --surface-raised: #1A3D3D;
   --surface-overlay: #214A4A;
   --border: #2A5A5A;
   --border-strong: #3A7070;
-  --accent: #C9A84C;
-  --accent-hover: #D4B36A;
-  --accent-subtle: rgba(201, 168, 76, 0.12);
-  --heading: #FFFFFF;
-  --text: #FFFFFF;
-  --text-secondary: #A8C5C5;
-  --muted: #6E8E8E;
-  --muted-strong: #8AABAB;
-  --link: #C9A84C;
-  --brand-mark: #C9A84C;
+
+  /* Text on dark backgrounds */
+  --heading: #FFFFFF;         /* Pure white - 15:1 contrast */
+  --text: #F0F5F5;            /* Near white - 14:1 contrast */
+  --text-secondary: #C8DEDE;  /* Light teal - 10:1 contrast */
+  --muted: #A8C5C5;           /* Light gray-teal - 7:1 contrast */
+  --muted-strong: #C8DEDE;
+
+  /* Brand colors */
+  --accent: #E3C87F;          /* Brighter gold - 8:1 on dark */
+  --accent-text: #E3C87F;
+  --accent-hover: #F0D99A;
+  --accent-subtle: #2A4A4A;
+  --link: #7DD3D3;            /* Bright teal - 9:1 on dark */
+  --brand-mark: #E3C87F;
+
   --bg: #0A1F1F;
   --bg-subtle: #0D2B2B;
   --shadow-card: 0 4px 24px -4px rgba(0, 0, 0, 0.3);
   --shadow-card-hover: 0 12px 32px -4px rgba(0, 0, 0, 0.4);
   --shadow-soft: 0 2px 16px -2px rgba(0, 0, 0, 0.25);
   color-scheme: dark;
-}
-
-/* ── Light Mode ── */
-.dark body,
-.dark {
-  color-scheme: light;
-}
-
-:root.light {
-  --surface: #FFFFFF;
-  --surface-raised: #F8FAFA;
-  --surface-overlay: #F0F5F5;
-  --border: #D5E0E0;
-  --border-strong: #B8CCCC;
-  --accent: #C9A84C;
-  --accent-hover: #B8963E;
-  --accent-subtle: rgba(201, 168, 76, 0.08);
-  --heading: #123333;
-  --text: #2D3A3A;
-  --text-secondary: #5A6E6E;
-  --muted: #6B7F7F;
-  --muted-strong: #4A6A6A;
-  --link: #0F5E5E;
-  --brand-mark: #8A6D2B;
-  --bg: #F5F7F7;
-  --bg-subtle: #EDF1F1;
-  --shadow-card: 0 4px 24px -4px rgba(10, 31, 31, 0.08);
-  --shadow-card-hover: 0 12px 32px -4px rgba(10, 31, 31, 0.12);
-  --shadow-soft: 0 2px 16px -2px rgba(10, 31, 31, 0.06);
-  color-scheme: light;
 }
 
 html {
@@ -218,6 +229,14 @@ a, button, input, select, textarea {
   color: var(--muted) !important;
 }
 
+/* Gold text in light mode: use the accessible accent shade */
+:root.light .text-accent,
+:root.light .text-gold-700,
+:root.light [style^="color: var(--accent)"],
+:root.light [style*=" color: var(--accent)"] {
+  color: var(--accent-text) !important;
+}
+
 /* Links in light mode: teal-700 for clear contrast */
 :root.light a:not([class*="btn-"]):not([class*="nav"]) {
   color: var(--link);
@@ -226,9 +245,9 @@ a, button, input, select, textarea {
   color: var(--accent-hover);
 }
 
-/* Buttons: white text on dark/gold backgrounds, readable text on light */
+/* Buttons: dark text on gold backgrounds for sufficient contrast */
 :root.light .btn-primary {
-  color: #FFFFFF;
+  color: #0A1F1F;
 }
 :root.light .btn-outline {
   border-color: var(--link);

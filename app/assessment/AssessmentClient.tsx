@@ -118,7 +118,7 @@ export default function AssessmentClient() {
             >
               <div className="mb-3">
                 <span className="text-xs font-bold text-accent">#{idx + 1}</span>
-                <h3 className="text-base font-extrabold" style={{ color: "var(--text)" }}>{s.name_ar}</h3>
+                <h2 className="text-base font-extrabold" style={{ color: "var(--text)" }}>{s.name_ar}</h2>
                 <p className="text-xs text-muted">{s.name_en}</p>
               </div>
 

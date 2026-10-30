@@ -87,12 +87,12 @@ export default function RootLayout({
               </div>
 
               <div>
-                <h4
+                <h2
                   className="mb-4 text-sm font-bold"
                   style={{ color: "var(--heading)" }}
                 >
                   روابط سريعة
-                </h4>
+                </h2>
                 <ul
                   className="space-y-2.5 text-sm"
                   style={{ color: "var(--text-secondary)" }}
@@ -194,12 +194,12 @@ export default function RootLayout({
               </div>
 
               <div>
-                <h4
+                <h2
                   className="mb-4 text-sm font-bold"
                   style={{ color: "var(--heading)" }}
                 >
                   تابعينا
-                </h4>
+                </h2>
                 <div className="flex gap-3">
                   <a
                     href="https://www.facebook.com/share/1BzbdKTLV6/"
