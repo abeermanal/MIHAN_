@@ -3,7 +3,6 @@ import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Logo from "@/components/Logo";
-import AdSenseScript from "@/components/AdSenseScript";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -59,7 +58,6 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
-        <AdSenseScript />
       </head>
       <body className="flex min-h-screen flex-col font-sans">
         <Navbar />
