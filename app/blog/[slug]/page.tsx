@@ -149,13 +149,17 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         }}
       />
 
-      <AdUnit
-        slot={ADSENSE_SLOTS.inArticle}
-        format="horizontal"
-        className="min-h-[90px]"
+      <BlogArticle
+        post={post}
+        ad={
+          <AdUnit
+            slot={ADSENSE_SLOTS.inArticle}
+            layout="in-article"
+            format="fluid"
+            className="min-h-[90px]"
+          />
+        }
       />
-
-      <BlogArticle post={post} />
 
       {related.length > 0 && (
         <section className="space-y-5 border-t pt-8" style={{ borderColor: "var(--border)" }}>

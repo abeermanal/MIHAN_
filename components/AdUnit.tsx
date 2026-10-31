@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { getAdSenseClientId } from "@/lib/ads";
 
 declare global {
   interface Window {
@@ -11,41 +10,39 @@ declare global {
 
 interface AdUnitProps {
   slot: string;
-  format?: "auto" | "rectangle" | "vertical" | "horizontal";
+  layout?: string;
+  format?: string;
   className?: string;
 }
 
 export default function AdUnit({
   slot,
+  layout,
   format = "auto",
-  className = "min-h-[100px]",
+  className,
 }: AdUnitProps) {
-  const adRef = useRef<HTMLDivElement | null>(null);
-  const clientId = getAdSenseClientId();
+  const pushed = useRef(false);
 
   useEffect(() => {
-    if (!clientId || !slot) return;
-    if (!adRef.current) return;
+    if (pushed.current) return;
+    pushed.current = true;
 
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch {
-      return;
+    } catch (error) {
+      console.error("AdSense error:", error);
     }
-  }, [clientId, slot]);
-
-  if (!clientId || !slot) return null;
+  }, []);
 
   return (
-    <div ref={adRef} className={className}>
-      <ins
-        className="adsbygoogle block"
-        style={{ display: "block" }}
-        data-ad-client={clientId}
-        data-ad-slot={slot}
-        data-ad-format={format}
-        data-full-width-responsive="true"
-      />
-    </div>
+    <ins
+      className={`adsbygoogle ${className || ""}`}
+      style={{ display: "block", textAlign: "center" }}
+      data-ad-client="ca-pub-5963533274767345"
+      data-ad-slot={slot}
+      data-ad-layout={layout}
+      data-ad-format={format}
+      data-full-width-responsive="true"
+    />
   );
 }

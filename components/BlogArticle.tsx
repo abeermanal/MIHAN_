@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import type { BlogPost } from "@/data/blog-posts";
 
 type Block =
@@ -104,11 +105,19 @@ function headingId(text: string, index: number) {
   return slug ? `${slug}-${index}` : `section-${index}`;
 }
 
-export default function BlogArticle({ post }: { post: BlogPost }) {
+export default function BlogArticle({
+  post,
+  ad,
+}: {
+  post: BlogPost;
+  ad?: ReactNode;
+}) {
   const blocks = parseBlocks(post.content);
 
   return (
     <article className="space-y-6">
+      {ad}
+
       {blocks.map((block, index) => {
         if (block.kind === "h2") {
           return (
